@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "98484835655",
+    "project_id": "snail-oscar",
+    "storage_bucket": "snail-oscar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98484835655:android:a19c46ec90930ea2eea862",
+        "android_client_info": {
+          "package_name": "com.oscarvera.snail"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98484835655-f251e74j38neht8pppedlove4eodb5vu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oscarvera.snail",
+            "certificate_hash": "ce4b5e281c4d374ea7ae3acdce12c88e9a88cadc"
+          }
+        },
+        {
+          "client_id": "98484835655-14bkl8qp0faikseusd5vp4ev6k6sv1fe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxP90vRjWwRAEU55W3br_AMmZPWF1L0Pk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98484835655-14bkl8qp0faikseusd5vp4ev6k6sv1fe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home"
+        android:id="@+id/tab_home"
+        android:icon="@drawable/selector_icon_home"/>
+    <item android:title="Charts"
+        android:id="@+id/tab_charts"
+        android:icon="@drawable/selector_icon_charts"/>
+    <item android:title="Settings"
+        android:id="@+id/tab_settings"
+        android:icon="@drawable/selector_icon_settings"/>
+    <item android:title="Online"
+        android:id="@+id/tab_online"
+        android:icon="@drawable/selector_icon_settings"/>
+</menu>

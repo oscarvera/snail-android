@@ -1,3 +1,35 @@
 <resources>
-    <string name="app_name">Snail</string>
+    <string name="app_name">snail</string>
+    <string name="title_activity_home_fragment">HomeFragment</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="name_card">flashcard</string>
+
+    <!--Login Screen!-->
+    <string name="login_sub_text">No queremos tus datos. Solo darte herramientas. Elige el método que mejor se adapte a tí.</string>
+    <!-- MAIN SCREEN!-->
+    <!-- Desks-->
+    <string name="fragment_desks_title">Desks</string>
+    <string name="fragment_desks_separator_1">To learn</string>
+    <string name="fragment_desks_separator_2">All Desks</string>
+    <string name="fragment_desks_item_button_edit">Edit</string>
+    <string name="fragment_desks_item_button_dueDesk">Due Desk</string>
+
+    <!-- Item Desk to learn-->
+    <string name="item_desk_tolearn_title_cardsNumber">Cards number</string>
+    <string name="item_desk_tolearn_title_toLearn">To Learn</string>
+    <string name="item_desk_tolearn_title_learned">Learned</string>
+    <string name="item_desk_tolearn_title_lastDay">Last Day Learned</string>
+
+
+    <!-- Dialog new Desk -->
+    <string name="dialog_newdesk_title">New Desk</string>
+    <string name="dialog_newdesk_field_name">Name</string>
+    <string name="dialog_newdesk_btn_addDesk">Add Desk</string>
+    <string name="dialog_newdesk_action_added_success">Desk added successfully</string>
+
+    <!-- DETAIL DESK SCREEN-->
+    <string name="detail_cards_tolearn">To learn</string>
+    <string name="detail_cards_learning">Learning</string>
+    <string name="detail_cards_learned">Learned</string>
 </resources>

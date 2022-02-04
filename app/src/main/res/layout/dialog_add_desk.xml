@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp">
+
+    <TextView
+        android:id="@+id/title_desks_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/newyork_medium_bold"
+        android:text="@string/dialog_newdesk_title"
+        android:textColor="@color/textblack"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_separator_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:paddingTop="15dp"
+        android:text="@string/dialog_newdesk_field_name"
+        android:textColor="@color/textgrey"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/title_desks_fragment"
+        />
+
+    <EditText
+        android:id="@+id/edittext_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title_separator_1"/>
+
+    <Button
+        android:id="@+id/btn_addDesk"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/gradient_button_primary"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/dialog_newdesk_btn_addDesk"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_name"
+        android:layout_marginTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
