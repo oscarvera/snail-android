@@ -1,21 +1,19 @@
 package com.oscarvera.snail.model.domain
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.Relation
+import androidx.room.*
 
 @Entity(tableName = "desk")
 data class Desk(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    var id: Int = 0,
+    @Ignore var idRemote : String = "",
     var name: String = "",
-    val isOnlineShared: Boolean = false,
-
+    var isOnlineShared: Boolean = false,
+    @Ignore var cards: List<Card> = listOf()
 )
 
 data class DeskWithCards(
-    @Embedded val desk: Desk,
+    @Embedded var desk: Desk,
     @Relation(
         parentColumn = "id",
         entityColumn = "deskId"

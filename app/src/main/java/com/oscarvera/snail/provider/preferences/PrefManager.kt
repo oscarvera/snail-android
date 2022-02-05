@@ -10,6 +10,11 @@ object PrefManager {
         set(value) = userPreferences.edit { putString("KEY_USER_ID", value) }
 
 
+    var maxQuantifierToBeLearned: Int
+        get() = userPreferences.getInt("MAX_QUA_LEARNED", 100)
+        set(value) = userPreferences.edit { putInt("MAX_QUA_LEARNED", value) }
+
+
     fun clear() = userPreferences.edit { clear() }
 
 

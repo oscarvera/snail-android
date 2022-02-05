@@ -11,6 +11,13 @@ interface DeskDataSource {
         fun onError(t: Throwable)
 
     }
+    interface LoadDeskCallBack{
+
+        fun onDeskLoaded(desk: Desk)
+        fun onError(t: Throwable)
+
+    }
+
     interface LoadDesksWithCardsCallBack{
 
         fun onDesksLoaded(desks: List<DeskWithCards>)
@@ -23,6 +30,7 @@ interface DeskDataSource {
         fun onError(t: Throwable)
     }
 
+    fun getDesk(id: String, callBack: LoadDeskCallBack )
     fun getDesks(callBack: LoadDesksCallBack)
     fun addDesk(desk : Desk, callback: SaveTaskCallback)
     fun getAllDesksWithCards(callback: LoadDesksWithCardsCallBack)

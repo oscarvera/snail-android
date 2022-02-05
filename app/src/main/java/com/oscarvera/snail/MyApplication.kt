@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.oscarvera.snail.provider.local.DesksDatabase
+import com.oscarvera.snail.provider.local.SnailDatabase
 import com.oscarvera.snail.util.Constants
 
 class MyApplication : Application() {
@@ -15,7 +15,7 @@ class MyApplication : Application() {
         super.onCreate()
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         userPreferences = this.getSharedPreferences(Constants.USER_PREFERENCES, Context.MODE_PRIVATE)
-        localDatabase = Room.databaseBuilder(this, DesksDatabase::class.java,"database-snail").build()
+        localDatabase = Room.databaseBuilder(this, SnailDatabase::class.java,"database-snail").build()
     }
 
     companion object {
@@ -23,7 +23,7 @@ class MyApplication : Application() {
             private set
         lateinit var userPreferences: SharedPreferences
             private set
-        lateinit var localDatabase: DesksDatabase
+        lateinit var localDatabase: SnailDatabase
             private set
     }
 }

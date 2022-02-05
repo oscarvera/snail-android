@@ -11,9 +11,8 @@ interface DesksDao {
     @Query("SELECT * FROM desk")
     fun getDesks(): List<Desk>
 
-    @Transaction
-    @Query("SELECT * FROM card WHERE deskId is :idDesk")
-    fun getCards(idDesk: Int): List<Card>
+    @Query("SELECT * FROM desk Where id = :id")
+    fun getDesk(id : Int): Desk
 
     @Transaction
     @Query("SELECT * FROM desk")

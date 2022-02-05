@@ -1,5 +1,6 @@
 package com.oscarvera.snail.usecases.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,9 +12,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.oscarvera.snail.R
+import com.oscarvera.snail.model.domain.Card
+import com.oscarvera.snail.model.domain.DeskWithCards
+import com.oscarvera.snail.provider.CardDataSource
+import com.oscarvera.snail.usecases.deskdetail.DeskDetailActivity
+import com.oscarvera.snail.usecases.deskdetail.DeskDetailViewModel
 import com.oscarvera.snail.usecases.home.desks.DesksViewModel
 import com.oscarvera.snail.util.EventType
 import com.oscarvera.snail.util.SendEvent
+import com.oscarvera.snail.util.extensions.getProperId
 import kotlinx.android.synthetic.main.fragment_home2.view.*
 
 
@@ -21,8 +28,8 @@ class DesksFragment : Fragment() {
 
     private var layoutManager2: RecyclerView.LayoutManager? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapterToLearn: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
-    private var adapterAll: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
+    private var adapterToLearn: DesksToCheckAdapter? = null
+    private var adapterAll: DesksCheckedAdapter? = null
 
     lateinit var desksViewModel: DesksViewModel
 
@@ -41,22 +48,35 @@ class DesksFragment : Fragment() {
 
         layoutManager2 = LinearLayoutManager(activity)
         view.listDesksToLearn.layoutManager = layoutManager2
-        /*adapterToLearn = DesksAdapter(testDesksToLearnList, DesksAdapter.TYPE_ADAPTER.TYPE_TOLEARN)
+        /*adapterToLearn = DesksToCheckAdapter(testDesksToLearnList, DesksToCheckAdapter.TYPE_ADAPTER.TYPE_TOLEARN)
         view.listDesksToLearn.adapter = adapterToLearn*/
 
         layoutManager = LinearLayoutManager(activity)
         view.listDesksAll.layoutManager = layoutManager
 
-        /*desksViewModel.desks.observe(viewLifecycleOwner, Observer {
-            adapterAll = DesksAdapter(it, DesksAdapter.TYPE_ADAPTER.TYPE_ALLDESKS)
+        desksViewModel.desksChecked.observe(viewLifecycleOwner, Observer {
+            adapterAll = DesksCheckedAdapter(it,  object : DesksCheckedAdapter.DeskCheckedAdapterCallback {
+                override fun onClick(desk: DeskWithCards) {
+                    val intent = Intent(context, DeskDetailActivity::class.java)
+                    intent.putExtra(DeskDetailActivity.EXTRA_ID_DESK, desk.getProperId())
+                    startActivity(intent)
+                }
+
+            })
             view.listDesksAll.adapter = adapterAll
         })
 
-        desksViewModel.deskWithCards.observe(viewLifecycleOwner, Observer {
+        desksViewModel.desksToCheck.observe(viewLifecycleOwner, Observer {
+            adapterToLearn = DesksToCheckAdapter(it,  object : DesksToCheckAdapter.DeskToCheckAdapterCallback {
+                override fun onClick(desk: DeskWithCards) {
+                    val intent = Intent(context, DeskDetailActivity::class.java)
+                    intent.putExtra(DeskDetailActivity.EXTRA_ID_DESK, desk.getProperId())
+                    startActivity(intent)
+                }
 
-            Log.d("Debug","${it.size}")
-
-        })*/
+            })
+            view.listDesksToLearn.adapter = adapterToLearn
+        })
 
         desksViewModel.getDeskWithCards()
 
