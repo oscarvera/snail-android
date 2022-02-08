@@ -11,17 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Snail">
         <activity
-            android:name=".usecases.deskdetail.DeskDetailActivity"
-            android:exported="true"
-            android:label="Detail"
-            android:theme="@style/Theme.Snail.NoActionBar">
-
-        </activity>
+            android:name=".usecases.addcard.AddCardActivity"
+            android:exported="false" />
         <activity
-            android:name=".usecases.login.LoginActivity"
+            android:name=".usecases.launch.LaunchActivity"
             android:exported="true"
-            android:label="@string/title_activity_login"
-            android:theme="@style/Theme.Snail.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,9 +24,21 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".usecases.deskdetail.DeskDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+        <activity
+            android:name=".usecases.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+        <activity
             android:name=".usecases.home.MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
+            android:exported="false"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+        <activity
+            android:name=".usecases.learning.LearningActivity"
+            android:exported="false"
             android:theme="@style/Theme.Snail.NoActionBar" />
 
         <meta-data

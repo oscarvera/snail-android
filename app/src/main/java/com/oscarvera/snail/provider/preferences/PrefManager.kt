@@ -5,9 +5,14 @@ import com.oscarvera.snail.MyApplication.Companion.userPreferences
 
 object PrefManager {
 
-    var userId: String?
+    var userIdFirebase: String?
         get() = userPreferences.getString("KEY_USER_ID", null)
         set(value) = userPreferences.edit { putString("KEY_USER_ID", value) }
+
+    var isInLocalMode: Boolean
+        get() = userPreferences.getBoolean("KEY_IS_IN_LOCAL_MODE", false)
+        set(value) = userPreferences.edit { putBoolean("KEY_IS_IN_LOCAL_MODE", value) }
+
 
 
     var maxQuantifierToBeLearned: Int

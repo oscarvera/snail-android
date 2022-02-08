@@ -70,7 +70,7 @@ fun LoginLayout() {
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
                                 account.id?.let {  id ->
-                                    PrefManager.userId = id
+                                    SessionManager.setIdFirebase(id)
                                     db.collection("users").document(id).set(hashMapOf("id" to id))
                                     val intent = Intent(context, MainActivity::class.java)
                                     context.startActivity(intent)
@@ -176,6 +176,7 @@ fun LoginLayout() {
                 Spacer(modifier = Modifier.height(40.dp))
                 OutlinedButton(
                     onClick = {
+                        SessionManager.setAsLocalMode()
                         val intent = Intent(context, MainActivity::class.java)
                         context.startActivity(intent)
                     },

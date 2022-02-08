@@ -12,7 +12,7 @@ data class Card(
     var date_added: String = "",
     var date_checked: String = "",
     var date_to_check: String = "",
-    var quantifier: Int = 0,
+    var quantifier: Int = 1,
     @Ignore var cardswithdata : List<CardData> = listOf(CardData(0,0,"Adios"), CardData(0,0,"Bye")),
     @Ignore var idRemote : String = "",
 )

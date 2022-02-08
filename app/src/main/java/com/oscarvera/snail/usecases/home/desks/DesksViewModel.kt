@@ -1,6 +1,5 @@
 package com.oscarvera.snail.usecases.home.desks
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,13 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.oscarvera.snail.model.domain.Desk
 import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.model.domain.StatusCard
-import com.oscarvera.snail.provider.DeskRepository
 import com.oscarvera.snail.provider.DeskDataSource
-import com.oscarvera.snail.util.Utils
+import com.oscarvera.snail.provider.SwichDataSource
 import com.oscarvera.snail.util.extensions.getStatusCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.*
 
 class DesksViewModel : ViewModel() {
@@ -35,7 +32,7 @@ class DesksViewModel : ViewModel() {
     fun getDesks() {
 
         viewModelScope.launch(Dispatchers.IO) {
-            DeskRepository().getDesks(object : DeskDataSource.LoadDesksCallBack {
+            SwichDataSource.deskData.getDesks(object : DeskDataSource.LoadDesksCallBack {
                 override fun onDesksLoaded(desks: List<Desk>) {
                     //_desks.postValue(desks)
                 }
@@ -50,7 +47,7 @@ class DesksViewModel : ViewModel() {
     fun getDeskWithCards(){
 
         viewModelScope.launch(Dispatchers.IO) {
-            DeskRepository().getAllDesksWithCards(object : DeskDataSource.LoadDesksWithCardsCallBack {
+            SwichDataSource.deskData.getAllDesksWithCards(object : DeskDataSource.LoadDesksWithCardsCallBack {
                 override fun onDesksLoaded(desks: List<DeskWithCards>) {
                     //_desksCards.postValue(desks)
                     splitStatusDesks(desks)

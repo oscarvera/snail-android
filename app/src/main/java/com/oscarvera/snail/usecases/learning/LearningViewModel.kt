@@ -1,0 +1,108 @@
+package com.oscarvera.snail.usecases.learning
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.oscarvera.snail.model.domain.CardWithData
+import com.oscarvera.snail.model.domain.StatusCard
+import com.oscarvera.snail.provider.CardDataSource
+import com.oscarvera.snail.provider.SwichDataSource
+import com.oscarvera.snail.util.Utils
+import com.oscarvera.snail.util.extensions.getStatusCard
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
+
+class LearningViewModel : ViewModel() {
+
+
+    private val _card: MutableLiveData<CardWithData> by lazy {
+        MutableLiveData<CardWithData>()
+    }
+
+    val card: LiveData<CardWithData> get() = _card
+
+
+
+    private var cardsToLearn : ArrayList<CardWithData> = ArrayList()
+    private var cardsRest : ArrayList<CardWithData> = ArrayList()
+    private var indexCards : Int = 0
+    private var idDesk : String = ""
+
+    fun getCards(idDesk : String) {
+        this.idDesk = idDesk
+        viewModelScope.launch(Dispatchers.IO) {
+            SwichDataSource.cardData.getCardsAndData(idDesk ,object : CardDataSource.LoadCardsAndDataCallBack {
+                override fun onCardsLoaded(cards: List<CardWithData>) {
+
+                    val splitLists = cards.partition {
+                        it.card.getStatusCard() == StatusCard.LEARNING
+                    }
+                    cardsToLearn = ArrayList(splitLists.second)
+                    cardsRest = ArrayList(splitLists.first)
+                    _card.postValue(cardsToLearn[indexCards])
+                }
+
+                override fun onError(t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        }
+    }
+
+    fun setResultCard(result : Boolean){
+        cardsToLearn?.let { cardsToLearn ->
+
+            val currentCard = cardsToLearn[indexCards]
+            currentCard.card.date_checked = Utils.getNowDateFormatted()
+            if (result){ // User remember the card
+                currentCard.card.quantifier = currentCard.card.quantifier*2
+            }else{ //User don't remember the card
+                if (currentCard.card.quantifier>1) currentCard.card.quantifier/2
+            }
+            currentCard.card.date_to_check = Utils.getDateWithQuantifierApplied(currentCard.card.quantifier)
+
+            cardsToLearn[indexCards] = currentCard
+            //Update Card
+            viewModelScope.launch(Dispatchers.IO) {
+
+                val allCard = cardsToLearn + cardsRest
+
+                SwichDataSource.cardData.updateCard(idDesk , allCard, indexCards, object : CardDataSource.SaveTaskCallback {
+                    override fun onSaveSuccess() {
+                        nextCard()
+                    }
+
+                    override fun onError(t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
+            }
+
+
+        }
+
+
+
+    }
+
+    fun nextCard(){
+        cardsToLearn?.let { cardsToLearn->
+            indexCards++
+            if (cardsToLearn.size > indexCards){
+                _card.postValue(cardsToLearn[indexCards])
+            }else{
+                // It's already leaned the cards
+                //TODO("SCREEN ALL LEARNED")
+            }
+        }
+
+
+
+
+    }
+
+}

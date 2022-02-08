@@ -29,6 +29,7 @@ interface CardDataSource {
     fun getDeskandCards(idDesk : String, callBack: LoadCardsCallBack)
     fun getCardsAndData(idDesk: String, callback : LoadCardsAndDataCallBack)
     fun addCard(idDesk: String, card: Card, callback: SaveTaskCallback)
+    fun updateCard(idDesk: String, listCards: List<CardWithData>, indexToUpload : Int, callback: SaveTaskCallback)
 
 
 }

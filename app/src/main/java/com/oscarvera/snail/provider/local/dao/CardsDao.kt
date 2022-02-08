@@ -20,6 +20,9 @@ interface CardsDao {
     @Insert
     fun addCardData( card: CardData)
 
+    @Update
+    fun updateCard(card : Card)
+
 
 
 }

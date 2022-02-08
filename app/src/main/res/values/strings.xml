@@ -33,4 +33,8 @@
     <string name="detail_cards_learning">Learning</string>
     <string name="detail_cards_learned">Learned</string>
     <string name="dialog_newcard_action_added_success">Card added successfully</string>
+    <string name="detail_list_cards_add">Add card</string>
+
+    <!-- ADD CARD SCREEN-->
+    <string name="add_card_screen_btn_add_card">Add card</string>
 </resources>

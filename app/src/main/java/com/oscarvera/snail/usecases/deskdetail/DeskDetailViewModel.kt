@@ -7,11 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.oscarvera.snail.model.domain.Card
 import com.oscarvera.snail.model.domain.CardWithData
 import com.oscarvera.snail.model.domain.Desk
-import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.provider.CardDataSource
-import com.oscarvera.snail.provider.CardRepository
-import com.oscarvera.snail.provider.DeskRepository
 import com.oscarvera.snail.provider.DeskDataSource
+import com.oscarvera.snail.provider.SwichDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -32,7 +30,7 @@ class DeskDetailViewModel : ViewModel() {
     fun getDesk(idDesk : String) {
 
         viewModelScope.launch(Dispatchers.IO) {
-            DeskRepository().getDesk(idDesk, object : DeskDataSource.LoadDeskCallBack {
+            SwichDataSource.deskData.getDesk(idDesk, object : DeskDataSource.LoadDeskCallBack {
                 override fun onDeskLoaded(desk: Desk) {
                     _desk.postValue(desk)
                 }
@@ -48,7 +46,7 @@ class DeskDetailViewModel : ViewModel() {
     fun getCards(idDesk : String) {
 
         viewModelScope.launch(Dispatchers.IO) {
-            CardRepository().getCardsAndData(idDesk, object : CardDataSource.LoadCardsAndDataCallBack {
+            SwichDataSource.cardData.getCardsAndData(idDesk, object : CardDataSource.LoadCardsAndDataCallBack {
 
                 override fun onCardsLoaded(cards: List<CardWithData>) {
                     _cards.postValue(cards)
@@ -64,7 +62,7 @@ class DeskDetailViewModel : ViewModel() {
 
     fun addCard(idDesk : String, card: Card, onSuccess: () -> Unit){
         viewModelScope.launch(Dispatchers.IO) {
-            CardRepository().addCard(idDesk,card = card, object : CardDataSource.SaveTaskCallback {
+            SwichDataSource.cardData.addCard(idDesk, card = card, object : CardDataSource.SaveTaskCallback {
                 override fun onSaveSuccess() {
                     onSuccess()
                 }
