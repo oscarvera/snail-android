@@ -19,7 +19,7 @@ interface DesksDao {
     fun getAllDeskswithCards(): List<DeskWithCards>
 
     @Insert
-    fun addDesk( desk: Desk)
+    fun addDesk( desk: Desk) : Long
 
     @Delete
     fun delete(desk: Desk)

@@ -1,25 +1,22 @@
 package com.oscarvera.snail.usecases.deskdetail
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.oscarvera.snail.R
 import com.oscarvera.snail.model.domain.Card
 import com.oscarvera.snail.model.domain.StatusCard
-import com.oscarvera.snail.model.domain.getEj
-import com.oscarvera.snail.usecases.addcard.AddCardActivity
 import com.oscarvera.snail.usecases.home.CardsAdapter
-import com.oscarvera.snail.usecases.learning.LearningActivity
 import com.oscarvera.snail.util.GridSpacingItemDecoration
+import com.oscarvera.snail.util.Router
 import com.oscarvera.snail.util.Utils
-import com.oscarvera.snail.util.extensions.getProperId
-import kotlinx.android.synthetic.main.activity_desk_datail.*
-import kotlinx.android.synthetic.main.activity_main.*
+import com.oscarvera.snail.util.extensions.afterTextChanged
+import kotlinx.android.synthetic.main.activity_desk_detail.*
+import kotlinx.android.synthetic.main.fragment_shared.*
+import kotlinx.android.synthetic.main.layout_top_bar.*
 import kotlin.math.roundToInt
 
 
@@ -33,32 +30,32 @@ class DeskDetailActivity : AppCompatActivity() {
         const val EXTRA_ID_DESK = "idDesk"
     }
 
-    private var idDesk : String? = null
+    private var idDesk: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_desk_datail)
+        setContentView(R.layout.activity_desk_detail)
         desksDetailViewModel = ViewModelProvider(this).get(DeskDetailViewModel::class.java)
 
         idDesk = intent.getStringExtra(EXTRA_ID_DESK)
 
-        listCards.layoutManager = GridLayoutManager(this, 2)
+        recyclerViewCards.layoutManager = GridLayoutManager(this, 2)
         val spanCount = 2
         val spacing = (25 * resources.displayMetrics.density).roundToInt()
-        listCards.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, false))
+        recyclerViewCards.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, false))
 
-        desksDetailViewModel.cards.observe(this, Observer {
+        desksDetailViewModel.cards.observe(this, Observer { listCards ->
 
-            val countStatesCards = Utils.countStatusDeskWithCards(it)
+            val countStatesCards = Utils.countStatusDeskWithCards(listCards)
             text_tolearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
             text_learning.text = countStatesCards[StatusCard.LEARNING].toString()
             text_learned.text = countStatesCards[StatusCard.LEARNED].toString()
 
-            val titleSeparator = "${it.size} ${getString(R.string.name_card)}"
+            val titleSeparator = "${listCards.size} ${getString(R.string.name_card)}"
             title_separator_1.text = titleSeparator
 
 
-            adapterCards = CardsAdapter(it, object : CardsAdapter.CardAdapterCallback {
+            adapterCards = CardsAdapter(listCards, object : CardsAdapter.CardAdapterCallback {
                 override fun onClick(card: Card) {
 
                 }
@@ -69,13 +66,37 @@ class DeskDetailActivity : AppCompatActivity() {
 
             })
 
-            listCards.adapter = adapterCards
+            recyclerViewCards.adapter = adapterCards
+
+
+            if (countStatesCards[StatusCard.TO_LEARN]!! > 0) {
+                //They have cards to learn
+                text_number_tolearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
+                btn_learn_desk.visibility = View.VISIBLE
+                btn_learn_desk.setOnClickListener {
+                    newIntentLearning()
+                }
+
+            } else {
+                btn_learn_desk.visibility = View.GONE
+            }
+
+            edit_text_search.afterTextChanged {
+
+                val listFilter = listCards.filter { card ->
+                    val text1 = card.cardData?.get(0)?.text ?: ""
+                    val text2 = card.cardData?.get(1)?.text ?: ""
+                    text1.contains(it, true) || text2.contains(it,true)
+                }
+                adapterCards?.setChangeCards(listFilter)
+
+            }
 
         })
 
         desksDetailViewModel.desk.observe(this, Observer {
 
-            title_desk_detail.text = it.name
+            title_top_bar.text = it.name
 
 
         })
@@ -84,11 +105,6 @@ class DeskDetailActivity : AppCompatActivity() {
         idDesk?.let {
             desksDetailViewModel.getDesk(idDesk = it)
             desksDetailViewModel.getCards(idDesk = it)
-
-            home_fab_add_card.setOnClickListener {
-                newIntentLearning()
-            }
-
         }
 
 
@@ -101,22 +117,22 @@ class DeskDetailActivity : AppCompatActivity() {
 
     private fun newIntentAddCard() {
         idDesk?.let {
-            val intent = Intent(this, AddCardActivity::class.java)
-            intent.putExtra(AddCardActivity.EXTRA_ID_DESK, idDesk)
-            intent.putExtra(AddCardActivity.EXTRA_NAME_DESK, title_desk_detail.text)
-            startActivity(intent)
+            Router.launchAddCardActivity(this, it, title_top_bar.text.toString())
         }
-
     }
 
     private fun newIntentLearning() {
         idDesk?.let {
-            val intent = Intent(this, LearningActivity::class.java)
-            intent.putExtra(LearningActivity.EXTRA_ID_DESK, idDesk)
-            intent.putExtra(LearningActivity.EXTRA_NAME_DESK, title_desk_detail.text)
-            startActivity(intent)
+            Router.launchLearningActivity(this, it, title_top_bar.text.toString())
         }
+    }
 
+    override fun onRestart() {
+        super.onRestart()
+        idDesk?.let {
+            desksDetailViewModel.getDesk(idDesk = it)
+            desksDetailViewModel.getCards(idDesk = it)
+        }
     }
 
 }

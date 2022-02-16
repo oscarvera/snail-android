@@ -8,9 +8,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.oscarvera.snail.R
 import com.oscarvera.snail.model.domain.Card
 import com.oscarvera.snail.model.domain.CardData
-import com.oscarvera.snail.usecases.deskdetail.DeskDetailActivity
 import com.oscarvera.snail.util.Utils
 import kotlinx.android.synthetic.main.activity_add_card.*
+import kotlinx.android.synthetic.main.layout_top_bar.*
 
 class AddCardActivity : AppCompatActivity() {
 
@@ -52,7 +52,7 @@ class AddCardActivity : AppCompatActivity() {
         })
 
         nameDesk?.let {
-            title_desk_add_card.text = it
+            title_top_bar.text = it
         }
 
         idDesk?.let { idDesk ->

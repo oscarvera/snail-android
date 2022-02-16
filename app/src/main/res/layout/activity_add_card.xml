@@ -7,35 +7,9 @@
     tools:context=".usecases.addcard.AddCardActivity"
     android:id="@+id/frame_container">
 
-    <RelativeLayout
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="20dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_back_arrow"
-            />
+    <include layout="@layout/layout_top_bar"/>
 
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/title_desk_add_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/newyork_medium_bold"
-        android:text="@string/fragment_desks_title"
-        android:textColor="@color/textblack"
-        android:textSize="34sp"
-        app:layout_constraintStart_toEndOf="@id/btn_back"
-        app:layout_constraintTop_toTopOf="@id/btn_back"
-        app:layout_constraintBottom_toBottomOf="@id/btn_back"
-        android:layout_marginStart="10dp"/>
 
 
     <EditText
@@ -45,7 +19,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_back" />
+        app:layout_constraintTop_toBottomOf="@id/topBar" />
 
 
     <EditText

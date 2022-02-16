@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:maxLines="3"
                 android:fontFamily="@font/newyork_medium_medium"
                 android:textColor="@color/textblack"
                 android:textSize="24sp"
@@ -43,7 +44,7 @@
             <FrameLayout
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:background="@drawable/circle">
+                android:background="@drawable/circle_white">
 
                 <TextView
                     android:id="@+id/text_number_tolearn"
@@ -228,6 +229,7 @@
             android:layout_marginTop="15dp">
 
             <Button
+                android:id="@+id/btn_edit"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_weight="1"
@@ -239,20 +241,21 @@
                 app:cornerRadius="15dp"
                 app:strokeColor="@color/secondary"
                 app:strokeWidth="2dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginStart="0dp"
                 style="?android:attr/buttonBarButtonStyle" />
 
             <Button
+                android:id="@+id/btn_learn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gradient_button_primary"
                 android:fontFamily="@font/roboto_black"
                 android:text="@string/fragment_desks_item_button_dueDesk"
-                app:cornerRadius="15dp" />
+                app:cornerRadius="15dp"/>
 
         </LinearLayout>
 

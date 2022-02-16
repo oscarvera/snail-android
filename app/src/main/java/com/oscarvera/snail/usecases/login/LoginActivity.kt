@@ -1,6 +1,5 @@
 package com.oscarvera.snail.usecases.login
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -9,27 +8,26 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.BottomEnd
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -40,7 +38,7 @@ import com.oscarvera.snail.R
 import com.oscarvera.snail.model.session.SessionManager
 import com.oscarvera.snail.ui.theme.*
 import com.oscarvera.snail.usecases.home.*
-import com.oscarvera.snail.provider.preferences.PrefManager
+import com.oscarvera.snail.util.Router
 
 class LoginActivity : ComponentActivity() {
 
@@ -69,11 +67,10 @@ fun LoginLayout() {
                     FirebaseAuth.getInstance().signInWithCredential(credencial)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                account.id?.let {  id ->
+                                account.id?.let { id ->
                                     SessionManager.setIdFirebase(id)
                                     db.collection("users").document(id).set(hashMapOf("id" to id))
-                                    val intent = Intent(context, MainActivity::class.java)
-                                    context.startActivity(intent)
+                                    Router.launchMainActivity(context)
                                 }
 
                             } else {
@@ -100,38 +97,27 @@ fun LoginLayout() {
     SnailTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxHeight()) {
 
-            Image(
-                painter = painterResource(id = R.drawable.ic_bottom_decoration),
-                contentDescription = "",
-                alignment = BottomEnd
-            )
-            Column(Modifier.padding(30.dp).padding(0.dp, 0.dp, 0.dp, 60.dp), verticalArrangement = Arrangement.Center) {
+
+            Column(
+                Modifier
+                    .padding(30.dp)
+                    .padding(10.dp, 0.dp, 10.dp, 60.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_logosnail),
                     contentDescription = "",
-                    modifier = Modifier.align(CenterHorizontally)
-                )
-                Spacer(modifier = Modifier.height(35.dp))
-                Text(
-                    text = context.getString(R.string.login_sub_text),
-                    fontSize = 18.sp,
-                    color = PrimaryGreen2,
-                    modifier = Modifier.align(CenterHorizontally),
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    fontFamily = ResourcesCompat.getFont(context, R.font.newyork_medium_regular)
-                        ?.let { FontFamily(it) }
+                    modifier = Modifier.align(CenterHorizontally).height(140.dp),
                 )
                 Spacer(modifier = Modifier.height(90.dp))
                 GradientButton(
                     gradient = gradient,
-                    text = "Prueba",
                     onClick = {
-                        if (SessionManager.isLogged()){
+                        if (SessionManager.isLogged()) {
                             //Is already logged
-                            val intent = Intent(context, MainActivity::class.java)
-                            context.startActivity(intent)
-                        }else {
+                            Router.launchMainActivity(context)
+                        } else {
                             val googleConf = GoogleSignInOptions
                                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                                 .requestIdToken(context.getString(R.string.default_web_client_id))
@@ -142,7 +128,6 @@ fun LoginLayout() {
                         }
 
                     }, modifier = Modifier
-                        .padding(10.dp, 0.dp, 10.dp, 0.dp)
                         .fillMaxWidth()
                         .height(58.dp)
                         .clip(RoundedCornerShape(15.dp)),
@@ -155,7 +140,7 @@ fun LoginLayout() {
                             )
                             Spacer(modifier = Modifier.width(15.dp))
                             Text(
-                                text = "Sign in with Google",
+                                text = context.getString(R.string.login_sign_google),
                                 fontSize = 20.sp,
                                 color = WhiteText,
                                 fontWeight = FontWeight.Black
@@ -165,38 +150,40 @@ fun LoginLayout() {
                     }
                 )
                 Text(
-                    text = "Online and recover mode",
+                    text = context.getString(R.string.login_describe_sign_google),
                     fontSize = 16.sp,
                     color = TextColor,
                     modifier = Modifier
                         .align(CenterHorizontally)
                         .padding(0.dp, 5.dp, 0.dp, 0.dp),
-                    fontWeight = FontWeight.Light
+                    fontWeight = FontWeight.Light,
+                    textAlign = TextAlign.Center
+
                 )
+                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(1.dp).background(DisableColor).fillMaxWidth())
                 Spacer(modifier = Modifier.height(40.dp))
                 OutlinedButton(
                     onClick = {
                         SessionManager.setAsLocalMode()
-                        val intent = Intent(context, MainActivity::class.java)
-                        context.startActivity(intent)
+                        Router.launchMainActivity(context)
                     },
                     border = BorderStroke(1.dp, PrimaryGreen2),
                     shape = RoundedCornerShape(15.dp),
                     colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Transparent),
                     modifier = Modifier
-                        .padding(10.dp, 0.dp, 10.dp, 0.dp)
                         .fillMaxWidth()
                         .height(58.dp)
                 ) {
                     Text(
-                        text = "Enter offline mode",
+                        text = context.getString(R.string.login_sign_local),
                         fontSize = 20.sp,
                         color = PrimaryGreen2,
                         fontWeight = FontWeight.Bold
                     )
                 }
                 Text(
-                    text = "Offline and local mode",
+                    text = context.getString(R.string.login_describe_sign_local),
                     fontSize = 16.sp,
                     color = TextColor,
                     modifier = Modifier

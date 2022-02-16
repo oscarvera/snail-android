@@ -11,8 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Snail">
         <activity
+            android:name=".usecases.sharedesk.ShareDeskActivity"
+            android:exported="false"
+            android:label="@string/title_activity_share_desk"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+        <activity
+            android:name=".usecases.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail" />
+        <activity
             android:name=".usecases.addcard.AddCardActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Snail" />
         <activity
             android:name=".usecases.launch.LaunchActivity"
             android:exported="true"
@@ -23,6 +33,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".usecases.deskshareddetail.DeskSharedDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail.NoActionBar" />
         <activity
             android:name=".usecases.deskdetail.DeskDetailActivity"
             android:exported="false"
@@ -38,6 +52,10 @@
             android:theme="@style/Theme.Snail.NoActionBar" />
         <activity
             android:name=".usecases.learning.LearningActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+        <activity
+            android:name=".usecases.deskshareddetail.DeskSharedDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.Snail.NoActionBar" />
 

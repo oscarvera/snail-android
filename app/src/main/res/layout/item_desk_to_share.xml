@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/background2"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="0dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:id="@+id/card_item">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/section_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingTop="25dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="25dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/titleBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical">
+                <TextView
+                    android:id="@+id/item_desk_share_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/newyork_medium_medium"
+                    android:textColor="@color/textblack"
+                    android:textSize="24sp"
+                    tools:text="Desk name"
+                    android:maxLines="3"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:id="@+id/title_numcards"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="@string/item_desk_all_title_cardsNumber"
+                        android:textColor="@color/textgrey"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/text_numcards"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/textblack"
+                        android:textSize="16sp"
+                        tools:text="12 flascards"
+                        android:layout_marginStart="5dp"/>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+            <FrameLayout
+                android:id="@+id/background_check"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle_white"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/image_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/ic_check"
+                    app:tint="@color/white"
+                    android:padding="8dp"
+                    android:visibility="invisible"/>
+            </FrameLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

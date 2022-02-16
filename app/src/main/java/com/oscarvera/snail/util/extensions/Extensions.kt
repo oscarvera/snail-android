@@ -1,6 +1,9 @@
 package com.oscarvera.snail.util.extensions
 
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import com.oscarvera.snail.R
 import com.oscarvera.snail.model.domain.Card
 import com.oscarvera.snail.model.domain.DeskWithCards
@@ -37,4 +40,18 @@ fun Card.getStatusName(context : Context): String{
         StatusCard.LEARNING -> context.getString(R.string.detail_cards_learning)
         StatusCard.TO_LEARN -> context.getString(R.string.detail_cards_tolearn)
     }
+}
+
+fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(editable: Editable?) {
+            afterTextChanged.invoke(editable.toString())
+        }
+    })
 }

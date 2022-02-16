@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.oscarvera.snail.R
 import com.oscarvera.snail.model.domain.Card
 import com.oscarvera.snail.model.domain.CardWithData
+import com.oscarvera.snail.model.domain.DeskShared
 import com.oscarvera.snail.util.extensions.getStatusName
 
 enum class VIEWTYPE {
@@ -18,11 +19,12 @@ enum class VIEWTYPE {
 }
 
 class CardsAdapter(
-    private var listCards: List<CardWithData>,
+    list: List<CardWithData>,
     private var callback: CardAdapterCallback
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    var listCards : List<CardWithData> = list
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -78,6 +80,11 @@ class CardsAdapter(
 
     override fun getItemCount(): Int {
         return listCards.size + 1
+    }
+
+    fun setChangeCards(list : List<CardWithData>){
+        this.listCards = list
+        notifyDataSetChanged()
     }
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

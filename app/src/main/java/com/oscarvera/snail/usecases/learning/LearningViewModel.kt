@@ -21,8 +21,12 @@ class LearningViewModel : ViewModel() {
     private val _card: MutableLiveData<CardWithData> by lazy {
         MutableLiveData<CardWithData>()
     }
+    private val _noMoreCards: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
+    }
 
     val card: LiveData<CardWithData> get() = _card
+    val noMoreCards: LiveData<Boolean> get() = _noMoreCards
 
 
 
@@ -96,7 +100,7 @@ class LearningViewModel : ViewModel() {
                 _card.postValue(cardsToLearn[indexCards])
             }else{
                 // It's already leaned the cards
-                //TODO("SCREEN ALL LEARNED")
+                _noMoreCards.postValue(true)
             }
         }
 

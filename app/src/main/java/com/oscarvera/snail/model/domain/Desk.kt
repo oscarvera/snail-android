@@ -21,6 +21,15 @@ data class DeskWithCards(
     val cards: List<Card>?
 )
 
+data class DeskShared(
+    var name: String = "",
+    var idRemote: String = "",
+    var userName : String = "",
+    var uploaded : String = "",
+    var timesDownloaded : Int = 0,
+    var cards: List<Card>? = listOf()
+)
+
 
 /* TEST MODE
 data class Desk (

@@ -24,25 +24,15 @@ class DesksViewModel : ViewModel() {
         MutableLiveData<List<DeskWithCards>>()
     }
 
+    private val _noDesks: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
+    }
+
 
     val desksChecked: LiveData<List<DeskWithCards>> get() = _desksChecked
     val desksToCheck: LiveData<List<DeskWithCards>> get() = _desksToCheck
+    val noDesks: LiveData<Boolean> get() = _noDesks
 
-    //Not Use
-    fun getDesks() {
-
-        viewModelScope.launch(Dispatchers.IO) {
-            SwichDataSource.deskData.getDesks(object : DeskDataSource.LoadDesksCallBack {
-                override fun onDesksLoaded(desks: List<Desk>) {
-                    //_desks.postValue(desks)
-                }
-
-                override fun onError(t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-            })
-        }
-    }
 
     fun getDeskWithCards(){
 
@@ -50,7 +40,13 @@ class DesksViewModel : ViewModel() {
             SwichDataSource.deskData.getAllDesksWithCards(object : DeskDataSource.LoadDesksWithCardsCallBack {
                 override fun onDesksLoaded(desks: List<DeskWithCards>) {
                     //_desksCards.postValue(desks)
-                    splitStatusDesks(desks)
+                    if (desks.isEmpty()){
+                        _noDesks.postValue(true)
+                    }else{
+                        splitStatusDesks(desks)
+                        _noDesks.postValue(false)
+                    }
+
                 }
 
                 override fun onError(t: Throwable) {
@@ -72,6 +68,22 @@ class DesksViewModel : ViewModel() {
         }
         _desksToCheck.postValue(deskSplit.first)
         _desksChecked.postValue(deskSplit.second)
+    }
+
+    fun addNewDesk(name: String, onSuccess: (newId : String?) -> Unit) {
+        val desk = Desk()
+        desk.name = name
+        viewModelScope.launch(Dispatchers.IO) {
+            SwichDataSource.deskData.addDesk(desk, object : DeskDataSource.SaveTaskCallback {
+                override fun onSaveSuccess(newId: String?) {
+                    onSuccess(newId)
+                }
+
+                override fun onError(t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
     }
 
 }

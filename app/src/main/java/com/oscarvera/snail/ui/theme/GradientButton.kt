@@ -16,10 +16,8 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun GradientButton(
-    text: String,
     gradient : Brush,
     modifier: Modifier = Modifier,
-    modifierText: Modifier = Modifier,
     onClick: () -> Unit = { },
     content: @Composable BoxScope.() -> Unit
 ) {

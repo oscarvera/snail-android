@@ -1,4 +1,4 @@
-package com.oscarvera.snail.usecases.home
+package com.oscarvera.snail.usecases.home.desks
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.oscarvera.snail.R
-import com.oscarvera.snail.model.domain.Desk
 import com.oscarvera.snail.model.domain.DeskWithCards
 
 
@@ -27,6 +26,9 @@ class DesksCheckedAdapter(list: List<DeskWithCards>, callback: DeskCheckedAdapte
         val desk = listDesks[position]
 
         holder.name.text = desk.desk.name
+
+        val numCards = desk.cards?.size ?: 0
+        holder.numCards.text = "$numCards ${holder.numCards.context.getString(R.string.name_card)}"
         holder.card.setOnClickListener {
             callback.onClick(desk = desk)
         }
@@ -39,15 +41,17 @@ class DesksCheckedAdapter(list: List<DeskWithCards>, callback: DeskCheckedAdapte
 
     inner class ViewHolderAll(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name: TextView
+        var numCards: TextView
         var card: CardView
 
         init {
             name = itemView.findViewById(R.id.item_desk_all_name)
             card = itemView.findViewById(R.id.card_item)
+            numCards = itemView.findViewById(R.id.text_numcards)
         }
     }
 
-    interface DeskCheckedAdapterCallback{
+    interface DeskCheckedAdapterCallback {
 
         fun onClick(desk: DeskWithCards)
 

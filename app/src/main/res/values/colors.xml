@@ -3,7 +3,7 @@
     <color name="primary">#3FCBB1</color>
     <color name="secondary">#1D444F</color>
     <color name="background">#FFFFFF</color>
-    <color name="background2">#FAF8FA</color>
+    <color name="background2">#F5F5F5</color>
 
     <color name="black">#FF000000</color>
     <color name="textblack">#FF2D2D2D</color>
@@ -13,5 +13,6 @@
     <color name="gradientDark">#FF266C6D</color>
     <color name="gradientLight">#FF3FCBB1</color>
     <color name="unselectedItem">#C1BDC1</color>
+    <color name="disable">#C1BDC1</color>
 
 </resources>

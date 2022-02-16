@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".usecases.home.desks.DesksFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="30dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="30dp">
+
+
+        <TextView
+            android:id="@+id/title_desks_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/newyork_medium_bold"
+            android:text="@string/fragment_desks_title"
+            android:textColor="@color/textblack"
+            android:textSize="45sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_add_desk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title_desks_fragment"
+            app:layout_constraintBottom_toBottomOf="@id/title_desks_fragment"/>
+
+        <TextView
+            android:id="@+id/title_separator_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:paddingTop="15dp"
+            android:text="@string/fragment_desks_separator_1"
+            android:textColor="@color/textgrey"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/title_desks_fragment"
+            tools:layout_editor_absoluteX="30dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listDesksToLearn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title_separator_1" />
+
+        <TextView
+            android:id="@+id/title_separator_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:paddingTop="15dp"
+            android:text="@string/fragment_desks_separator_2"
+            android:textColor="@color/textgrey"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/listDesksToLearn"
+            tools:layout_editor_absoluteX="30dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listDesksAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title_separator_2" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_noDesk"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="fitCenter"
+            app:lottie_loop="true"
+            app:layout_constraintTop_toBottomOf="@id/title_desks_fragment"
+            app:lottie_rawRes="@raw/animation_no_desks_main"
+            android:visibility="gone"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -21,11 +21,11 @@ enum class NAME_SCREENS(
     FRAGMENT_MAIN_SETTINGS("FRAGMENT_MAIN_SETTINGS")
 }
 
-sealed class MainTabs(val route: String, val resourceId: String, @DrawableRes val icon: Int) {
+/*sealed class MainTabs(val route: String, val resourceId: String, @DrawableRes val icon: Int) {
     object Home : MainTabs(NAME_SCREENS.FRAGMENT_MAIN_HOME.route, "R.string.profile", R.drawable.ic_home_selected)
-    object Charts : MainTabs(NAME_SCREENS.FRAGMENT_MAIN_CHARTS.route, "R.string.friends", R.drawable.ic_chart_unselected)
+    object Shared : MainTabs(NAME_SCREENS.FRAGMENT_MAIN_CHARTS.route, "R.string.friends", R.drawable.ic_shared_unselected)
     object Settings : MainTabs(NAME_SCREENS.FRAGMENT_MAIN_SETTINGS.route, "R.string.settings", R.drawable.ic_settings_unselected)
-}
+}*/
 
 
 /* TODO: ADD ROUTES

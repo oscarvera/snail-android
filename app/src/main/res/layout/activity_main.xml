@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".usecases.home.MainActivity">
 
+
+<!--
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/home_fab_add_desk"
         android:layout_width="wrap_content"
@@ -14,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="20dp"
         app:tint="@color/white"
-        android:src="@drawable/ic_add_white" />
+        android:src="@drawable/ic_add_white" /> !-->
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -38,5 +40,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_rawRes="@raw/splash_main"
+        android:scaleType="centerCrop"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

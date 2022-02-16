@@ -2,49 +2,137 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".usecases.addcard.AddCardActivity"
-    android:id="@+id/frame_container">
+    tools:context=".usecases.addcard.AddCardActivity">
+
+    <include layout="@layout/layout_top_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_decoration_background"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btn_learned"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp">
+
+        <TextView
+            android:id="@+id/card_text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/textblack"
+            android:textSize="22sp"
+            tools:text="Texto 1" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white" />
+
+
+        <TextView
+            android:id="@+id/card_text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/textblack"
+            android:textSize="22sp"
+            android:visibility="gone"
+            tools:text="Texto 2" />
+
+        <LinearLayout
+            android:id="@+id/btn_show"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/secondary"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_arrow_bottom"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="Show card"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
     <RelativeLayout
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="20dp">
+        android:id="@+id/btn_learned"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/rectangle_decoration_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_back_arrow" />
+            android:id="@+id/im_check"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_arrow_bottom"
+            app:tint="@color/black" />
 
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/title_desk_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/newyork_medium_bold"
-        android:text="@string/fragment_desks_title"
-        android:textColor="@color/textblack"
-        android:textSize="34sp"
-        app:layout_constraintStart_toEndOf="@id/btn_back"
-        app:layout_constraintTop_toTopOf="@id/btn_back"
-        app:layout_constraintBottom_toBottomOf="@id/btn_back"
-        android:layout_marginStart="10dp"/>
+    <RelativeLayout
+        android:id="@+id/btn_not_learned"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/rectangle_decoration_background"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_cross" />
 
 
-    <TextView
+    </RelativeLayout>
+
+
+    <!--<TextView
         android:id="@+id/text_data_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_back" />
+        app:layout_constraintTop_toBottomOf="@id/topBar" />
 
 
     <TextView
@@ -54,38 +142,6 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_data_1" />
-
-    <Button
-        android:id="@+id/btn_good_answer"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:background="@drawable/gradient_button_primary"
-        android:fontFamily="@font/roboto_black"
-        android:text="Good"
-        app:cornerRadius="15dp"
-        app:layout_constraintTop_toBottomOf="@id/text_data_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-
-    <Button
-        android:id="@+id/btn_bad_answer"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:background="@drawable/gradient_button_primary"
-        android:fontFamily="@font/roboto_black"
-        android:text="Wrong"
-        app:cornerRadius="15dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_good_answer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-
-
-
+        app:layout_constraintTop_toBottomOf="@id/text_data_1" /> !-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

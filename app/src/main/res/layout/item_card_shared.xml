@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/background2"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="0dp"
+    app:cardPreventCornerOverlap="false">
+
+    <LinearLayout
+        android:id="@+id/section_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_decoration_background"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="20dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/card_firt_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/newyork_medium_medium"
+            android:textColor="@color/textblack"
+            android:maxLines="2"
+            android:textSize="20sp"
+            android:paddingBottom="20dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/card_second_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:fontFamily="@font/newyork_medium_medium"
+            android:textColor="@color/textblack"
+            android:textSize="20sp"
+            android:paddingTop="20dp"/>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

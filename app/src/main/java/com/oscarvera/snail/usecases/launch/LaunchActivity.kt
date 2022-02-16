@@ -7,6 +7,8 @@ import com.oscarvera.snail.R
 import com.oscarvera.snail.model.session.SessionManager
 import com.oscarvera.snail.usecases.home.MainActivity
 import com.oscarvera.snail.usecases.login.LoginActivity
+import com.oscarvera.snail.usecases.onboarding.OnboardingActivity
+import com.oscarvera.snail.util.Router
 
 class LaunchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,14 +28,12 @@ class LaunchActivity : AppCompatActivity() {
     }
 
     private fun showHome(){
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        Router.launchMainActivity(this)
         finish()
     }
 
     private fun showLogin(){
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+        Router.launchOnbordingActivity(this)
         finish()
     }
 }
