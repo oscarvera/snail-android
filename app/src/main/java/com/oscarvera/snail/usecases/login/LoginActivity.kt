@@ -165,7 +165,7 @@ fun LoginLayout() {
                 Spacer(modifier = Modifier.height(40.dp))
                 OutlinedButton(
                     onClick = {
-                        SessionManager.setAsLocalMode()
+                        SessionManager.setLocalMode(true)
                         Router.launchMainActivity(context)
                     },
                     border = BorderStroke(1.dp, PrimaryGreen2),

@@ -8,6 +8,7 @@ import com.oscarvera.snail.model.domain.CardWithData
 import com.oscarvera.snail.model.domain.StatusCard
 import com.oscarvera.snail.provider.CardDataSource
 import com.oscarvera.snail.provider.SwichDataSource
+import com.oscarvera.snail.provider.preferences.PrefManager
 import com.oscarvera.snail.util.Utils
 import com.oscarvera.snail.util.extensions.getStatusCard
 import kotlinx.coroutines.Dispatchers
@@ -63,7 +64,7 @@ class LearningViewModel : ViewModel() {
             val currentCard = cardsToLearn[indexCards]
             currentCard.card.date_checked = Utils.getNowDateFormatted()
             if (result){ // User remember the card
-                currentCard.card.quantifier = currentCard.card.quantifier*2
+                currentCard.card.quantifier = currentCard.card.quantifier*PrefManager.quantifierNumber
             }else{ //User don't remember the card
                 if (currentCard.card.quantifier>1) currentCard.card.quantifier/2
             }

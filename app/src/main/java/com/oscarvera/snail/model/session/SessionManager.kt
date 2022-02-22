@@ -12,11 +12,16 @@ class SessionManager {
         fun isLogged(): Boolean =
             PrefManager.userIdFirebase!=null
 
+        fun signout() {
+            PrefManager.userIdFirebase = null
+            PrefManager.isInLocalMode = false
+        }
+
         fun isLocalMode(): Boolean =
             PrefManager.isInLocalMode
 
-        fun setAsLocalMode(){
-            PrefManager.isInLocalMode = true
+        fun setLocalMode(localMode : Boolean){
+            PrefManager.isInLocalMode = localMode
         }
 
         fun setIdFirebase(id : String){

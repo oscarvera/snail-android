@@ -1,5 +1,6 @@
 package com.oscarvera.snail.usecases.deskdetail
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,9 +11,7 @@ import com.oscarvera.snail.R
 import com.oscarvera.snail.model.domain.Card
 import com.oscarvera.snail.model.domain.StatusCard
 import com.oscarvera.snail.usecases.home.CardsAdapter
-import com.oscarvera.snail.util.GridSpacingItemDecoration
-import com.oscarvera.snail.util.Router
-import com.oscarvera.snail.util.Utils
+import com.oscarvera.snail.util.*
 import com.oscarvera.snail.util.extensions.afterTextChanged
 import kotlinx.android.synthetic.main.activity_desk_detail.*
 import kotlinx.android.synthetic.main.fragment_shared.*
@@ -31,11 +30,14 @@ class DeskDetailActivity : AppCompatActivity() {
     }
 
     private var idDesk: String? = null
+    lateinit var loadingDialog : LoadingDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_desk_detail)
         desksDetailViewModel = ViewModelProvider(this).get(DeskDetailViewModel::class.java)
+
+        loadingDialog = LoadingDialog(this)
 
         idDesk = intent.getStringExtra(EXTRA_ID_DESK)
 
@@ -101,6 +103,28 @@ class DeskDetailActivity : AppCompatActivity() {
 
         })
 
+        btn_options.visibility = View.VISIBLE
+        btn_options.setOnClickListener {
+
+            Dialogs.optionsBottomSheetDialog(this,layoutInflater,object : Dialogs.DeskSettingsDialog{
+                override fun onDelete(dialogOptions: Dialog) {
+                    dialogOptions.dismiss()
+                    loadingDialog.setCallback(object : LoadingDialog.LoadingDialogCallback {
+                        override fun onFinish(dialog: Dialog) {
+                            dialog.dismiss()
+                            finish()
+                        }
+                    })
+                    loadingDialog.showLoadingDialog()
+                    desksDetailViewModel.deleteDesk(idDesk!!) {
+                        loadingDialog.finishLoadingDialog()
+                    }
+                }
+
+            })
+
+        }
+
 
         idDesk?.let {
             desksDetailViewModel.getDesk(idDesk = it)
@@ -134,5 +158,6 @@ class DeskDetailActivity : AppCompatActivity() {
             desksDetailViewModel.getCards(idDesk = it)
         }
     }
+
 
 }

@@ -10,6 +10,7 @@ import com.oscarvera.snail.R
 import com.oscarvera.snail.usecases.home.shared.SharedViewModel
 import com.oscarvera.snail.util.Dialogs
 import com.oscarvera.snail.util.GridSpacingItemDecoration
+import com.oscarvera.snail.util.LoadingDialog
 import kotlinx.android.synthetic.main.activity_desk_shared_detail.*
 import kotlinx.android.synthetic.main.layout_top_bar.*
 import kotlin.math.roundToInt
@@ -28,12 +29,16 @@ class DeskSharedDetailActivity : AppCompatActivity() {
 
     private var idRemoteDesk: String? = null
 
+    lateinit var loadingDialog : LoadingDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_desk_shared_detail)
         desksSharedDetailViewModel =
             ViewModelProvider(this).get(DeskSharedDetailViewModel::class.java)
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+
+        loadingDialog = LoadingDialog(this)
 
         idRemoteDesk = intent.getStringExtra(EXTRA_ID_DESK)
 
@@ -65,19 +70,20 @@ class DeskSharedDetailActivity : AppCompatActivity() {
             btn_download_desk.setOnClickListener {
                 sharedViewModel.downloadDesk(desk)
                 //TODO: Start animation loading
-                Dialogs.createLoadingDialog(this, object : Dialogs.LoadingDialog {
+                loadingDialog.setCallback(object : LoadingDialog.LoadingDialogCallback {
                     override fun onFinish(dialog: Dialog) {
                         dialog.dismiss()
                         finish()
                     }
-
                 })
+                loadingDialog.showLoadingDialog()
             }
 
         })
 
         sharedViewModel.isDesksShared.observe(this, Observer {
             //TODO: Stop animation
+            loadingDialog.finishLoadingDialog()
         })
 
 

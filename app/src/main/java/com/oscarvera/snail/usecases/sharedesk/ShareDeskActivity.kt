@@ -12,6 +12,7 @@ import com.oscarvera.snail.R
 import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.provider.preferences.PrefManager
 import com.oscarvera.snail.util.Dialogs
+import com.oscarvera.snail.util.LoadingDialog
 import kotlinx.android.synthetic.main.activity_share_desk.*
 import kotlinx.android.synthetic.main.layout_top_bar.*
 
@@ -23,11 +24,15 @@ class ShareDeskActivity : AppCompatActivity() {
     private var adapterShare: DesksShareAdapter? = null
     private var listDesks: List<DeskWithCards>? = null
 
+    lateinit var loadingDialog : LoadingDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_share_desk)
 
         shareViewModel = ViewModelProvider(this).get(DeskShareViewModel::class.java)
+
+        loadingDialog = LoadingDialog(this)
 
         title_top_bar.text = getString(R.string.share_desk_title)
         layoutManager = LinearLayoutManager(this)
@@ -58,7 +63,7 @@ class ShareDeskActivity : AppCompatActivity() {
 
         shareViewModel.desksShared.observe(this, Observer {
 
-            // TODO: Stop loading animation
+            loadingDialog.finishLoadingDialog()
 
         })
 
@@ -69,12 +74,6 @@ class ShareDeskActivity : AppCompatActivity() {
             listDesks?.let { desks ->
                 adapterShare?.getPositionChecked()?.let { positionDesk ->
                     shareDeskNameUser(desks[positionDesk])
-                    Dialogs.createLoadingDialog(this, object : Dialogs.LoadingDialog {
-                        override fun onFinish(dialog: Dialog) {
-                            dialog.dismiss()
-                            finish()
-                        }
-                    })
                 }
             }
         }
@@ -94,12 +93,26 @@ class ShareDeskActivity : AppCompatActivity() {
                         PrefManager.userNameShare = name
                         shareViewModel.shareDesk(desk = desk, name)
                     }
+                    loadingDialog.setCallback(object : LoadingDialog.LoadingDialogCallback {
+                        override fun onFinish(dialog: Dialog) {
+                            dialog.dismiss()
+                            finish()
+                        }
+                    })
+                    loadingDialog.showLoadingDialog()
                     dialog.dismiss()
                 }
 
             })
         } else {
             shareViewModel.shareDesk(desk = desk, PrefManager.userNameShare!!)
+            loadingDialog.setCallback(object : LoadingDialog.LoadingDialogCallback {
+                override fun onFinish(dialog: Dialog) {
+                    dialog.dismiss()
+                    finish()
+                }
+            })
+            loadingDialog.showLoadingDialog()
         }
 
     }

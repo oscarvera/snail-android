@@ -19,17 +19,34 @@ object Utils {
         }
     }
 
+    fun getLatestDate(cards: List<Card>, textWhenEmpty: String): String {
+        val dates = ArrayList<Date>()
+        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+        cards.forEach {
+            if (it.date_checked.isNotEmpty()) {
+                dates.add(formatter.parse(it.date_checked))
+            }
+        }
+        dates.sortByDescending { it }
+
+        return if (dates.isEmpty()) {
+            textWhenEmpty
+        } else {
+            formatter.format(dates.first())
+        }
+    }
+
     fun getNowDateFormatted(): String {
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
         return formatter.format(Date())
     }
 
-    fun getDateFormatted(date : Date): String {
+    fun getDateFormatted(date: Date): String {
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
         return formatter.format(date)
     }
 
-    fun getDateWithQuantifierApplied(quantifier: Int): String{
+    fun getDateWithQuantifierApplied(quantifier: Int): String {
         val now = Date()
         val c = Calendar.getInstance()
         c.time = now

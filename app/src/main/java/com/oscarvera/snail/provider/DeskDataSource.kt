@@ -44,13 +44,21 @@ interface DeskDataSource {
         fun onError(t: Throwable)
     }
 
+    interface DeleteTaskCallback {
+        fun onDeleteSuccess()
+        fun onError(t: Throwable)
+    }
+
     fun getDesk(id: String, callBack: LoadDeskCallBack )
     fun getRemoteDesk(idRemote: String, callBack: LoadSharedDeskCallBack )
     fun getDesks(callBack: LoadDesksCallBack)
     fun addDesk(desk : Desk, callback: SaveTaskCallback)
+    fun deleteDesk(desk : Desk, callback: DeleteTaskCallback)
     fun addDeskShared(desk : DeskShared, callback: SaveTaskCallback)
     fun getAllDesksWithCards(callback: LoadDesksWithCardsCallBack)
     fun getAllDesksSharedWithCards(callback: LoadDesksSharedWithCardsCallBack)
+    fun uploadNumDownloadShareDesk(desk : DeskShared)
+    fun deleteAllDesks()
 
 
 }

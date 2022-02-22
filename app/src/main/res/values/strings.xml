@@ -43,6 +43,7 @@
     <string name="item_desk_tolearn_title_toLearn">To Learn</string>
     <string name="item_desk_tolearn_title_learned">Learned</string>
     <string name="item_desk_tolearn_title_lastDay">Last Day Learned</string>
+    <string name="item_desk_tolearn_text_lastDay_empty">Not started</string>
 
     <!-- Item Desk all-->
     <string name="item_desk_all_title_cardsNumber">Cards number</string>
@@ -74,12 +75,9 @@
 
     <!-- ADD CARD SCREEN-->
     <string name="add_card_screen_btn_add_card">Add card</string>
-    <string name="title_activity_share_desk">ShareDeskActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="add_card_screen_field_1">First side</string>
+    <string name="add_card_screen_field_2">Second side</string>
+    <string name="add_card_screen_error_void_field">The card can not be empty</string>
 
 
 
@@ -108,5 +106,33 @@
     <string name="share_desk_detail_title_date">Uploaded</string>
     <string name="share_desk_detail_title_downloaded">Downloaded</string>
     <string name="share_desk_detail_btn_download">Download</string>
+
+    <!-- Dialog Settings Desk -->
+    <string name="dialog_settings_desk_title">Desk settings</string>
+    <string name="dialog_settings_desk_option_delete">Delete desk</string>
+
+    <!-- Settings Main Screen  !-->
+    <string name="setting_main_btn_turn_online">Turn to online</string>
+    <string name="setting_main_btn_close_session">Close session</string>
+    <string name="setting_main_btn_delete_data">Delete data</string>
+    <string name="setting_main_data_quantifier">Quantifier number</string>
+    <string name="setting_main_data_quantifier_max">Maximum quantizer</string>
+    <string name="setting_main_data_online_name">Online name</string>
+    <string name="setting_main_dialog_online_name_title">Online name</string>
+    <string name="setting_main_dialog_online_name_subtitle">Change online name you want will appear when you upload some desk. (Default: Unknown)</string>
+    <string name="setting_main_dialog_quantifier_number_title">Quantifier number</string>
+    <string name="setting_main_dialog_quantifier_number_subtitle">Change the number by which the days are multiplied to remember a card</string>
+    <string name="setting_main_dialog_quantifier_max_title">Maximum quantifier</string>
+    <string name="setting_main_dialog_quantifier_max_subtitle">When a card is set like learned</string>
+    <string name="setting_main_dialog_btn_change">Change</string>
+
+    <!-- Data Cross Activity !-->
+    <string name="data_cross_item_1_title">Share and download desks from users</string>
+    <string name="data_cross_item_1_subtitle">Share your desks with whole community and download the best desks of them. Or only take one of them to start another one bigger.</string>
+    <string name="data_cross_item_2_title">Safe and free</string>
+    <string name="data_cross_item_2_subtitle">Your desk always in the cloud. Safe and accessible wherever and whenever you want. And the most important, it is free ;)</string>
+    <string name="data_cross_item_3_title">Privacy</string>
+    <string name="data_cross_item_3_subtitle">We don’t get any additional data from your Google account, only a private id made specifically for this app. We don’t know even your name.</string>
+    <string name="data_cross_btn_migrate">Log in and migrate your data</string>
 
 </resources>

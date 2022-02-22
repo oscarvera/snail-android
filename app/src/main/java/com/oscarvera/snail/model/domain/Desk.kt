@@ -18,7 +18,7 @@ data class DeskWithCards(
         parentColumn = "id",
         entityColumn = "deskId"
     )
-    val cards: List<Card>?
+    var cards: List<Card>?
 )
 
 data class DeskShared(

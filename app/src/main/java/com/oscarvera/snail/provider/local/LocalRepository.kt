@@ -16,7 +16,7 @@ class LocalRepository : DeskDataSource, CardDataSource {
     }
 
     override fun getRemoteDesk(idRemote: String, callBack: DeskDataSource.LoadSharedDeskCallBack) {
-        //Not available
+        //Not in local mode
     }
 
     override fun getDesks(callBack: DeskDataSource.LoadDesksCallBack) {
@@ -29,8 +29,13 @@ class LocalRepository : DeskDataSource, CardDataSource {
         callback.onSaveSuccess(newId.toString())
     }
 
+    override fun deleteDesk(desk: Desk, callback: DeskDataSource.DeleteTaskCallback) {
+        MyApplication.localDatabase.deskDao().delete(desk = desk)
+        callback.onDeleteSuccess()
+    }
+
     override fun addDeskShared(desk: DeskShared, callback: DeskDataSource.SaveTaskCallback) {
-        //Not available
+        //Not in local mode
     }
 
     override fun getAllDesksWithCards(callback: DeskDataSource.LoadDesksWithCardsCallBack) {
@@ -39,7 +44,15 @@ class LocalRepository : DeskDataSource, CardDataSource {
     }
 
     override fun getAllDesksSharedWithCards(callback: DeskDataSource.LoadDesksSharedWithCardsCallBack) {
-        //Not available
+        //Not in local mode
+    }
+
+    override fun uploadNumDownloadShareDesk(desk: DeskShared) {
+        //Not in local mode
+    }
+
+    override fun deleteAllDesks() {
+        MyApplication.localDatabase.clearAllTables()
     }
 
     override fun getDeskandCards(idDesk: String, callBack: CardDataSource.LoadCardsCallBack) {

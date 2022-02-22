@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".usecases.home.shared.SharedFragment"
     android:paddingStart="30dp"
     android:paddingTop="20dp"
-    android:paddingEnd="30dp">
+    android:paddingEnd="30dp"
+    tools:context=".usecases.home.shared.SharedFragment">
 
     <TextView
-        android:id="@+id/title_desks_fragment"
+        android:id="@+id/title_settings_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/newyork_medium_bold"
@@ -19,5 +19,239 @@
         android:textSize="45sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/data_fields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_settings_fragment">
+
+        <RelativeLayout
+            android:id="@+id/btn_quantifier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_decoration_background"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:padding="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:fontFamily="@font/roboto_black"
+                android:layout_alignParentStart="true"
+                android:text="@string/setting_main_data_quantifier"
+                android:textColor="@color/textblack"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/text_quantifier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical|end"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/textblack"
+                android:textSize="16sp"
+                tools:text="2" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_max_quantifier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_decoration_background"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:padding="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:fontFamily="@font/roboto_black"
+                android:layout_alignParentStart="true"
+                android:text="@string/setting_main_data_quantifier_max"
+                android:textColor="@color/textblack"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/text_max_quantifier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical|end"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/textblack"
+                android:textSize="16sp"
+                tools:text="2" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_online_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_decoration_background"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:padding="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:fontFamily="@font/roboto_black"
+                android:layout_alignParentStart="true"
+                android:text="@string/setting_main_data_online_name"
+                android:textColor="@color/textblack"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/text_online_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical|end"
+                android:fontFamily="@font/roboto"
+                tools:text="Unknow"
+                android:textColor="@color/textblack"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/data_fields">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/disable"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/btn_turn_online"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_decoration_background"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/ic_turn"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_margin="20sp"
+                android:src="@drawable/ic_online"
+                app:tint="@color/textblack" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/setting_main_btn_turn_online"
+                android:textColor="@color/textblack"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_delete_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_decoration_background"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/ic_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_margin="20sp"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/textblack" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/setting_main_btn_delete_data"
+                android:textColor="@color/textblack"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_close_session"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_decoration_background"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/ic_close"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_margin="20sp"
+                android:src="@drawable/ic_exit"
+                app:tint="@color/textblack" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/setting_main_btn_close_session"
+                android:textColor="@color/textblack"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

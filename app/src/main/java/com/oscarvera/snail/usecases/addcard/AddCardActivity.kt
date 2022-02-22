@@ -38,11 +38,11 @@ class AddCardActivity : AppCompatActivity() {
         addCardVM.isCardAddedSuccessfully.observe(this, Observer {
 
             if (it){
-                Snackbar.make(
+                /*Snackbar.make(
                     frame_container,
                     R.string.dialog_newdesk_action_added_success,
                     Snackbar.LENGTH_SHORT
-                ).show()
+                ).show()*/
 
                 resetFields()
 
@@ -59,13 +59,26 @@ class AddCardActivity : AppCompatActivity() {
 
             btn_add_card.setOnClickListener {
 
-                val firstText = edit_text_1.text.toString()
-                val secondText = edit_text_2.text.toString()
-                val cardToSend = Card()
-                cardToSend.date_added = Utils.getNowDateFormatted()
-                cardToSend.cardswithdata =
-                    listOf(CardData(0, 0, firstText), CardData(0, 0, secondText))
-                addCardVM.addCard(idDesk, cardToSend)
+                when {
+
+                    edit_text_1.text.toString().isEmpty() -> {
+                        edit_text_1.error = getString(R.string.add_card_screen_error_void_field)
+                    }
+                    edit_text_2.text.toString().isEmpty() -> {
+                        edit_text_2.error = getString(R.string.add_card_screen_error_void_field)
+                    }
+
+                    else -> {
+                        val firstText = edit_text_1.text.toString()
+                        val secondText = edit_text_2.text.toString()
+                        val cardToSend = Card()
+                        cardToSend.date_added = Utils.getNowDateFormatted()
+                        cardToSend.cardswithdata =
+                            listOf(CardData(0, 0, firstText), CardData(0, 0, secondText))
+                        addCardVM.addCard(idDesk, cardToSend)
+                    }
+
+                }
 
             }
 

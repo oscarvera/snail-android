@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.oscarvera.snail.R
 import com.oscarvera.snail.model.domain.DeskShared
-import com.oscarvera.snail.util.Dialogs
+import com.oscarvera.snail.util.LoadingDialog
 import com.oscarvera.snail.util.Router
 import com.oscarvera.snail.util.extensions.afterTextChanged
 import kotlinx.android.synthetic.main.fragment_shared.*
@@ -26,10 +26,14 @@ class SharedFragment : Fragment() {
     private var adapterDeskShared: DesksSharedAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
 
+    private var loadingDialog: LoadingDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
-
+        activity?.let {
+            loadingDialog = LoadingDialog(it)
+        }
     }
 
     override fun onCreateView(
@@ -53,20 +57,18 @@ class SharedFragment : Fragment() {
                 DesksSharedAdapter(list, object : DesksSharedAdapter.DesksSharedAdapterCallback {
 
                     override fun onClick(desk: DeskShared) {
-                        Router.launchDeskSharedDetailActivity(context,desk.idRemote)
+                        Router.launchDeskSharedDetailActivity(context, desk.idRemote)
                     }
 
                     override fun onClickDownload(desk: DeskShared) {
+                        loadingDialog?.setCallback(object : LoadingDialog.LoadingDialogCallback {
+                            override fun onFinish(dialog: Dialog) {
+                                dialog.dismiss()
+                            }
+                        })
+                        loadingDialog?.showLoadingDialog()
                         sharedViewModel.downloadDesk(desk)
-                        activity?.let { fragActivity ->
-                            Dialogs.createLoadingDialog(fragActivity, object : Dialogs.LoadingDialog{
-                                override fun onFinish(dialog: Dialog) {
-                                    sharedViewModel.getDeskShared()
-                                    dialog.dismiss()
-                                }
 
-                            })
-                        }
                     }
 
                 })
@@ -83,11 +85,24 @@ class SharedFragment : Fragment() {
 
         })
 
+
+        sharedViewModel.isDesksShared.observe(viewLifecycleOwner, Observer {
+
+            loadingDialog?.finishLoadingDialog()
+            sharedViewModel.getDeskShared()
+
+        })
+
         sharedViewModel.getDeskShared()
 
 
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sharedViewModel.getDeskShared()
     }
 
 }

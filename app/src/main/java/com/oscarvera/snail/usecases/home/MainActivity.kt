@@ -5,9 +5,11 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.oscarvera.snail.R
+import com.oscarvera.snail.model.session.SessionManager
 import com.oscarvera.snail.usecases.home.desks.DesksFragment
 import com.oscarvera.snail.usecases.home.settings.SettingsFragment
 import com.oscarvera.snail.usecases.home.shared.SharedFragment
+import com.oscarvera.snail.util.Router
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -29,17 +31,17 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation_home.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.tab_home -> replaceFragment(desksFragment)
-                R.id.tab_shared -> replaceFragment(sharedFragment)
+                R.id.tab_shared -> {
+                    if (SessionManager.isLocalMode()){
+                        Router.launchDataCrossActivity(this)
+                    }else{
+                        replaceFragment(sharedFragment)
+                    }
+                }
                 R.id.tab_settings -> replaceFragment(settingsFragment)
             }
             return@setOnItemSelectedListener true
         }
-
-        /*home_fab_add_desk.setOnClickListener {
-
-            showAddDeskDialog()
-
-        }*/
 
 
     }

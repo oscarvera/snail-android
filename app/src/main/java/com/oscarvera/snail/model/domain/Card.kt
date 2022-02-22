@@ -13,7 +13,7 @@ data class Card(
     var date_checked: String = "",
     var date_to_check: String = "",
     var quantifier: Int = 1,
-    @Ignore var cardswithdata : List<CardData> = listOf(CardData(0,0,"Adios"), CardData(0,0,"Bye")),
+    @Ignore var cardswithdata : List<CardData> = listOf(),
     @Ignore var idRemote : String = "",
 )
 

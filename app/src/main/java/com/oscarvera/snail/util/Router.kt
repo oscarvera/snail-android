@@ -3,6 +3,7 @@ package com.oscarvera.snail.util
 import android.content.Context
 import android.content.Intent
 import com.oscarvera.snail.usecases.addcard.AddCardActivity
+import com.oscarvera.snail.usecases.crossdata.CrossDataActivity
 import com.oscarvera.snail.usecases.deskdetail.DeskDetailActivity
 import com.oscarvera.snail.usecases.deskshareddetail.DeskSharedDetailActivity
 import com.oscarvera.snail.usecases.home.MainActivity
@@ -15,9 +16,9 @@ class Router {
 
     companion object {
 
-        fun launchLoginIntent(context: Context) {
+        fun launchLoginIntent(context: Context?) {
             val intent = Intent(context, LoginActivity::class.java)
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
 
         fun launchAddCardActivity(context: Context, idDesk: String, nameDesk: String) {
@@ -58,6 +59,11 @@ class Router {
 
         fun launchShareDeskActivity(context: Context?) {
             val intent = Intent(context, ShareDeskActivity::class.java)
+            context?.startActivity(intent)
+        }
+
+        fun launchDataCrossActivity(context: Context?) {
+            val intent = Intent(context, CrossDataActivity::class.java)
             context?.startActivity(intent)
         }
 

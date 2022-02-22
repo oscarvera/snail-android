@@ -1,5 +1,7 @@
 package com.oscarvera.snail.usecases.home.shared
 
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -59,13 +61,14 @@ class SharedViewModel : ViewModel() {
             SwichDataSource.deskData.addDesk(desk,object : DeskDataSource.SaveTaskCallback {
 
                 override fun onSaveSuccess(newId: String?) {
-
+                    _isDesksShared.postValue(true)
                 }
 
                 override fun onError(t: Throwable) {
-
+                    _isDesksShared.postValue(false)
                 }
             })
+            SwichDataSource.deskData.uploadNumDownloadShareDesk(deskShared)
         }
 
     }

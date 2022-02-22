@@ -16,6 +16,7 @@ class FirebaseRepository : DeskDataSource, CardDataSource {
                 .addOnSuccessListener { document ->
                     val desk = document.toObject(Desk::class.java)
                     desk?.let {
+                        desk.idRemote = document.id
                         callBack.onDeskLoaded(it)
                     } ?: callBack.onError(NullPointerException())
                 }.addOnFailureListener {
@@ -67,6 +68,18 @@ class FirebaseRepository : DeskDataSource, CardDataSource {
         }
     }
 
+    override fun deleteDesk(desk: Desk, callback: DeskDataSource.DeleteTaskCallback) {
+        val db = FirebaseFirestore.getInstance()
+        SessionManager.getIdFirebase()?.let { userId ->
+            db.collection("users").document(userId).collection("desks").document(desk.idRemote).delete()
+                .addOnSuccessListener {
+                    callback.onDeleteSuccess()
+                }.addOnFailureListener {
+                    callback.onError(it)
+                }
+        }
+    }
+
     override fun addDeskShared(desk: DeskShared, callback: DeskDataSource.SaveTaskCallback) {
         val db = FirebaseFirestore.getInstance()
         db.collection("shared").add(desk)
@@ -109,6 +122,18 @@ class FirebaseRepository : DeskDataSource, CardDataSource {
             }.addOnFailureListener {
                 callback.onError(it)
             }
+    }
+
+    override fun uploadNumDownloadShareDesk(desk: DeskShared) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("shared").document(desk.idRemote).update("timesDownloaded", desk.timesDownloaded+1)
+    }
+
+    override fun deleteAllDesks() {
+        val db = FirebaseFirestore.getInstance()
+        SessionManager.getIdFirebase()?.let { userId ->
+            db.collection("users").document(userId).delete()
+        }
     }
 
     override fun getDeskandCards(idDesk: String, callBack: CardDataSource.LoadCardsCallBack) {

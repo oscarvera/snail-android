@@ -76,5 +76,25 @@ class DeskDetailViewModel : ViewModel() {
         }
     }
 
+    fun deleteDesk(idDesk: String,onSuccess: () -> Unit){
+        viewModelScope.launch(Dispatchers.IO) {
+            desk.value?.let {
+                SwichDataSource.deskData.deleteDesk(it, object : DeskDataSource.DeleteTaskCallback {
+
+                    override fun onDeleteSuccess() {
+                        onSuccess()
+                    }
+
+                    override fun onError(t: Throwable) {
+
+                    }
+
+
+                })
+            }
+
+        }
+    }
+
 
 }

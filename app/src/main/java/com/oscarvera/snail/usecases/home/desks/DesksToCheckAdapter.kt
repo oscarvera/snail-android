@@ -25,24 +25,25 @@ class DesksToCheckAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (noDeskToLearn){
+        return if (noDeskToLearn) {
             ViewHolderNoToLearn(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_desk_no_desk_learn, parent, false)
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_desk_no_desk_learn, parent, false)
             )
-        }else{
+        } else {
             ViewHolderToLearn(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_desk_tolearn, parent, false)
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_desk_tolearn, parent, false)
             )
         }
     }
 
 
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        when (holder){
+        when (holder) {
 
-            is ViewHolderToLearn ->{
+            is ViewHolderToLearn -> {
 
                 val desk = listDesksCards[position]
 
@@ -52,15 +53,16 @@ class DesksToCheckAdapter(
 
                 desk.cards?.let {
 
-                    val countStatesCards = Utils.countStatusCards(desk.cards)
-                    val textCountLearned =  "${countStatesCards[StatusCard.LEARNED]} ${
+                    val countStatesCards = Utils.countStatusCards(it)
+                    val textCountLearned = "${countStatesCards[StatusCard.LEARNED]} ${
                         holder.textCardsLearned.context.getString(
                             R.string.name_card
                         )
                     }"
                     holder.textCardsLearned.text = textCountLearned
 
-                    val textCardsNumber =  "${desk.cards.size} ${holder.textCardsLearned.context.getString(R.string.name_card)}"
+                    val textCardsNumber =
+                        "${it.size} ${holder.textCardsLearned.context.getString(R.string.name_card)}"
                     holder.textCardsNumber.text = textCardsNumber
 
                     val textCountLearn = "${countStatesCards[StatusCard.TO_LEARN]} ${
@@ -71,7 +73,10 @@ class DesksToCheckAdapter(
                     holder.textCardsToLearn.text = textCountLearn
 
                     holder.numberToLearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
-                    holder.textLastDay.text = ""
+                    holder.textLastDay.text = Utils.getLatestDate(
+                        it,
+                        holder.textLastDay.context.getString(R.string.item_desk_tolearn_text_lastDay_empty)
+                    )
 
                 } ?: {
 

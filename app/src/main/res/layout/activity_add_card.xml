@@ -10,39 +10,102 @@
 
     <include layout="@layout/layout_top_bar"/>
 
-
-
-    <EditText
-        android:id="@+id/edit_text_1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topBar" />
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_card"
+        android:orientation="vertical"
+        android:layout_marginBottom="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp">
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/edit_text_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_input"
+            app:layout_constraintTop_toBottomOf="@id/topBar"
+            android:padding="10dp"
+            android:inputType="textMultiLine|textAutoCorrect"
+            android:gravity="top|start"
+            android:scrollbars="vertical"
+            android:hint="@string/add_card_screen_field_1"
+            android:maxLines="20"
+            android:layout_marginTop="20dp"
+            android:autofillHints=""
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+
+            />
 
 
-    <EditText
-        android:id="@+id/edit_text_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_1" />
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/edit_text_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_input"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_1"
+            android:padding="10dp"
+            android:inputType="textMultiLine|textAutoCorrect"
+            android:gravity="top|start"
+            android:scrollbars="vertical"
+            android:hint="@string/add_card_screen_field_2"
+            android:maxLines="20"
+            android:layout_marginTop="20dp"
+            android:autofillHints=""
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            />
 
-    <Button
+
+
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
         android:id="@+id/btn_add_card"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/gradient_button_primary"
-        android:fontFamily="@font/roboto_black"
-        android:text="@string/add_card_screen_btn_add_card"
-        app:cornerRadius="15dp"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/titleBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/add_card_screen_btn_add_card"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
 

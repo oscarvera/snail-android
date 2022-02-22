@@ -13,6 +13,10 @@ object PrefManager {
         get() = userPreferences.getBoolean("KEY_IS_IN_LOCAL_MODE", false)
         set(value) = userPreferences.edit { putBoolean("KEY_IS_IN_LOCAL_MODE", value) }
 
+    var quantifierNumber: Int
+        get() = userPreferences.getInt("QUA_NUMBER", 2)
+        set(value) = userPreferences.edit { putInt("QUA_NUMBER", value) }
+
     var maxQuantifierToBeLearned: Int
         get() = userPreferences.getInt("MAX_QUA_LEARNED", 100)
         set(value) = userPreferences.edit { putInt("MAX_QUA_LEARNED", value) }

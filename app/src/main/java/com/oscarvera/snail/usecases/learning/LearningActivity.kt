@@ -1,6 +1,7 @@
 package com.oscarvera.snail.usecases.learning
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
@@ -32,6 +33,9 @@ class LearningActivity : AppCompatActivity() {
         idDesk = intent.getStringExtra(EXTRA_ID_DESK)
         nameDesk = intent.getStringExtra(EXTRA_NAME_DESK)
         title_top_bar.text = nameDesk
+
+        card_text1.movementMethod = ScrollingMovementMethod()
+        card_text2.movementMethod = ScrollingMovementMethod()
 
         learningVM.card.observe(this, Observer {
 
