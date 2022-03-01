@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/background2"
+    app:cardCornerRadius="15dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    app:cardElevation="0dp"
+    android:id="@+id/card_item">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/section_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="20dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/titleBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/item_desk_tolearn_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:maxLines="3"
+                android:fontFamily="@font/newyork_medium_medium"
+                android:textColor="@color/textblack"
+                android:textSize="24sp"
+                tools:text="Desk name" />
+
+            <FrameLayout
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/circle_white">
+
+                <TextView
+                    android:id="@+id/text_number_tolearn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/newyork_medium_black"
+                    android:gravity="center"
+                    android:textColor="@color/textblack"
+                    android:textSize="20sp"
+                    tools:text="4" />
+            </FrameLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <LinearLayout
+            android:id="@+id/dataBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/titleBox"
+            android:layout_marginTop="15dp"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/title_numcards"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="@string/item_desk_tolearn_title_cardsNumber"
+                        android:textColor="@color/textgrey"
+                        android:textSize="16sp" />
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+
+                    <TextView
+                        android:id="@+id/text_numcards"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/textblack"
+                        android:textSize="16sp"
+                        tools:text="12 flascards" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+
+                    <TextView
+                        android:id="@+id/title_learned"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="@string/item_desk_tolearn_title_learned"
+                        android:textColor="@color/textgrey"
+                        android:textSize="16sp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+
+                    <TextView
+                        android:id="@+id/text_learned"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/textblack"
+                        android:textSize="16sp"
+                        tools:text="3 flascards" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/title_to_learn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="@color/textgrey"
+                        android:textSize="16sp"
+                        android:text="@string/item_desk_tolearn_title_toLearn" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+
+                    <TextView
+                        android:id="@+id/text_to_learn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/textblack"
+                        android:textSize="16sp"
+                        tools:text="12 flascards" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+
+                    <TextView
+                        android:id="@+id/title_lastday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="@string/item_desk_tolearn_title_lastDay"
+                        android:textColor="@color/textgrey"
+                        android:textSize="16sp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+
+                    <TextView
+                        android:id="@+id/text_lastday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/textblack"
+                        android:textSize="16sp"
+                        tools:text="3 flascards" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/dataBox"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/btn_edit"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/background2"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/fragment_desks_item_button_edit"
+                android:textAllCaps="false"
+                android:textColor="@color/secondary"
+                app:cornerRadius="15dp"
+                app:strokeColor="@color/secondary"
+                app:strokeWidth="2dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="0dp"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/btn_learn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_button_primary"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/fragment_desks_item_button_dueDesk"
+                app:cornerRadius="15dp"/>
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

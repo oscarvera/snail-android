@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="25dp">
+
+    <TextView
+        android:id="@+id/title_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/newyork_medium_black"
+        android:text="@string/dialog_settings_desk_title"
+        android:textColor="@color/secondary"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_name"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <LinearLayout
+            android:id="@+id/btn_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/rectangle_decoration_background">
+
+            <ImageView
+                android:id="@+id/ic_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/textblack"
+                android:layout_margin="20sp"/>
+
+            <TextView
+                android:text="@string/dialog_settings_desk_option_delete"
+                android:layout_width="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/textblack"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

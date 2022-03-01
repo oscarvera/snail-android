@@ -3,6 +3,7 @@
     package="com.oscarvera.snail">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,16 +11,58 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Snail">
         <activity
-            android:name=".MainActivity"
+            android:name=".usecases.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail" />
+        <activity
+            android:name=".usecases.addcard.AddCardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail" />
+        <activity
+            android:name=".usecases.launch.LaunchActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Snail">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".usecases.deskshareddetail.DeskSharedDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+        <activity
+            android:name=".usecases.deskdetail.DeskDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+        <activity
+            android:name=".usecases.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+        <activity
+            android:name=".usecases.home.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+        <activity
+            android:name=".usecases.learning.LearningActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+
+        <activity
+            android:name=".usecases.crossdata.CrossDataActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+
+        <activity
+            android:name=".usecases.sharedesk.ShareDeskActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Snail.NoActionBar" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

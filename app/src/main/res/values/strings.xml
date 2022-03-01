@@ -1,3 +1,144 @@
 <resources>
-    <string name="app_name">Snail</string>
+    <string name="app_name">snail</string>
+    <string name="title_activity_home_fragment">HomeFragment</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="name_card">flashcard</string>
+
+    <!-- Onboarding !-->
+    <string name="activity_onboarding_screen1_title1">Welcome!</string>
+    <string name="activity_onboarding_screen1_title2">Get started now</string>
+    <string name="activity_onboarding_screen1_title3"></string>
+    <string name="activity_onboarding_screen2_title1">Here you can</string>
+    <string name="activity_onboarding_screen2_title2">learn whatever you want</string>
+    <string name="activity_onboarding_screen2_title3">English, geography, History…</string>
+    <string name="activity_onboarding_screen3_title1">Study using the</string>
+    <string name="activity_onboarding_screen3_title2">spaced repetition method</string>
+    <string name="activity_onboarding_screen3_title3">We are the most simple and easier tool to use it</string>
+    <string name="activity_onboarding_screen4_title1">Create and study</string>
+    <string name="activity_onboarding_screen4_title2">with flashcards</string>
+    <string name="activity_onboarding_screen4_title3">Effiency and faster.</string>
+    <string name="activity_onboarding_screen5_title1">You can share your desks</string>
+    <string name="activity_onboarding_screen5_title2">with the whole world</string>
+    <string name="activity_onboarding_screen5_title3">And get desks the people created</string>
+
+
+    <!--Login Screen!-->
+    <string name="login_sign_google">Continue with Google</string>
+    <string name="login_describe_sign_google">Synchronize data online and share and get online desks</string>
+    <string name="login_sign_local">Continue offline</string>
+    <string name="login_describe_sign_local">Offline and local mode</string>
+
+
+    <!-- DESKS MAIN SCREEN-->
+    <string name="fragment_desks_title">Desks</string>
+    <string name="fragment_desks_separator_1">To learn</string>
+    <string name="fragment_desks_separator_2">All Desks</string>
+    <string name="fragment_desks_item_button_edit">Detail</string>
+    <string name="fragment_desks_item_button_dueDesk">Due Today</string>
+    <string name="fragment_desks_item_no_desk_to_learn">Great! You don\'t have desks to learn 💃</string>
+
+    <!-- Item Desk to learn-->
+    <string name="item_desk_tolearn_title_cardsNumber">Cards number</string>
+    <string name="item_desk_tolearn_title_toLearn">To Learn</string>
+    <string name="item_desk_tolearn_title_learned">Learned</string>
+    <string name="item_desk_tolearn_title_lastDay">Last Day Learned</string>
+    <string name="item_desk_tolearn_text_lastDay_empty">Not started</string>
+
+    <!-- Item Desk all-->
+    <string name="item_desk_all_title_cardsNumber">Cards number</string>
+
+    <!-- Dialog new Desk -->
+    <string name="dialog_newdesk_title">New Desk</string>
+    <string name="dialog_newdesk_field_name">Name</string>
+    <string name="dialog_newdesk_btn_addDesk">Add Desk</string>
+    <string name="dialog_newdesk_btn_close">Cancel</string>
+    <string name="dialog_newdesk_action_added_success">Desk added successfully</string>
+
+
+    <!-- SHARED MAIN SCREEN-->
+    <string name="fragment_shared_title">Shared</string>
+    <string name="fragment_shared_btn_share">Share desk</string>
+    <string name="fragment_shared_hint_search">Search desks</string>
+
+    <!-- SETTINGS MAIN SCREEN-->
+    <string name="fragment_settings_title">Settings</string>
+
+    <!-- DETAIL DESK SCREEN-->
+    <string name="detail_cards_tolearn">To learn</string>
+    <string name="detail_cards_learning">Learning</string>
+    <string name="detail_cards_learned">Learned</string>
+    <string name="dialog_newcard_action_added_success">Card added successfully</string>
+    <string name="detail_list_cards_add">Add card</string>
+    <string name="detail_search_cards">Search cards</string>
+    <string name="detail_btn_learn_desk">Due today</string>
+
+    <!-- ADD CARD SCREEN-->
+    <string name="add_card_screen_btn_add_card">Add card</string>
+    <string name="add_card_screen_field_1">First side</string>
+    <string name="add_card_screen_field_2">Second side</string>
+    <string name="add_card_screen_error_void_field">The card can not be empty</string>
+
+
+
+    <!-- SHARE DESK SCREEN-->
+    <string name="share_desk_title">Your desks</string>
+    <string name="share_desk_subtitle">Select your desk to share</string>
+    <string name="share_desk_btn_share">Share</string>
+
+    <!-- Dialog Add Name -->
+    <string name="dialog_addname_title">Your name</string>
+    <string name="dialog_addname_subtitle">It’s not necessary, you can continue anyways. It´ll be visible for everyone.</string>
+    <string name="dialog_addname_btn_share">Share</string>
+    <string name="dialog_addname_btn_cancel">Cancel</string>
+    <string name="void_username_desk_shared">Unknown</string>
+
+    <!-- Item Desk Shared-->
+    <string name="item_desk_shared_title_cardsNumber">Cards number</string>
+    <string name="item_desk_shared_title_userOwner">Created by</string>
+    <string name="item_desk_shared_title_date">Uploaded</string>
+    <string name="item_desk_shared_title_downloaded">Downloaded</string>
+    <string name="item_desk_shared_btn_show">Show</string>
+    <string name="item_desk_shared_btn_download">Download</string>
+
+    <!-- SHARE DESK DETAIL SCREEN-->
+    <string name="share_desk_detail_title_owner">Created by</string>
+    <string name="share_desk_detail_title_date">Uploaded</string>
+    <string name="share_desk_detail_title_downloaded">Downloaded</string>
+    <string name="share_desk_detail_btn_download">Download</string>
+
+    <!-- Dialog Settings Desk -->
+    <string name="dialog_settings_desk_title">Desk settings</string>
+    <string name="dialog_settings_desk_option_delete">Delete desk</string>
+
+    <!-- Settings Main Screen  !-->
+    <string name="setting_main_btn_turn_online">Turn to online</string>
+    <string name="setting_main_btn_close_session">Close session</string>
+    <string name="setting_main_btn_delete_data">Delete data</string>
+    <string name="setting_main_data_quantifier">Quantifier number</string>
+    <string name="setting_main_data_quantifier_max">Maximum quantizer</string>
+    <string name="setting_main_data_online_name">Online name</string>
+    <string name="setting_main_dialog_online_name_title">Online name</string>
+    <string name="setting_main_dialog_online_name_subtitle">Change online name you want will appear when you upload some desk. (Default: Unknown)</string>
+    <string name="setting_main_dialog_quantifier_number_title">Quantifier number</string>
+    <string name="setting_main_dialog_quantifier_number_subtitle">Change the number by which the days are multiplied to remember a card</string>
+    <string name="setting_main_dialog_quantifier_max_title">Maximum quantifier</string>
+    <string name="setting_main_dialog_quantifier_max_subtitle">When a card is set like learned</string>
+    <string name="setting_main_dialog_btn_change">Change</string>
+
+    <!-- Data Cross Activity !-->
+    <string name="data_cross_item_1_title">Share and download desks from users</string>
+    <string name="data_cross_item_1_subtitle">Share your desks with whole community and download the best desks of them. Or only take one of them to start another one bigger.</string>
+    <string name="data_cross_item_2_title">Safe and free</string>
+    <string name="data_cross_item_2_subtitle">Your desk always in the cloud. Safe and accessible wherever and whenever you want. And the most important, it is free ;)</string>
+    <string name="data_cross_item_3_title">Privacy</string>
+    <string name="data_cross_item_3_subtitle">We don’t get any additional data from your Google account, only a private id made specifically for this app. We don’t know even your name.</string>
+    <string name="data_cross_btn_migrate">Log in and migrate your data</string>
+
+    <!-- Error Dialog !-->
+    <string name="dialog_error_title">An error is happened :(</string>
+    <string name="dialog_error_subtitle">Sorry, an unexpected error appeared. Please, try again later. We are working on it.</string>
+    <string name="dialog_error_button1">Cancel</string>
+    <string name="dialog_error_button2">Okay</string>
+
 </resources>
