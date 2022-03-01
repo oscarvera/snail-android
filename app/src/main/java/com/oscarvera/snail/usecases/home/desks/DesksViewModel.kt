@@ -1,5 +1,6 @@
 package com.oscarvera.snail.usecases.home.desks
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +10,10 @@ import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.model.domain.StatusCard
 import com.oscarvera.snail.provider.DeskDataSource
 import com.oscarvera.snail.provider.SwichDataSource
+import com.oscarvera.snail.usecases.deskdetail.DeskDetailViewModel
+import com.oscarvera.snail.util.Constants
 import com.oscarvera.snail.util.extensions.getStatusCard
+import com.oscarvera.snail.util.sendErrorEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
@@ -50,7 +54,7 @@ class DesksViewModel : ViewModel() {
                 }
 
                 override fun onError(t: Throwable) {
-                    TODO("Not yet implemented")
+                    sendErrorEvent(DesksViewModel::class.java.name,t.message)
                 }
             })
         }
@@ -80,7 +84,7 @@ class DesksViewModel : ViewModel() {
                 }
 
                 override fun onError(t: Throwable) {
-                    TODO("Not yet implemented")
+                    sendErrorEvent(DesksViewModel::class.java.name,t.message)
                 }
             })
         }

@@ -10,7 +10,10 @@ import com.oscarvera.snail.provider.CardDataSource
 import com.oscarvera.snail.provider.DeskDataSource
 import com.oscarvera.snail.provider.SwichDataSource
 import com.oscarvera.snail.provider.preferences.PrefManager
+import com.oscarvera.snail.usecases.crossdata.CrossDataActivity
+import com.oscarvera.snail.util.Dialogs
 import com.oscarvera.snail.util.Utils
+import com.oscarvera.snail.util.sendErrorEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -38,7 +41,7 @@ class DeskShareViewModel : ViewModel() {
                 }
 
                 override fun onError(t: Throwable) {
-                    TODO("Not yet implemented")
+                    sendErrorEvent(DeskShareViewModel::class.java.name,t.message)
                 }
 
             })

@@ -15,7 +15,7 @@ import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.util.Dialogs
 import com.oscarvera.snail.util.EventType
 import com.oscarvera.snail.util.Router
-import com.oscarvera.snail.util.SendEvent
+import com.oscarvera.snail.util.sendEvent
 import com.oscarvera.snail.util.extensions.getProperId
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -31,7 +31,7 @@ class DesksFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SendEvent(EventType.SHOWDESKVIEW, null)
+        sendEvent(EventType.SHOWDESKSVIEW, null)
         desksViewModel = ViewModelProvider(this).get(DesksViewModel::class.java)
     }
 
@@ -96,6 +96,7 @@ class DesksFragment : Fragment() {
 
     private fun showAddDeskDialog() {
 
+        sendEvent(EventType.CLICKADDDESK,null)
         activity?.let { fragActivity ->
             Dialogs.createNewDeskDialog(fragActivity, object : Dialogs.NewDeskDialog {
                 override fun createDialog(name: String, dialog: Dialog) {

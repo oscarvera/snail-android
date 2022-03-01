@@ -12,7 +12,8 @@ import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.model.domain.StatusCard
 import com.oscarvera.snail.provider.DeskDataSource
 import com.oscarvera.snail.provider.SwichDataSource
-import com.oscarvera.snail.util.Utils
+import com.oscarvera.snail.usecases.home.desks.DesksViewModel
+import com.oscarvera.snail.util.*
 import com.oscarvera.snail.util.extensions.getStatusCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,7 +41,7 @@ class SharedViewModel : ViewModel() {
                 }
 
                 override fun onError(t: Throwable) {
-                    TODO("Not yet implemented")
+                    sendErrorEvent(SharedViewModel::class.java.name,t.message)
                 }
             })
         }
@@ -48,6 +49,7 @@ class SharedViewModel : ViewModel() {
 
     fun downloadDesk(deskShared: DeskShared){
 
+        sendEventWithDeskId(EventType.DOWNLOADDESK, deskShared.idRemote)
         val desk = Desk()
         desk.name = deskShared.name
         deskShared.cards?.let {

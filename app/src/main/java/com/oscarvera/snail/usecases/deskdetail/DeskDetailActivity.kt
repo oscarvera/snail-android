@@ -40,6 +40,7 @@ class DeskDetailActivity : AppCompatActivity() {
         loadingDialog = LoadingDialog(this)
 
         idDesk = intent.getStringExtra(EXTRA_ID_DESK)
+        sendEventWithDeskId(EventType.SHOWDESKVIEW, idDesk)
 
         recyclerViewCards.layoutManager = GridLayoutManager(this, 2)
         val spanCount = 2

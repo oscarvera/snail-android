@@ -69,7 +69,6 @@ class DeskSharedDetailActivity : AppCompatActivity() {
 
             btn_download_desk.setOnClickListener {
                 sharedViewModel.downloadDesk(desk)
-                //TODO: Start animation loading
                 loadingDialog.setCallback(object : LoadingDialog.LoadingDialogCallback {
                     override fun onFinish(dialog: Dialog) {
                         dialog.dismiss()
@@ -82,7 +81,6 @@ class DeskSharedDetailActivity : AppCompatActivity() {
         })
 
         sharedViewModel.isDesksShared.observe(this, Observer {
-            //TODO: Stop animation
             loadingDialog.finishLoadingDialog()
         })
 

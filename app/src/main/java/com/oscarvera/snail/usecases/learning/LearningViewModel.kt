@@ -9,8 +9,10 @@ import com.oscarvera.snail.model.domain.StatusCard
 import com.oscarvera.snail.provider.CardDataSource
 import com.oscarvera.snail.provider.SwichDataSource
 import com.oscarvera.snail.provider.preferences.PrefManager
+import com.oscarvera.snail.usecases.home.desks.DesksViewModel
 import com.oscarvera.snail.util.Utils
 import com.oscarvera.snail.util.extensions.getStatusCard
+import com.oscarvera.snail.util.sendErrorEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
@@ -51,7 +53,7 @@ class LearningViewModel : ViewModel() {
                 }
 
                 override fun onError(t: Throwable) {
-                    TODO("Not yet implemented")
+                    sendErrorEvent(LearningViewModel::class.java.name,t.message)
                 }
 
             })
@@ -82,7 +84,7 @@ class LearningViewModel : ViewModel() {
                     }
 
                     override fun onError(t: Throwable) {
-                        TODO("Not yet implemented")
+                        sendErrorEvent(LearningViewModel::class.java.name,t.message)
                     }
                 })
             }

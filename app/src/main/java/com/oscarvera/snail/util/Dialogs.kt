@@ -194,6 +194,39 @@ object Dialogs {
 
     }
 
+    fun createErrorDialog(context: Context) {
+        val dialog = Dialog(context, R.style.CustomAlertDialog)
+        dialog.setContentView(R.layout.dialog_error)
+        dialog.show()
+
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(dialog.window?.attributes)
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+        dialog.window?.attributes = lp
+
+        val inset =
+            InsetDrawable(AppCompatResources.getDrawable(context, R.drawable.background_dialog), 40)
+        dialog.window?.setBackgroundDrawable(inset)
+
+        /*val title = dialog.findViewById<TextView>(R.id.title_name)
+        title.text = context.getText(R.string.dialog_addname_title)
+        val subtitle = dialog.findViewById<TextView>(R.id.subtitle_name)
+        subtitle.text = context.getText(R.string.dialog_addname_subtitle)*/
+
+        val btnClose = dialog.findViewById<Button>(R.id.btn_close)
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        val btnAdd = dialog.findViewById<CardView>(R.id.btn_add_name)
+
+        btnAdd.setOnClickListener {
+           dialog.dismiss()
+        }
+
+    }
+
 
 
     fun optionsBottomSheetDialog(

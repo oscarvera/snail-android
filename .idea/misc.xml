@@ -52,6 +52,7 @@
         <entry key="app/src/main/res/layout/dialog_add_name.xml" value="0.245018115942029" />
         <entry key="app/src/main/res/layout/dialog_bottom_sheet_options_desk.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/dialog_change_number.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/dialog_error.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.2203125" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.26614583333333336" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2765625" />

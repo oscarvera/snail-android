@@ -15,8 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.oscarvera.snail.R
 import com.oscarvera.snail.model.session.SessionManager
-import com.oscarvera.snail.util.LoadingDialog
-import com.oscarvera.snail.util.Router
+import com.oscarvera.snail.util.*
 import kotlinx.android.synthetic.main.activity_cross_data.*
 import kotlinx.android.synthetic.main.layout_top_bar.*
 import kotlinx.android.synthetic.main.layout_top_bar.btn_back
@@ -32,6 +31,8 @@ class CrossDataActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cross_data)
 
         crossDataViewModel = ViewModelProvider(this).get(CrossDataViewModel::class.java)
+
+        sendEvent(EventType.MIGRATESCREEN, null)
 
         loadingDialog = LoadingDialog(this)
 
@@ -59,15 +60,16 @@ class CrossDataActivity : AppCompatActivity() {
                                 }
 
                             } else {
-                                Log.d("ERROR",it.exception.toString())
                                 //There is an error with google account
-                                //TODO: Show error message
+                                sendErrorEvent(CrossDataActivity::class.java.name,it.exception.toString())
+                                Dialogs.createErrorDialog(this)
                             }
                         }
                 }
             } catch (e: ApiException) {
                 //There is an error with Intent or google sign in
-                //TODO: Show error message
+                sendErrorEvent(CrossDataActivity::class.java.name,e.message)
+                Dialogs.createErrorDialog(this)
             }
         }
 

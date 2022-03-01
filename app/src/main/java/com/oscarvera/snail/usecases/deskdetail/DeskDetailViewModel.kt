@@ -10,6 +10,9 @@ import com.oscarvera.snail.model.domain.Desk
 import com.oscarvera.snail.provider.CardDataSource
 import com.oscarvera.snail.provider.DeskDataSource
 import com.oscarvera.snail.provider.SwichDataSource
+import com.oscarvera.snail.usecases.crossdata.CrossDataActivity
+import com.oscarvera.snail.util.Dialogs
+import com.oscarvera.snail.util.sendErrorEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -36,7 +39,7 @@ class DeskDetailViewModel : ViewModel() {
                 }
 
                 override fun onError(t: Throwable) {
-                    TODO("Not yet implemented")
+                    sendErrorEvent(DeskDetailViewModel::class.java.name,t.message)
                 }
 
             })
@@ -53,7 +56,7 @@ class DeskDetailViewModel : ViewModel() {
                 }
 
                 override fun onError(t: Throwable) {
-                    TODO("Not yet implemented")
+                    sendErrorEvent(DeskDetailViewModel::class.java.name,t.message)
                 }
 
             })
@@ -68,7 +71,7 @@ class DeskDetailViewModel : ViewModel() {
                 }
 
                 override fun onError(t: Throwable) {
-
+                    sendErrorEvent(DeskDetailViewModel::class.java.name,t.message)
                 }
 
 
@@ -86,7 +89,7 @@ class DeskDetailViewModel : ViewModel() {
                     }
 
                     override fun onError(t: Throwable) {
-
+                        sendErrorEvent(DeskDetailViewModel::class.java.name,t.message)
                     }
 
 

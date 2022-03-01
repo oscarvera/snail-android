@@ -135,4 +135,10 @@
     <string name="data_cross_item_3_subtitle">We don’t get any additional data from your Google account, only a private id made specifically for this app. We don’t know even your name.</string>
     <string name="data_cross_btn_migrate">Log in and migrate your data</string>
 
+    <!-- Error Dialog !-->
+    <string name="dialog_error_title">An error is happened :(</string>
+    <string name="dialog_error_subtitle">Sorry, an unexpected error appeared. Please, try again later. We are working on it.</string>
+    <string name="dialog_error_button1">Cancel</string>
+    <string name="dialog_error_button2">Okay</string>
+
 </resources>

@@ -37,8 +37,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.oscarvera.snail.R
 import com.oscarvera.snail.model.session.SessionManager
 import com.oscarvera.snail.ui.theme.*
+import com.oscarvera.snail.usecases.crossdata.CrossDataActivity
 import com.oscarvera.snail.usecases.home.*
-import com.oscarvera.snail.util.Router
+import com.oscarvera.snail.usecases.learning.LearningViewModel
+import com.oscarvera.snail.util.*
 
 class LoginActivity : ComponentActivity() {
 
@@ -70,18 +72,21 @@ fun LoginLayout() {
                                 account.id?.let { id ->
                                     SessionManager.setIdFirebase(id)
                                     db.collection("users").document(id).set(hashMapOf("id" to id))
+                                    sendEvent(EventType.LOGINONLINEMODE, null)
                                     Router.launchMainActivity(context)
                                 }
 
                             } else {
                                 //There is an error with google account
-                                //TODO: Show error message
+                                sendErrorEvent(CrossDataActivity::class.java.name,it.exception.toString())
+                                Dialogs.createErrorDialog(context)
                             }
                         }
                 }
             } catch (e: ApiException) {
                 //There is an error with Intent or google sign in
-                //TODO: Show error message
+                sendErrorEvent(CrossDataActivity::class.java.name,e.message)
+                Dialogs.createErrorDialog(context)
             }
         }
 
@@ -166,6 +171,7 @@ fun LoginLayout() {
                 OutlinedButton(
                     onClick = {
                         SessionManager.setLocalMode(true)
+                        sendEvent(EventType.LOGINLOCALMODE, null)
                         Router.launchMainActivity(context)
                     },
                     border = BorderStroke(1.dp, PrimaryGreen2),

@@ -28,7 +28,7 @@ enum class NAME_SCREENS(
 }*/
 
 
-/* TODO: ADD ROUTES
+/*
    enum class MainTabs(
        @StringRes val title: Int,
        @DrawableRes val icon: Int,
