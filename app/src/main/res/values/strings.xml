@@ -35,7 +35,7 @@
     <string name="fragment_desks_separator_1">To learn</string>
     <string name="fragment_desks_separator_2">All Desks</string>
     <string name="fragment_desks_item_button_edit">Detail</string>
-    <string name="fragment_desks_item_button_dueDesk">Due Desk</string>
+    <string name="fragment_desks_item_button_dueDesk">Due Today</string>
     <string name="fragment_desks_item_no_desk_to_learn">Great! You don\'t have desks to learn 💃</string>
 
     <!-- Item Desk to learn-->
@@ -71,7 +71,7 @@
     <string name="dialog_newcard_action_added_success">Card added successfully</string>
     <string name="detail_list_cards_add">Add card</string>
     <string name="detail_search_cards">Search cards</string>
-    <string name="detail_btn_learn_desk">Due desk</string>
+    <string name="detail_btn_learn_desk">Due today</string>
 
     <!-- ADD CARD SCREEN-->
     <string name="add_card_screen_btn_add_card">Add card</string>
