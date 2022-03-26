@@ -1,4 +1,8 @@
-![header](/readme/gitHeader.png)
+![header](/readme/head-github.png)
+![body1](/readme/body1-animated.gif)
+![body1](/readme/body2-animated.gif)
+[![platforms](/readme/platforms.png)](https://play.google.com/store/apps/details?id=com.oscarvera.snail)
+![footer](/readme/footer-github.png)
 
 Spaced repetition simplified.
 
