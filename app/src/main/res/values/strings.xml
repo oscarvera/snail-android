@@ -11,16 +11,16 @@
     <string name="activity_onboarding_screen1_title3"></string>
     <string name="activity_onboarding_screen2_title1">Here you can</string>
     <string name="activity_onboarding_screen2_title2">learn whatever you want</string>
-    <string name="activity_onboarding_screen2_title3">English, geography, History…</string>
+    <string name="activity_onboarding_screen2_title3">English, Geography, History…</string>
     <string name="activity_onboarding_screen3_title1">Study using the</string>
     <string name="activity_onboarding_screen3_title2">spaced repetition method</string>
     <string name="activity_onboarding_screen3_title3">We are the most simple and easier tool to use it</string>
     <string name="activity_onboarding_screen4_title1">Create and study</string>
     <string name="activity_onboarding_screen4_title2">with flashcards</string>
-    <string name="activity_onboarding_screen4_title3">Effiency and faster.</string>
+    <string name="activity_onboarding_screen4_title3">Efficiency and faster.</string>
     <string name="activity_onboarding_screen5_title1">You can share your desks</string>
     <string name="activity_onboarding_screen5_title2">with the whole world</string>
-    <string name="activity_onboarding_screen5_title3">And get desks the people created</string>
+    <string name="activity_onboarding_screen5_title3">And get desks the people are creating</string>
 
 
     <!--Login Screen!-->
