@@ -7,12 +7,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.oscarvera.snail.R
+import com.oscarvera.snail.databinding.ActivityDeskSharedDetailBinding
 import com.oscarvera.snail.usecases.home.shared.SharedViewModel
+import com.oscarvera.snail.util.Configuration
 import com.oscarvera.snail.util.Dialogs
 import com.oscarvera.snail.util.GridSpacingItemDecoration
 import com.oscarvera.snail.util.LoadingDialog
-import kotlinx.android.synthetic.main.activity_desk_shared_detail.*
-import kotlinx.android.synthetic.main.layout_top_bar.*
 import kotlin.math.roundToInt
 
 
@@ -20,6 +20,8 @@ class DeskSharedDetailActivity : AppCompatActivity() {
 
     lateinit var desksSharedDetailViewModel: DeskSharedDetailViewModel
     lateinit var sharedViewModel: SharedViewModel
+
+    private lateinit var binding: ActivityDeskSharedDetailBinding
 
     private var adapterCards: CardsSharedAdapter? = null
 
@@ -33,41 +35,47 @@ class DeskSharedDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_desk_shared_detail)
+        binding = ActivityDeskSharedDetailBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         desksSharedDetailViewModel =
-            ViewModelProvider(this).get(DeskSharedDetailViewModel::class.java)
-        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+            ViewModelProvider(this)[DeskSharedDetailViewModel::class.java]
+        sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
 
         loadingDialog = LoadingDialog(this)
 
         idRemoteDesk = intent.getStringExtra(EXTRA_ID_DESK)
 
-        listCards.layoutManager = GridLayoutManager(this, 2)
-        val spanCount = 2
-        val spacing = (25 * resources.displayMetrics.density).roundToInt()
-        listCards.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, false))
+        binding.listCards.layoutManager = GridLayoutManager(this, 2)
+
+        binding.listCards.addItemDecoration(
+            GridSpacingItemDecoration(
+                Configuration.spanCount,
+                Configuration.getSpacing(resources),
+                false))
 
         desksSharedDetailViewModel.cards.observe(this, Observer {
 
 
             val titleSeparator = "${it.size} ${getString(R.string.name_card)}"
-            title_separator_1.text = titleSeparator
+            binding.titleSeparator1.text = titleSeparator
 
             adapterCards = CardsSharedAdapter(it)
 
-            listCards.adapter = adapterCards
+            binding.listCards.adapter = adapterCards
 
         })
 
         desksSharedDetailViewModel.desk.observe(this, Observer { desk ->
 
-            title_top_bar.text = desk.name
+            binding.layoutTopbar.titleTopBar.text = desk.name
 
-            text_download.text = desk.timesDownloaded.toString()
-            text_owner.text = desk.userName
-            text_upload.text = desk.uploaded
+            binding.textDownload.text = desk.timesDownloaded.toString()
+            binding.textOwner.text = desk.userName
+            binding.textUpload.text = desk.uploaded
 
-            btn_download_desk.setOnClickListener {
+            binding.btnDownloadDesk.setOnClickListener {
                 sharedViewModel.downloadDesk(desk)
                 loadingDialog.setCallback(object : LoadingDialog.LoadingDialogCallback {
                     override fun onFinish(dialog: Dialog) {
@@ -92,7 +100,7 @@ class DeskSharedDetailActivity : AppCompatActivity() {
         }
 
 
-        btn_back.setOnClickListener {
+        binding.layoutTopbar.btnBack.setOnClickListener {
             finish()
         }
 

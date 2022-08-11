@@ -14,6 +14,7 @@ import com.oscarvera.snail.usecases.crossdata.CrossDataActivity
 import com.oscarvera.snail.util.Dialogs
 import com.oscarvera.snail.util.sendErrorEvent
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class DeskDetailViewModel : ViewModel() {

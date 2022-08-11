@@ -6,11 +6,13 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.oscarvera.snail.R
+import com.oscarvera.snail.databinding.ActivityOnboardingBinding
 import com.oscarvera.snail.util.Router
-import kotlinx.android.synthetic.main.activity_onboarding.*
 
 
 class OnboardingActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityOnboardingBinding
 
     private var numPage = 1
     private val totalPages = 5
@@ -46,7 +48,9 @@ class OnboardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_onboarding)
+        binding = ActivityOnboardingBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         val w: Window = window
         w.setFlags(
@@ -58,7 +62,7 @@ class OnboardingActivity : AppCompatActivity() {
 
         playAnimationPage(numPage)
 
-        onboarding_button_next.setOnClickListener {
+        binding.onboardingButtonNext.setOnClickListener {
             if (numPage == totalPages){
                 //Go to Login
                 Router.launchLoginIntent(this)
@@ -75,16 +79,16 @@ class OnboardingActivity : AppCompatActivity() {
     private fun playAnimationPage(numPage: Int) {
         when (numPage) {
             5 -> {
-                animation_view.visibility = View.VISIBLE
-                animation_view.setAnimation(R.raw.animation_onboarding2)
-                animation_view.repeatCount = 3
-                animation_view.playAnimation()
+                binding.animationView.visibility = View.VISIBLE
+                binding.animationView.setAnimation(R.raw.animation_onboarding2)
+                binding.animationView.repeatCount = 3
+                binding.animationView.playAnimation()
 
             }
             else -> {
-                animation_view.setMinFrame("Marker${numPage - 1}")
-                animation_view.setMaxFrame("Marker$numPage")
-                animation_view.playAnimation()
+                binding.animationView.setMinFrame("Marker${numPage - 1}")
+                binding.animationView.setMaxFrame("Marker$numPage")
+                binding.animationView.playAnimation()
             }
         }
     }
@@ -100,8 +104,8 @@ class OnboardingActivity : AppCompatActivity() {
             else -> OnboardingScreenTexts.FIRST
         }
 
-        title_text_1.text = getText(textsScreen.text1)
-        title_text_2.text = getText(textsScreen.text2)
-        title_text_3.text = getText(textsScreen.text3)
+        binding.titleText1.text = getText(textsScreen.text1)
+        binding.titleText2.text = getText(textsScreen.text2)
+        binding.titleText3.text = getText(textsScreen.text3)
     }
 }

@@ -8,20 +8,23 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.oscarvera.snail.R
+import com.oscarvera.snail.databinding.FragmentSettingsBinding
 import com.oscarvera.snail.model.session.SessionManager
 import com.oscarvera.snail.provider.preferences.PrefManager
 import com.oscarvera.snail.util.Dialogs
 import com.oscarvera.snail.util.Router
-import kotlinx.android.synthetic.main.fragment_settings.view.*
 
 
 class SettingsFragment : Fragment() {
 
     lateinit var settingsViewModel: SettingsViewModel
 
+    private var _binding: FragmentSettingsBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        settingsViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
+        settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
     }
 
@@ -30,11 +33,13 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_settings, container, false)
+        //val view = inflater.inflate(R.layout.fragment_settings, container, false)
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        fillFields(view)
+        fillFields()
 
-        view.btn_quantifier.setOnClickListener {
+        binding.btnQuantifier.setOnClickListener {
             activity?.let {
                 Dialogs.createChangeNumber(
                     it,
@@ -45,14 +50,14 @@ class SettingsFragment : Fragment() {
                 ) { newNumber ->
                     if (newNumber > 0){
                         PrefManager.quantifierNumber = newNumber
-                        fillFields(view)
+                        fillFields()
                     }
                 }
             }
 
         }
 
-        view.btn_max_quantifier.setOnClickListener {
+        binding.btnMaxQuantifier.setOnClickListener {
             activity?.let {
                 Dialogs.createChangeNumber(
                     it,
@@ -63,14 +68,14 @@ class SettingsFragment : Fragment() {
                 ) { newNumber ->
                     if (newNumber > 0){
                         PrefManager.maxQuantifierToBeLearned = newNumber
-                        fillFields(view)
+                        fillFields()
                     }
                 }
             }
 
         }
 
-        view.btn_online_name.setOnClickListener {
+        binding.btnOnlineName.setOnClickListener {
             activity?.let {
                 Dialogs.createChangeText(
                     it,
@@ -81,34 +86,34 @@ class SettingsFragment : Fragment() {
                 ) { newName ->
                     if (newName.isNotEmpty()){
                         PrefManager.userNameShare = newName
-                        fillFields(view)
+                        fillFields()
                     }
                 }
             }
         }
 
         if (SessionManager.isLocalMode()) {
-            view.btn_turn_online.setOnClickListener {
+            binding.btnTurnOnline.setOnClickListener {
                 activity?.let {
                     Router.launchDataCrossActivity(it)
                 }
             }
         } else {
-            view.btn_turn_online.visibility = View.GONE
+            binding.btnTurnOnline.visibility = View.GONE
         }
 
 
         if (SessionManager.isLocalMode()) {
-            view.btn_delete_data.setOnClickListener {
+            binding.btnDeleteData.setOnClickListener {
                 settingsViewModel.deleteAllDesks()
             }
         }else{
-            view.btn_delete_data.visibility = View.GONE
+            binding.btnDeleteData.visibility = View.GONE
         }
 
 
 
-        view.btn_close_session.setOnClickListener {
+        binding.btnCloseSession.setOnClickListener {
             if (SessionManager.isLocalMode()) {
                 Router.launchLoginIntent(activity)
                 SessionManager.signout()
@@ -124,10 +129,10 @@ class SettingsFragment : Fragment() {
         return view
     }
 
-    fun fillFields(view : View){
-        view.text_quantifier.text = PrefManager.quantifierNumber.toString()
-        view.text_max_quantifier.text = PrefManager.maxQuantifierToBeLearned.toString()
-        view.text_online_name.text =
+    fun fillFields(){
+        binding.textQuantifier.text = PrefManager.quantifierNumber.toString()
+        binding.textMaxQuantifier.text = PrefManager.maxQuantifierToBeLearned.toString()
+        binding.textOnlineName.text =
             PrefManager.userNameShare ?: getString(R.string.void_username_desk_shared)
     }
 
@@ -135,7 +140,7 @@ class SettingsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         view?.let {
-            fillFields(it)
+            fillFields()
         }
 
     }

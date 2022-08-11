@@ -3,27 +3,29 @@ package com.oscarvera.snail
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.room.Room
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.oscarvera.snail.provider.local.SnailDatabase
 import com.oscarvera.snail.util.Constants
 
 class MyApplication : Application() {
 
-
     override fun onCreate() {
         super.onCreate()
-        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        userPreferences = this.getSharedPreferences(Constants.USER_PREFERENCES, Context.MODE_PRIVATE)
-        localDatabase = Room.databaseBuilder(this, SnailDatabase::class.java,"database-snail").build()
+        instance = this
     }
 
     companion object {
-        lateinit var firebaseAnalytics: FirebaseAnalytics
-            private set
-        lateinit var userPreferences: SharedPreferences
-            private set
-        lateinit var localDatabase: SnailDatabase
-            private set
+
+        private lateinit var instance: MyApplication
+
+        val firebaseAnalytics: FirebaseAnalytics by lazy {
+            FirebaseAnalytics.getInstance(instance)
+        }
+        val userPreferences: SharedPreferences by lazy {
+            instance.getSharedPreferences(Constants.USER_PREFERENCES, Context.MODE_PRIVATE)
+        }
+        val localDatabase: SnailDatabase by lazy {
+            SnailDatabase.buildDatabase(instance)
+        }
     }
 }

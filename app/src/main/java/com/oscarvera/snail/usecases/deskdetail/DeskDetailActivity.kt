@@ -8,20 +8,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.oscarvera.snail.R
+import com.oscarvera.snail.databinding.ActivityDeskDetailBinding
 import com.oscarvera.snail.model.domain.Card
 import com.oscarvera.snail.model.domain.StatusCard
 import com.oscarvera.snail.usecases.home.CardsAdapter
 import com.oscarvera.snail.util.*
 import com.oscarvera.snail.util.extensions.afterTextChanged
-import kotlinx.android.synthetic.main.activity_desk_detail.*
-import kotlinx.android.synthetic.main.fragment_shared.*
-import kotlinx.android.synthetic.main.layout_top_bar.*
 import kotlin.math.roundToInt
 
 
 class DeskDetailActivity : AppCompatActivity() {
 
     lateinit var desksDetailViewModel: DeskDetailViewModel
+    private lateinit var binding: ActivityDeskDetailBinding
 
     private var adapterCards: CardsAdapter? = null
 
@@ -34,28 +33,35 @@ class DeskDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_desk_detail)
-        desksDetailViewModel = ViewModelProvider(this).get(DeskDetailViewModel::class.java)
+
+        binding = ActivityDeskDetailBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        desksDetailViewModel = ViewModelProvider(this)[DeskDetailViewModel::class.java]
 
         loadingDialog = LoadingDialog(this)
 
         idDesk = intent.getStringExtra(EXTRA_ID_DESK)
         sendEventWithDeskId(EventType.SHOWDESKVIEW, idDesk)
 
-        recyclerViewCards.layoutManager = GridLayoutManager(this, 2)
-        val spanCount = 2
-        val spacing = (25 * resources.displayMetrics.density).roundToInt()
-        recyclerViewCards.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, false))
+        binding.recyclerViewCards.layoutManager = GridLayoutManager(this, 2)
+
+        binding.recyclerViewCards.addItemDecoration(
+            GridSpacingItemDecoration(
+                Configuration.spanCount,
+                Configuration.getSpacing(resources),
+                false))
 
         desksDetailViewModel.cards.observe(this, Observer { listCards ->
 
             val countStatesCards = Utils.countStatusDeskWithCards(listCards)
-            text_tolearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
-            text_learning.text = countStatesCards[StatusCard.LEARNING].toString()
-            text_learned.text = countStatesCards[StatusCard.LEARNED].toString()
+            binding.textTolearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
+            binding.textLearning.text = countStatesCards[StatusCard.LEARNING].toString()
+            binding.textLearned.text = countStatesCards[StatusCard.LEARNED].toString()
 
             val titleSeparator = "${listCards.size} ${getString(R.string.name_card)}"
-            title_separator_1.text = titleSeparator
+            binding.titleSeparator1.text = titleSeparator
 
 
             adapterCards = CardsAdapter(listCards, object : CardsAdapter.CardAdapterCallback {
@@ -69,22 +75,22 @@ class DeskDetailActivity : AppCompatActivity() {
 
             })
 
-            recyclerViewCards.adapter = adapterCards
+            binding.recyclerViewCards.adapter = adapterCards
 
 
             if (countStatesCards[StatusCard.TO_LEARN]!! > 0) {
                 //They have cards to learn
-                text_number_tolearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
-                btn_learn_desk.visibility = View.VISIBLE
-                btn_learn_desk.setOnClickListener {
+                binding.textNumberTolearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
+                binding.btnLearnDesk.visibility = View.VISIBLE
+                binding.btnLearnDesk.setOnClickListener {
                     newIntentLearning()
                 }
 
             } else {
-                btn_learn_desk.visibility = View.GONE
+                binding.btnLearnDesk.visibility = View.GONE
             }
 
-            edit_text_search.afterTextChanged {
+            binding.editTextSearch.afterTextChanged {
 
                 val listFilter = listCards.filter { card ->
                     val text1 = card.cardData?.get(0)?.text ?: ""
@@ -99,13 +105,13 @@ class DeskDetailActivity : AppCompatActivity() {
 
         desksDetailViewModel.desk.observe(this, Observer {
 
-            title_top_bar.text = it.name
+            binding.layoutTopbar.titleTopBar.text = it.name
 
 
         })
 
-        btn_options.visibility = View.VISIBLE
-        btn_options.setOnClickListener {
+        binding.layoutTopbar.btnOptions.visibility = View.VISIBLE
+        binding.layoutTopbar.btnOptions.setOnClickListener {
 
             Dialogs.optionsBottomSheetDialog(this,layoutInflater,object : Dialogs.DeskSettingsDialog{
                 override fun onDelete(dialogOptions: Dialog) {
@@ -133,7 +139,7 @@ class DeskDetailActivity : AppCompatActivity() {
         }
 
 
-        btn_back.setOnClickListener {
+        binding.layoutTopbar.btnBack.setOnClickListener {
             finish()
         }
 
@@ -142,13 +148,13 @@ class DeskDetailActivity : AppCompatActivity() {
 
     private fun newIntentAddCard() {
         idDesk?.let {
-            Router.launchAddCardActivity(this, it, title_top_bar.text.toString())
+            Router.launchAddCardActivity(this, it, binding.layoutTopbar.titleTopBar.text.toString())
         }
     }
 
     private fun newIntentLearning() {
         idDesk?.let {
-            Router.launchLearningActivity(this, it, title_top_bar.text.toString())
+            Router.launchLearningActivity(this, it, binding.layoutTopbar.titleTopBar.toString())
         }
     }
 

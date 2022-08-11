@@ -8,7 +8,7 @@
     tools:context=".usecases.deskshareddetail.DeskSharedDetailActivity">
 
 
-    <include layout="@layout/layout_top_bar"/>
+    <include android:id="@+id/layoutTopbar" layout="@layout/layout_top_bar"/>
 
 
     <androidx.core.widget.NestedScrollView
@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topBar">
+        app:layout_constraintTop_toBottomOf="@id/layoutTopbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

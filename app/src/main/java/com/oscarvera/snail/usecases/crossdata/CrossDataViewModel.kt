@@ -10,6 +10,7 @@ import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.provider.CardDataSource
 import com.oscarvera.snail.provider.DeskDataSource
 import com.oscarvera.snail.provider.SwichDataSource
+import com.oscarvera.snail.provider.local.LocalRepository
 import com.oscarvera.snail.util.extensions.getProperId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,32 +46,35 @@ class CrossDataViewModel : ViewModel() {
     fun getLocalDesks() {
 
         viewModelScope.launch(Dispatchers.IO) {
-            SwichDataSource.deskData.getAllDesksWithCards(object :
+
+            val localRepository = LocalRepository()
+            localRepository.getAllDesksWithCards(object :
                 DeskDataSource.LoadDesksWithCardsCallBack {
                 override fun onDesksLoaded(desks: List<DeskWithCards>) {
                     listDesksLocal = desks
                     totalNumberOfDesks = desks.size
-
                     desks.forEach {
-                        SwichDataSource.cardData.getCardsAndData(it.getProperId(), object :
-                            CardDataSource.LoadCardsAndDataCallBack {
-                            override fun onCardsLoaded(cards: List<CardWithData>) {
-                                var listCards = ArrayList<Card>()
-                                cards.forEach {
-                                    val card = it.card
-                                    card.cardswithdata = it.cardData ?: listOf()
-                                    listCards.add(card)
+                        this@launch.launch {
+                            localRepository.getCardsAndData(it.getProperId(), object :
+                                CardDataSource.LoadCardsAndDataCallBack {
+                                override fun onCardsLoaded(cards: List<CardWithData>) {
+                                    var listCards = ArrayList<Card>()
+                                    cards.forEach {
+                                        val card = it.card
+                                        card.cardswithdata = it.cardData ?: listOf()
+                                        listCards.add(card)
+                                    }
+                                    it.cards = listCards.toList()
+                                    listDesksToExport.add(it)
+                                    numberOfDeskLoaded++
                                 }
-                                it.cards = listCards.toList()
-                                listDesksToExport.add(it)
-                                numberOfDeskLoaded++
-                            }
 
-                            override fun onError(t: Throwable) {
+                                override fun onError(t: Throwable) {
 
-                            }
+                                }
 
-                        })
+                            })
+                        }
                     }
 
                 }
