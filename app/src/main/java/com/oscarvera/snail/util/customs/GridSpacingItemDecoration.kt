@@ -1,4 +1,4 @@
-package com.oscarvera.snail.util
+package com.oscarvera.snail.util.customs
 
 import android.graphics.Rect
 import android.view.View

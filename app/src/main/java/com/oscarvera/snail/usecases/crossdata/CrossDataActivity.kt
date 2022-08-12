@@ -1,9 +1,7 @@
 package com.oscarvera.snail.usecases.crossdata
 
-import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -17,6 +15,7 @@ import com.oscarvera.snail.R
 import com.oscarvera.snail.databinding.ActivityCrossDataBinding
 import com.oscarvera.snail.model.session.SessionManager
 import com.oscarvera.snail.util.*
+import com.oscarvera.snail.util.customs.LoadingDialog
 
 class CrossDataActivity : AppCompatActivity() {
 

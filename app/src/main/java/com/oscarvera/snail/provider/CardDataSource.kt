@@ -4,6 +4,8 @@ import com.oscarvera.snail.model.domain.Card
 import com.oscarvera.snail.model.domain.CardWithData
 import com.oscarvera.snail.model.domain.Desk
 import com.oscarvera.snail.model.domain.DeskWithCards
+import com.oscarvera.snail.util.customs.Result
+import kotlinx.coroutines.flow.Flow
 
 interface CardDataSource {
 
@@ -26,10 +28,10 @@ interface CardDataSource {
         fun onError(t: Throwable)
     }
 
-    fun getDeskandCards(idDesk : String, callBack: LoadCardsCallBack)
-    fun getCardsAndData(idDesk: String, callback : LoadCardsAndDataCallBack)
-    fun addCard(idDesk: String, card: Card, callback: SaveTaskCallback)
-    fun updateCard(idDesk: String, listCards: List<CardWithData>, indexToUpload : Int, callback: SaveTaskCallback)
+    suspend fun getDeskandCards(idDesk : String, callBack: LoadCardsCallBack)
+    suspend fun getCardsAndData(idDesk: String) : Flow<Result<List<CardWithData>>>
+    suspend fun addCard(idDesk: String, card: Card, callback: SaveTaskCallback)
+    suspend fun updateCard(idDesk: String, listCards: List<CardWithData>, indexToUpload : Int, callback: SaveTaskCallback)
 
 
 }

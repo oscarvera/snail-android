@@ -11,6 +11,10 @@ import com.oscarvera.snail.model.domain.StatusCard
 import com.oscarvera.snail.model.session.SessionManager
 import com.oscarvera.snail.provider.preferences.PrefManager
 import com.oscarvera.snail.util.Utils
+import com.oscarvera.snail.util.customs.Result
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import java.util.*
 
 fun DeskWithCards.getProperId(): String {
     return if (SessionManager.isLogged()){
@@ -55,3 +59,7 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         }
     })
 }
+
+fun <T> Flow<T>.setResultEnclosed() : Flow<Result<T>> = this.map {  Result(Result.Status.SUCCESS, it, null, null) }
+
+fun <T> T.setResultEnclosed() : Result<T> =  Result(Result.Status.SUCCESS, this, null, null)

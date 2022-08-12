@@ -1,4 +1,4 @@
-package com.oscarvera.snail.util
+package com.oscarvera.snail.util.customs
 
 import android.animation.Animator
 import android.app.Dialog
@@ -82,7 +82,7 @@ class LoadingDialog(context: Context) {
 
     }
 
-    fun finishLoadingDialog(){
+    fun finishLoadingDialog(dismiss : Boolean = false){
         Handler(Looper.getMainLooper()).post {
             animationLoading.setMinFrame("Marker2")
             animationLoading.setMaxFrame("Marker3")
@@ -90,6 +90,9 @@ class LoadingDialog(context: Context) {
                 override fun onAnimationRepeat(animation: Animator?) {
                     animationLoading.cancelAnimation()
                     callback?.onFinish(dialog)
+                    if (dismiss){
+                        dialog.dismiss()
+                    }
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {

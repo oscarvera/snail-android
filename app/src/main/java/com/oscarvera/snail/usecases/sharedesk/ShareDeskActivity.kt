@@ -13,7 +13,7 @@ import com.oscarvera.snail.databinding.ActivityShareDeskBinding
 import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.provider.preferences.PrefManager
 import com.oscarvera.snail.util.Dialogs
-import com.oscarvera.snail.util.LoadingDialog
+import com.oscarvera.snail.util.customs.LoadingDialog
 
 class ShareDeskActivity : AppCompatActivity() {
 

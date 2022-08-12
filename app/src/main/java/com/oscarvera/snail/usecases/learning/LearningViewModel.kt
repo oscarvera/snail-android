@@ -9,11 +9,16 @@ import com.oscarvera.snail.model.domain.StatusCard
 import com.oscarvera.snail.provider.CardDataSource
 import com.oscarvera.snail.provider.SwichDataSource
 import com.oscarvera.snail.provider.preferences.PrefManager
+import com.oscarvera.snail.usecases.deskdetail.DeskDetailViewModel
 import com.oscarvera.snail.usecases.home.desks.DesksViewModel
 import com.oscarvera.snail.util.Utils
+import com.oscarvera.snail.util.customs.Result
 import com.oscarvera.snail.util.extensions.getStatusCard
 import com.oscarvera.snail.util.sendErrorEvent
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.cancellable
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
@@ -32,7 +37,6 @@ class LearningViewModel : ViewModel() {
     val noMoreCards: LiveData<Boolean> get() = _noMoreCards
 
 
-
     private var cardsToLearn : ArrayList<CardWithData> = ArrayList()
     private var cardsRest : ArrayList<CardWithData> = ArrayList()
     private var indexCards : Int = 0
@@ -41,28 +45,26 @@ class LearningViewModel : ViewModel() {
     fun getCards(idDesk : String) {
         this.idDesk = idDesk
         viewModelScope.launch(Dispatchers.IO) {
-            SwichDataSource.cardData.getCardsAndData(idDesk ,object : CardDataSource.LoadCardsAndDataCallBack {
-                override fun onCardsLoaded(cards: List<CardWithData>) {
-
-                    val splitLists = cards.partition {
-                        it.card.getStatusCard() == StatusCard.LEARNING
+            SwichDataSource.cardData.getCardsAndData(idDesk)
+                .catch {
+                    emit(Result.error(it.message ?: "", null))
+                    sendErrorEvent(LearningViewModel::class.java.name, it.message)
+                }.cancellable()
+                .collect {
+                    it.data?.let { listCards ->
+                        val splitLists = listCards.partition {
+                            it.card.getStatusCard() == StatusCard.LEARNING
+                        }
+                        cardsToLearn = ArrayList(splitLists.second)
+                        cardsRest = ArrayList(splitLists.first)
+                        _card.postValue(cardsToLearn[indexCards])
+                        cancel()
                     }
-                    cardsToLearn = ArrayList(splitLists.second)
-                    cardsRest = ArrayList(splitLists.first)
-                    _card.postValue(cardsToLearn[indexCards])
                 }
-
-                override fun onError(t: Throwable) {
-                    sendErrorEvent(LearningViewModel::class.java.name,t.message)
-                }
-
-            })
         }
     }
 
     fun setResultCard(result : Boolean){
-        cardsToLearn?.let { cardsToLearn ->
-
             val currentCard = cardsToLearn[indexCards]
             currentCard.card.date_checked = Utils.getNowDateFormatted()
             if (result){ // User remember the card
@@ -90,14 +92,9 @@ class LearningViewModel : ViewModel() {
             }
 
 
-        }
-
-
-
     }
 
     fun nextCard(){
-        cardsToLearn?.let { cardsToLearn->
             indexCards++
             if (cardsToLearn.size > indexCards){
                 _card.postValue(cardsToLearn[indexCards])
@@ -105,10 +102,6 @@ class LearningViewModel : ViewModel() {
                 // It's already leaned the cards
                 _noMoreCards.postValue(true)
             }
-        }
-
-
-
 
     }
 
