@@ -29,12 +29,10 @@
                 android:id="@+id/title_separator_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
                 android:paddingTop="15dp"
                 android:text="@string/share_desk_subtitle"
-                android:textColor="@color/textgrey"
-                android:textSize="16sp"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/titleList"/>
 
 
             <androidx.recyclerview.widget.RecyclerView

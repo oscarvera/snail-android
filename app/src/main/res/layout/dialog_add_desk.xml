@@ -18,13 +18,11 @@
         android:id="@+id/title_desks_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/newyork_medium_black"
         android:text="@string/dialog_newdesk_title"
-        android:textColor="@color/secondary"
-        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/animation_view" />
+        app:layout_constraintTop_toBottomOf="@id/animation_view"
+        style="@style/titleDialog"/>
 
     <EditText
         android:id="@+id/edittext_name"
@@ -52,17 +50,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/background2"
-            android:fontFamily="@font/roboto_black"
             android:text="@string/dialog_newdesk_btn_close"
-            android:textAllCaps="false"
-            android:textColor="@color/secondary"
-            app:cornerRadius="15dp"
-            app:strokeColor="@color/secondary"
-            app:strokeWidth="2dp"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="0dp"
-            style="?android:attr/buttonBarButtonStyle" />
+            style="@style/buttonSecondary" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/btn_add_desk"
@@ -72,9 +63,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:cardBackgroundColor="@color/secondary"
-            app:cardCornerRadius="15dp"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            style="@style/loadingButton">
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/button_loading_animation"
@@ -91,9 +81,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_newdesk_btn_addDesk"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
                 android:fontFamily="@font/roboto_black"
-                android:textSize="16dp"/>
+                style="@style/textButton"/>
 
 
         </androidx.cardview.widget.CardView>

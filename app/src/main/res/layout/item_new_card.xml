@@ -32,7 +32,7 @@
                 android:layout_height="15dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_add"
-                app:tint="@color/secondary"
+                app:tint="@color/buttonTextCard"
                 android:layout_marginEnd="5dp"/>
 
             <TextView
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:text="@string/detail_list_cards_add"
-                android:textColor="@color/secondary"
+                android:textColor="@color/buttonTextCard"
                 android:textSize="16sp"
                 android:layout_gravity="center"/>
 

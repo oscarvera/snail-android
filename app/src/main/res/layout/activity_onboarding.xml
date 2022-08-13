@@ -31,19 +31,15 @@
             android:id="@+id/title_text_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/newyork_medium_medium"
-            android:textColor="@color/textblack"
-            android:textSize="34sp"
-            tools:text="Welcome!" />
+            tools:text="Welcome!"
+            style="@style/onboardingText1"/>
 
         <TextView
             android:id="@+id/title_text_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/newyork_medium_black"
-            android:textColor="@color/textblack"
-            android:textSize="34sp"
-            tools:text="Get started now" />
+            tools:text="Get started now"
+            style="@style/onboardingText2"/>
 
     </LinearLayout>
 
@@ -54,14 +50,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:fontFamily="@font/newyork_medium_regular"
-        android:lines="2"
-        android:textColor="@color/textblack"
-        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@id/onboarding_button_next"
         app:layout_constraintStart_toStartOf="@id/onboarding_linear_text"
         app:layout_constraintTop_toBottomOf="@id/onboarding_linear_text"
-        tools:text="We are the most simple and easier tool to use it" />
+        tools:text="We are the most simple and easier tool to use it"
+        style="@style/onboardingText3"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -71,10 +64,10 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="40dp"
         android:src="@drawable/ic_arrow_right_white"
-        app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white" />
+        style="@style/onboardingFloatingButton"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,4 +15,20 @@
     <color name="unselectedItem">#C1BDC1</color>
     <color name="disable">#C1BDC1</color>
 
+    <color name="blackLevel1">#242424</color>
+    <color name="blackLevel2">#4D4D4D</color>
+
+    <color name="colorCircleState">@color/white</color>
+    <color name="colorIconPrimary">@color/secondary</color>
+    <color name="strokeCard">@color/secondary</color>
+    <color name="buttonTextCard">@color/secondary</color>
+    <color name="backIconToolbar">@color/textblack</color>
+    <color name="iconSettings">@color/textblack</color>
+    <color name="cardBackground">@color/background2</color>
+    <color name="backgroundSimulated">@color/white</color>
+    <color name="backgroundBottomNavigation">@color/white</color>
+    <color name="colorButtonShow">@color/secondary</color>
+    <color name="colorTextShow">@color/white</color>
+    <color name="oppositeBackground">@color/black</color>
+
 </resources>

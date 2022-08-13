@@ -30,35 +30,28 @@
         </activity>
         <activity
             android:name=".usecases.deskshareddetail.DeskSharedDetailActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Snail.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".usecases.deskdetail.DeskDetailActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Snail.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".usecases.login.LoginActivity"
             android:exported="false"
-            android:label="@string/title_activity_login"
-            android:theme="@style/Theme.Snail.NoActionBar" />
+            android:label="@string/title_activity_login"/>
         <activity
             android:name=".usecases.home.MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Snail.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".usecases.learning.LearningActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Snail.NoActionBar" />
+            android:exported="false"/>
 
         <activity
             android:name=".usecases.crossdata.CrossDataActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Snail.NoActionBar" />
+            android:exported="false"/>
 
         <activity
             android:name=".usecases.sharedesk.ShareDeskActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Snail.NoActionBar" />
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

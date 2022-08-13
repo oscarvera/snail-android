@@ -20,15 +20,163 @@
 
     </style>
 
-    <style name="Theme.Snail.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:navigationBarColor">@color/white</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">@color/white</item>
+    <style name="titleFragment">
+        <item name="fontFamily">@font/newyork_medium_bold</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">45sp</item>
+    </style>
+    <style name="titleList">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/textgrey</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="cardviewDesk">
+        <item name="cardBackgroundColor">@color/background2</item>
+        <item name="cardCornerRadius">15sp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+    <style name="titleCard">
+        <item name="fontFamily">@font/newyork_medium_medium</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">24sp</item>
+        <item name="maxLines">3</item>
+    </style>
+    <style name="textLevel1">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="textLevel2">
+        <item name="fontFamily">@font/roboto_light</item>
+        <item name="android:textColor">@color/textgrey</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="buttonSecondary">
+        <item name="backgroundTint">@color/background2</item>
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="cornerRadius">15dp</item>
+        <item name="strokeColor">@color/secondary</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="buttonBarStyle">?android:attr/buttonBarButtonStyle</item>
+        <item name="elevation">0dp</item>
+
+    </style>
+    <style name="buttonPrimary">
+        <item name="background">@drawable/gradient_button_primary</item>
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="cornerRadius">15dp</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="titleScreen">
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">30sp</item>
+        <item name="fontFamily">@font/newyork_medium_bold</item>
+        <item name="maxLines">1</item>
+    </style>
+    <style name="textCard">
+        <item name="fontFamily">@font/newyork_medium_medium</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="maxLines">2</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="buttonText">
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="editTextSearch">
+        <item name="drawableTint">@color/black</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="nameSetting">
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="valueSetting">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="titleDialog">
+        <item name="fontFamily">@font/newyork_medium_black</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="textDialog">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/disable</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="loadingButton">
+        <item name="cardBackgroundColor">@color/secondary</item>
+        <item name="cardCornerRadius">15dp</item>
+    </style>
+
+    <style name="textButton">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="onboardingText1">
+        <item name="fontFamily">@font/newyork_medium_medium</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="onboardingText2">
+        <item name="fontFamily">@font/newyork_medium_black</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="onboardingText3">
+        <item name="fontFamily">@font/newyork_medium_regular</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lines">2</item>
+    </style>
+
+    <style name="onboardingFloatingButton">
+        <item name="tint">@color/white</item>
+        <item name="elevation">0dp</item>
+        <item name="android:backgroundTint">@color/secondary</item>
+    </style>
+
+    <style name="textLearning">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">22sp</item>
+        <item name="maxLines">7</item>
+    </style>
+
+    <style name="titleInfo">
+        <item name="fontFamily">@font/newyork_medium_medium</item>
+        <item name="android:textColor">@color/textblack</item>
+        <item name="android:textSize">22sp</item>
+        <item name="maxLines">2</item>
+    </style>
+
+    <style name="textInfo">
+        <item name="fontFamily">@font/roboto_light</item>
+        <item name="android:textColor">@color/textgrey</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+
+
+    <style name="CustomAlertDialog" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="android:windowBackground">@drawable/background_dialog</item>
     </style>
 

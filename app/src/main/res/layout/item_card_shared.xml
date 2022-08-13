@@ -5,10 +5,8 @@
     android:id="@+id/card_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/background2"
-    app:cardCornerRadius="15dp"
-    app:cardElevation="0dp"
-    app:cardPreventCornerOverlap="false">
+    app:cardPreventCornerOverlap="false"
+    style="@style/cardviewDesk">
 
     <LinearLayout
         android:id="@+id/section_title"
@@ -26,26 +24,20 @@
             android:id="@+id/card_firt_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/newyork_medium_medium"
-            android:textColor="@color/textblack"
-            android:maxLines="2"
-            android:textSize="20sp"
-            android:paddingBottom="20dp"/>
+            android:paddingBottom="20dp"
+            style="@style/textCard"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/white"/>
+            android:background="@color/backgroundSimulated"/>
 
         <TextView
             android:id="@+id/card_second_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:fontFamily="@font/newyork_medium_medium"
-            android:textColor="@color/textblack"
-            android:textSize="20sp"
-            android:paddingTop="20dp"/>
+            android:paddingTop="20dp"
+            style="@style/textCard"/>
 
 
     </LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="blackLevel1">#242424</color>
+    <color name="blackLevel2">#4D4D4D</color>
+    <color name="background">#121212</color>
+
+    <color name="colorCircleState">@color/blackLevel2</color>
+    <color name="colorIconPrimary">@color/primary</color>
+    <color name="strokeCard">@color/white</color>
+    <color name="buttonTextCard">@color/white</color>
+    <color name="backIconToolbar">@color/white</color>
+    <color name="iconSettings">@color/white</color>
+    <color name="cardBackground">@color/blackLevel1</color>
+    <color name="backgroundSimulated">@color/black</color>
+    <color name="colorButtonShow">@color/primary</color>
+    <color name="colorTextShow">@color/black</color>
+    <color name="oppositeBackground">@color/white</color>
+
+</resources>

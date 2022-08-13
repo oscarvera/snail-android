@@ -28,19 +28,16 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:fontFamily="@font/roboto"
-            android:maxLines="7"
             android:scrollbars="vertical"
-            android:textColor="@color/textblack"
-            android:textSize="22sp"
-            tools:text="Texto 1" />
+            tools:text="Texto 1"
+            style="@style/textLearning"/>
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_marginTop="20dp"
-            android:background="@color/white" />
+            android:background="@color/background" />
 
 
         <TextView
@@ -63,7 +60,7 @@
             android:id="@+id/btn_show"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@color/secondary"
+            android:background="@color/colorButtonShow"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -72,14 +69,14 @@
                 android:layout_height="15dp"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/ic_arrow_bottom"
-                app:tint="@color/white" />
+                app:tint="@color/cardBackground" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_black"
                 android:text="Show card"
-                android:textColor="@color/white"
+                android:textColor="@color/colorTextShow"
                 android:textSize="18sp" />
 
 
@@ -105,7 +102,7 @@
             android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:src="@drawable/ic_arrow_bottom"
-            app:tint="@color/black" />
+            app:tint="@color/backIconToolbar" />
 
 
     </RelativeLayout>
@@ -125,7 +122,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_cross" />
+            android:src="@drawable/ic_cross"
+            app:tint="@color/backIconToolbar"/>
 
 
     </RelativeLayout>

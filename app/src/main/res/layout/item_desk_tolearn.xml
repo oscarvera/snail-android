@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/background2"
-    app:cardCornerRadius="15dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    app:cardElevation="0dp"
-    android:id="@+id/card_item">
+    android:id="@+id/card_item"
+    style="@style/cardviewDesk">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/section_title"
@@ -35,11 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:maxLines="3"
-                android:fontFamily="@font/newyork_medium_medium"
-                android:textColor="@color/textblack"
-                android:textSize="24sp"
-                tools:text="Desk name" />
+                tools:text="Desk name"
+                style="@style/titleCard"/>
 
             <FrameLayout
                 android:layout_width="35dp"
@@ -53,7 +48,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/newyork_medium_black"
                     android:gravity="center"
-                    android:textColor="@color/textblack"
+                    android:textColor="@color/colorIconPrimary"
                     android:textSize="20sp"
                     tools:text="4" />
             </FrameLayout>
@@ -85,10 +80,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/item_desk_tolearn_title_cardsNumber"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp" />
+                        style="@style/textLevel2"/>
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="2dp"/>
@@ -98,10 +91,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
-                        tools:text="12 flascards" />
+                        tools:text="12 flascards"
+                        style="@style/textLevel1"/>
 
                 </LinearLayout>
 
@@ -119,10 +110,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/item_desk_tolearn_title_learned"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp" />
+                        style="@style/textLevel2"/>
 
                     <Space
                         android:layout_width="match_parent"
@@ -133,10 +122,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
-                        tools:text="3 flascards" />
+                        tools:text="3 flascards"
+                        style="@style/textLevel1"/>
 
                 </LinearLayout>
 
@@ -159,10 +146,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp"
-                        android:text="@string/item_desk_tolearn_title_toLearn" />
+                        android:text="@string/item_desk_tolearn_title_toLearn"
+                        style="@style/textLevel2"/>
 
                     <Space
                         android:layout_width="match_parent"
@@ -173,10 +158,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
-                        tools:text="12 flascards" />
+                        tools:text="12 flascards"
+                        style="@style/textLevel1"/>
 
                 </LinearLayout>
 
@@ -194,10 +177,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/item_desk_tolearn_title_lastDay"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp" />
+                        style="@style/textLevel2" />
 
                     <Space
                         android:layout_width="match_parent"
@@ -208,10 +189,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
-                        tools:text="3 flascards" />
+                        tools:text="3 flascards"
+                        style="@style/textLevel1"/>
 
                 </LinearLayout>
 
@@ -233,29 +212,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/background2"
-                android:fontFamily="@font/roboto_black"
                 android:text="@string/fragment_desks_item_button_edit"
-                android:textAllCaps="false"
-                android:textColor="@color/secondary"
-                app:cornerRadius="15dp"
-                app:strokeColor="@color/secondary"
-                app:strokeWidth="2dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="0dp"
-                style="?android:attr/buttonBarButtonStyle" />
+                style="@style/buttonSecondary"/>
 
             <Button
                 android:id="@+id/btn_learn"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/gradient_button_primary"
-                android:fontFamily="@font/roboto_black"
                 android:text="@string/fragment_desks_item_button_dueDesk"
-                app:cornerRadius="15dp"/>
+                style="@style/buttonPrimary"/>
 
         </LinearLayout>
 

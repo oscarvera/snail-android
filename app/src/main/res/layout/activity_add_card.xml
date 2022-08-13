@@ -99,7 +99,7 @@
                 android:layout_marginEnd="15dp"
                 android:fontFamily="@font/roboto_black"
                 android:text="@string/add_card_screen_btn_add_card"
-                android:textColor="@color/white"
+                android:textColor="@color/background"
                 android:textSize="24sp" />
 
 
