@@ -10,18 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.oscarvera.snail.R
+import com.oscarvera.snail.databinding.FragmentSharedBinding
 import com.oscarvera.snail.model.domain.DeskShared
-import com.oscarvera.snail.util.LoadingDialog
+import com.oscarvera.snail.util.customs.LoadingDialog
 import com.oscarvera.snail.util.Router
+import com.oscarvera.snail.util.customs.Result
 import com.oscarvera.snail.util.extensions.afterTextChanged
-import kotlinx.android.synthetic.main.fragment_shared.*
-import kotlinx.android.synthetic.main.fragment_shared.view.*
 
 
 class SharedFragment : Fragment() {
 
     lateinit var sharedViewModel: SharedViewModel
+
+    private var _binding: FragmentSharedBinding? = null
+    private val binding get() = _binding!!
 
     private var adapterDeskShared: DesksSharedAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -30,7 +32,7 @@ class SharedFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+        sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         activity?.let {
             loadingDialog = LoadingDialog(it)
         }
@@ -41,50 +43,35 @@ class SharedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_shared, container, false)
+        //val view = inflater.inflate(R.layout.fragment_shared, container, false)
 
-        view.animation_shared_background.playAnimation()
-        view.btn_share_desk.setOnClickListener {
+        _binding = FragmentSharedBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+
+        binding.animationSharedBackground.playAnimation()
+        binding.btnShareDesk.setOnClickListener {
             Router.launchShareDeskActivity(context)
         }
 
         layoutManager = LinearLayoutManager(activity)
-        view.listDesksShared.layoutManager = layoutManager
+        binding.listDesksShared.layoutManager = layoutManager
 
 
-        sharedViewModel.desksShared.observe(viewLifecycleOwner, Observer { list ->
-            adapterDeskShared =
-                DesksSharedAdapter(list, object : DesksSharedAdapter.DesksSharedAdapterCallback {
+        sharedViewModel.desksShared.observe(viewLifecycleOwner, Observer { result ->
 
-                    override fun onClick(desk: DeskShared) {
-                        Router.launchDeskSharedDetailActivity(context, desk.idRemote)
+            when (result.status) {
+                Result.Status.SUCCESS -> {
+                    loadingDialog?.finishLoadingDialog(true)
+                    result.data?.let {
+                        fillDataDesks(it)
                     }
-
-                    override fun onClickDownload(desk: DeskShared) {
-                        loadingDialog?.setCallback(object : LoadingDialog.LoadingDialogCallback {
-                            override fun onFinish(dialog: Dialog) {
-                                dialog.dismiss()
-                            }
-                        })
-                        loadingDialog?.showLoadingDialog()
-                        sharedViewModel.downloadDesk(desk)
-
-                    }
-
-                })
-            view.listDesksShared.adapter = adapterDeskShared
-
-            edit_text_search_shared.afterTextChanged {
-
-                val listFilter = list.filter { desk ->
-                    desk.name.contains(it, true)
                 }
-                adapterDeskShared?.setChangeDesks(listFilter)
-
+                Result.Status.ERROR -> {}
+                Result.Status.LOADING -> loadingDialog?.showLoadingDialog()
             }
 
         })
-
 
         sharedViewModel.isDesksShared.observe(viewLifecycleOwner, Observer {
 
@@ -98,6 +85,41 @@ class SharedFragment : Fragment() {
 
 
         return view
+    }
+
+    fun fillDataDesks(list: List<DeskShared>) {
+
+        adapterDeskShared =
+            DesksSharedAdapter(list, object : DesksSharedAdapter.DesksSharedAdapterCallback {
+
+                override fun onClick(desk: DeskShared) {
+                    Router.launchDeskSharedDetailActivity(context, desk.idRemote)
+                }
+
+                override fun onClickDownload(desk: DeskShared) {
+                    loadingDialog?.setCallback(object : LoadingDialog.LoadingDialogCallback {
+                        override fun onFinish(dialog: Dialog) {
+                            dialog.dismiss()
+                        }
+                    })
+                    loadingDialog?.showLoadingDialog()
+                    sharedViewModel.downloadDesk(desk)
+
+                }
+
+            })
+        binding.listDesksShared.adapter = adapterDeskShared
+
+        binding.editTextSearchShared.afterTextChanged {
+
+            val listFilter = list.filter { desk ->
+                desk.name.contains(it, true)
+            }
+            adapterDeskShared?.setChangeDesks(listFilter)
+
+        }
+
+
     }
 
     override fun onResume() {

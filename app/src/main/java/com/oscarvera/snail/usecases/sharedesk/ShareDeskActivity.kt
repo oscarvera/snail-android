@@ -9,36 +9,38 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.oscarvera.snail.R
+import com.oscarvera.snail.databinding.ActivityShareDeskBinding
 import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.provider.preferences.PrefManager
 import com.oscarvera.snail.util.Dialogs
-import com.oscarvera.snail.util.LoadingDialog
-import kotlinx.android.synthetic.main.activity_share_desk.*
-import kotlinx.android.synthetic.main.layout_top_bar.*
+import com.oscarvera.snail.util.customs.LoadingDialog
 
 class ShareDeskActivity : AppCompatActivity() {
 
     lateinit var shareViewModel: DeskShareViewModel
     private var layoutManager: RecyclerView.LayoutManager? = null
 
+    private lateinit var binding: ActivityShareDeskBinding
+
     private var adapterShare: DesksShareAdapter? = null
     private var listDesks: List<DeskWithCards>? = null
 
-    lateinit var loadingDialog : LoadingDialog
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_share_desk)
 
-        shareViewModel = ViewModelProvider(this).get(DeskShareViewModel::class.java)
+        binding = ActivityShareDeskBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        loadingDialog = LoadingDialog(this)
+        shareViewModel = ViewModelProvider(this)[DeskShareViewModel::class.java]
 
-        title_top_bar.text = getString(R.string.share_desk_title)
+        binding.layoutTopbar.titleTopBar.text = getString(R.string.share_desk_title)
         layoutManager = LinearLayoutManager(this)
-        listDeskToShare.layoutManager = layoutManager
+        binding.listDeskToShare.layoutManager = layoutManager
 
-        btn_back.setOnClickListener {
+        binding.layoutTopbar.btnBack.setOnClickListener {
             finish()
         }
 
@@ -52,11 +54,11 @@ class ShareDeskActivity : AppCompatActivity() {
                         override fun onClick(desk: DeskWithCards, position: Int) {
                             adapterShare?.setPositionChecked(position)
                             adapterShare?.notifyDataSetChanged()
-                            btn_share_desk.visibility = View.VISIBLE
+                            binding.btnShareDesk.visibility = View.VISIBLE
                         }
 
                     })
-            listDeskToShare.adapter = adapterShare
+            binding.listDeskToShare.adapter = adapterShare
 
 
         })
@@ -70,7 +72,7 @@ class ShareDeskActivity : AppCompatActivity() {
 
         shareViewModel.getDeskWithCards()
 
-        btn_share_desk.setOnClickListener {
+        binding.btnShareDesk.setOnClickListener {
             listDesks?.let { desks ->
                 adapterShare?.getPositionChecked()?.let { positionDesk ->
                     shareDeskNameUser(desks[positionDesk])

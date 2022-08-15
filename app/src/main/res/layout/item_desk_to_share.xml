@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/background2"
-    app:cardCornerRadius="15dp"
-    app:cardElevation="0dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    android:id="@+id/card_item">
+    android:id="@+id/card_item"
+    style="@style/cardviewDesk">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/section_title"
@@ -39,11 +37,8 @@
                     android:id="@+id/item_desk_share_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/newyork_medium_medium"
-                    android:textColor="@color/textblack"
-                    android:textSize="24sp"
                     tools:text="Desk name"
-                    android:maxLines="3"/>
+                    style="@style/titleCard"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -56,26 +51,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/item_desk_all_title_cardsNumber"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp" />
+                        style="@style/textLevel2"/>
 
                     <TextView
                         android:id="@+id/text_numcards"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
                         tools:text="12 flascards"
+                        style="@style/textLevel1"
                         android:layout_marginStart="5dp"/>
-
-
                 </LinearLayout>
-
-
 
             </LinearLayout>
 
@@ -94,7 +81,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:src="@drawable/ic_check"
-                    app:tint="@color/white"
+                    app:tint="@color/colorIconPrimary"
                     android:padding="8dp"
                     android:visibility="invisible"/>
             </FrameLayout>

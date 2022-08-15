@@ -10,8 +10,13 @@ import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.provider.CardDataSource
 import com.oscarvera.snail.provider.DeskDataSource
 import com.oscarvera.snail.provider.SwichDataSource
+import com.oscarvera.snail.provider.local.LocalRepository
+import com.oscarvera.snail.usecases.learning.LearningViewModel
 import com.oscarvera.snail.util.extensions.getProperId
+import com.oscarvera.snail.util.sendErrorEvent
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CrossDataViewModel : ViewModel() {
@@ -45,32 +50,35 @@ class CrossDataViewModel : ViewModel() {
     fun getLocalDesks() {
 
         viewModelScope.launch(Dispatchers.IO) {
-            SwichDataSource.deskData.getAllDesksWithCards(object :
+
+            val localRepository = LocalRepository()
+            localRepository.getAllDesksWithCards(object :
                 DeskDataSource.LoadDesksWithCardsCallBack {
                 override fun onDesksLoaded(desks: List<DeskWithCards>) {
                     listDesksLocal = desks
                     totalNumberOfDesks = desks.size
+                    desks.forEach { deskWithCards ->
+                        this@launch.launch {
 
-                    desks.forEach {
-                        SwichDataSource.cardData.getCardsAndData(it.getProperId(), object :
-                            CardDataSource.LoadCardsAndDataCallBack {
-                            override fun onCardsLoaded(cards: List<CardWithData>) {
-                                var listCards = ArrayList<Card>()
-                                cards.forEach {
-                                    val card = it.card
-                                    card.cardswithdata = it.cardData ?: listOf()
-                                    listCards.add(card)
+                            localRepository.getCardsAndData(deskWithCards.getProperId())
+                                .catch {
+                                    sendErrorEvent(CrossDataViewModel::class.java.name, it.message)
                                 }
-                                it.cards = listCards.toList()
-                                listDesksToExport.add(it)
-                                numberOfDeskLoaded++
-                            }
+                                .collect{
+                                    it.data?.let { cards->
+                                        var listCards = ArrayList<Card>()
+                                        cards.forEach {
+                                            val card = it.card
+                                            card.cardswithdata = it.cardData ?: listOf()
+                                            listCards.add(card)
+                                        }
+                                        deskWithCards.cards = listCards.toList()
+                                        listDesksToExport.add(deskWithCards)
+                                        numberOfDeskLoaded++
+                                    }
+                                }
 
-                            override fun onError(t: Throwable) {
-
-                            }
-
-                        })
+                        }
                     }
 
                 }

@@ -8,7 +8,7 @@
     tools:context=".usecases.deskshareddetail.DeskSharedDetailActivity">
 
 
-    <include layout="@layout/layout_top_bar"/>
+    <include android:id="@+id/layoutTopbar" layout="@layout/layout_top_bar"/>
 
 
     <androidx.core.widget.NestedScrollView
@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topBar">
+        app:layout_constraintTop_toBottomOf="@id/layoutTopbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -43,11 +43,9 @@
                         android:id="@+id/title_owner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/share_desk_detail_title_owner"
                         android:textAlignment="center"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp" />
+                        style="@style/textLevel2"/>
 
                     <Space
                         android:layout_width="match_parent"
@@ -57,11 +55,9 @@
                         android:id="@+id/text_owner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
                         android:textAlignment="center"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
-                        tools:text="12" />
+                        tools:text="12"
+                        style="@style/textLevel1"/>
 
                 </LinearLayout>
 
@@ -76,11 +72,9 @@
                         android:id="@+id/title_upload"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/share_desk_detail_title_date"
                         android:textAlignment="center"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp" />
+                        style="@style/textLevel2"/>
 
                     <Space
                         android:layout_width="match_parent"
@@ -90,11 +84,9 @@
                         android:id="@+id/text_upload"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
                         android:textAlignment="center"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
-                        tools:text="3" />
+                        tools:text="3"
+                        style="@style/textLevel1"/>
 
                 </LinearLayout>
 
@@ -109,11 +101,9 @@
                         android:id="@+id/title_download"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/share_desk_detail_title_downloaded"
                         android:textAlignment="center"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp" />
+                        style="@style/textLevel2" />
 
                     <Space
                         android:layout_width="match_parent"
@@ -123,11 +113,9 @@
                         android:id="@+id/text_download"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
                         android:textAlignment="center"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
-                        tools:text="3" />
+                        tools:text="3"
+                        style="@style/textLevel1"/>
 
                 </LinearLayout>
 
@@ -142,12 +130,10 @@
                 android:id="@+id/title_separator_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
                 android:layout_marginTop="30dp"
-                android:textColor="@color/textblack"
-                android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@id/box_information"
-                tools:text="12 Cards" />
+                tools:text="12 Cards"
+                style="@style/titleList"/>
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -194,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/roboto_black"
-                android:textColor="@color/white"
+                android:textColor="@color/colorTextShow"
                 android:textSize="24sp"
                 android:text="@string/share_desk_detail_btn_download"
                 android:layout_marginEnd="15dp"/>
@@ -204,7 +190,8 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_arrow_right_white"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:tint="@color/colorTextShow"/>
 
         </LinearLayout>
 

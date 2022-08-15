@@ -5,16 +5,17 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.oscarvera.snail.R
+import com.oscarvera.snail.databinding.ActivityMainBinding
 import com.oscarvera.snail.model.session.SessionManager
 import com.oscarvera.snail.usecases.home.desks.DesksFragment
 import com.oscarvera.snail.usecases.home.settings.SettingsFragment
 import com.oscarvera.snail.usecases.home.shared.SharedFragment
 import com.oscarvera.snail.util.Router
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var mainViewModel: MainViewModel
+    private lateinit var binding: ActivityMainBinding
 
     private val desksFragment = DesksFragment()
     private val sharedFragment = SharedFragment()
@@ -22,13 +23,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        replaceFragment(desksFragment)
-        animation_view.playAnimation()
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        bottom_navigation_home.itemIconTintList = null
-        bottom_navigation_home.setOnItemSelectedListener {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        replaceFragment(desksFragment)
+        binding.animationView.playAnimation()
+        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        binding.bottomNavigationHome.itemIconTintList = null
+        binding.bottomNavigationHome.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.tab_home -> replaceFragment(desksFragment)
                 R.id.tab_shared -> {

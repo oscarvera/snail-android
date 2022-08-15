@@ -8,20 +8,22 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.oscarvera.snail.R
+import com.oscarvera.snail.databinding.ActivityDeskDetailBinding
 import com.oscarvera.snail.model.domain.Card
+import com.oscarvera.snail.model.domain.CardWithData
 import com.oscarvera.snail.model.domain.StatusCard
 import com.oscarvera.snail.usecases.home.CardsAdapter
 import com.oscarvera.snail.util.*
+import com.oscarvera.snail.util.customs.GridSpacingItemDecoration
+import com.oscarvera.snail.util.customs.LoadingDialog
+import com.oscarvera.snail.util.customs.Result
 import com.oscarvera.snail.util.extensions.afterTextChanged
-import kotlinx.android.synthetic.main.activity_desk_detail.*
-import kotlinx.android.synthetic.main.fragment_shared.*
-import kotlinx.android.synthetic.main.layout_top_bar.*
-import kotlin.math.roundToInt
 
 
 class DeskDetailActivity : AppCompatActivity() {
 
     lateinit var desksDetailViewModel: DeskDetailViewModel
+    private lateinit var binding: ActivityDeskDetailBinding
 
     private var adapterCards: CardsAdapter? = null
 
@@ -30,84 +32,66 @@ class DeskDetailActivity : AppCompatActivity() {
     }
 
     private var idDesk: String? = null
-    lateinit var loadingDialog : LoadingDialog
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_desk_detail)
-        desksDetailViewModel = ViewModelProvider(this).get(DeskDetailViewModel::class.java)
 
-        loadingDialog = LoadingDialog(this)
+        binding = ActivityDeskDetailBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        desksDetailViewModel = ViewModelProvider(this)[DeskDetailViewModel::class.java]
 
         idDesk = intent.getStringExtra(EXTRA_ID_DESK)
         sendEventWithDeskId(EventType.SHOWDESKVIEW, idDesk)
 
-        recyclerViewCards.layoutManager = GridLayoutManager(this, 2)
-        val spanCount = 2
-        val spacing = (25 * resources.displayMetrics.density).roundToInt()
-        recyclerViewCards.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, false))
+        binding.recyclerViewCards.layoutManager = GridLayoutManager(this, 2)
 
-        desksDetailViewModel.cards.observe(this, Observer { listCards ->
+        binding.recyclerViewCards.addItemDecoration(
+            GridSpacingItemDecoration(
+                Configuration.spanCount,
+                Configuration.getSpacing(resources),
+                false
+            )
+        )
 
-            val countStatesCards = Utils.countStatusDeskWithCards(listCards)
-            text_tolearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
-            text_learning.text = countStatesCards[StatusCard.LEARNING].toString()
-            text_learned.text = countStatesCards[StatusCard.LEARNED].toString()
+        desksDetailViewModel.cards.observe(this, Observer { result ->
 
-            val titleSeparator = "${listCards.size} ${getString(R.string.name_card)}"
-            title_separator_1.text = titleSeparator
+            when (result.status) {
+                Result.Status.SUCCESS -> {
+                    loadingDialog.finishLoadingDialog(true)
+                    result.data?.let {
+                        fillCardsData(it)
+                    }
+                }
+                Result.Status.ERROR -> {
 
-
-            adapterCards = CardsAdapter(listCards, object : CardsAdapter.CardAdapterCallback {
-                override fun onClick(card: Card) {
 
                 }
-
-                override fun onClickAddCard() {
-                    newIntentAddCard()
+                Result.Status.LOADING -> {
+                    loadingDialog.showLoadingDialog()
                 }
-
-            })
-
-            recyclerViewCards.adapter = adapterCards
-
-
-            if (countStatesCards[StatusCard.TO_LEARN]!! > 0) {
-                //They have cards to learn
-                text_number_tolearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
-                btn_learn_desk.visibility = View.VISIBLE
-                btn_learn_desk.setOnClickListener {
-                    newIntentLearning()
-                }
-
-            } else {
-                btn_learn_desk.visibility = View.GONE
             }
+        })
 
-            edit_text_search.afterTextChanged {
+        desksDetailViewModel.desk.observe(this, Observer { result ->
 
-                val listFilter = listCards.filter { card ->
-                    val text1 = card.cardData?.get(0)?.text ?: ""
-                    val text2 = card.cardData?.get(1)?.text ?: ""
-                    text1.contains(it, true) || text2.contains(it,true)
+            when (result.status) {
+                Result.Status.SUCCESS -> {
+                    loadingDialog.finishLoadingDialog(true)
+                    binding.layoutTopbar.titleTopBar.text = result.data?.name
                 }
-                adapterCards?.setChangeCards(listFilter)
-
+                Result.Status.LOADING -> loadingDialog.showLoadingDialog()
+                else -> {}
             }
 
         })
 
-        desksDetailViewModel.desk.observe(this, Observer {
+        binding.layoutTopbar.btnOptions.visibility = View.VISIBLE
+        binding.layoutTopbar.btnOptions.setOnClickListener {
 
-            title_top_bar.text = it.name
-
-
-        })
-
-        btn_options.visibility = View.VISIBLE
-        btn_options.setOnClickListener {
-
-            Dialogs.optionsBottomSheetDialog(this,layoutInflater,object : Dialogs.DeskSettingsDialog{
+            Dialogs.optionsBottomSheetDialog(this, layoutInflater, object : Dialogs.DeskSettingsDialog {
                 override fun onDelete(dialogOptions: Dialog) {
                     dialogOptions.dismiss()
                     loadingDialog.setCallback(object : LoadingDialog.LoadingDialogCallback {
@@ -117,7 +101,7 @@ class DeskDetailActivity : AppCompatActivity() {
                         }
                     })
                     loadingDialog.showLoadingDialog()
-                    desksDetailViewModel.deleteDesk(idDesk!!) {
+                    desksDetailViewModel.deleteDesk() {
                         loadingDialog.finishLoadingDialog()
                     }
                 }
@@ -133,32 +117,72 @@ class DeskDetailActivity : AppCompatActivity() {
         }
 
 
-        btn_back.setOnClickListener {
+        binding.layoutTopbar.btnBack.setOnClickListener {
             finish()
         }
 
 
     }
 
+    private fun fillCardsData(listCards: List<CardWithData>) {
+
+        val countStatesCards = Utils.countStatusDeskWithCards(listCards)
+        binding.textTolearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
+        binding.textLearning.text = countStatesCards[StatusCard.LEARNING].toString()
+        binding.textLearned.text = countStatesCards[StatusCard.LEARNED].toString()
+
+        val titleSeparator = "${listCards.size} ${getString(R.string.name_card)}"
+        binding.titleSeparator1.text = titleSeparator
+
+
+        adapterCards = CardsAdapter(listCards, object : CardsAdapter.CardAdapterCallback {
+            override fun onClick(card: Card) {
+
+            }
+
+            override fun onClickAddCard() {
+                newIntentAddCard()
+            }
+
+        })
+
+        binding.recyclerViewCards.adapter = adapterCards
+
+
+        if (countStatesCards[StatusCard.TO_LEARN]!! > 0) {
+            //They have cards to learn
+            binding.textNumberTolearn.text = countStatesCards[StatusCard.TO_LEARN].toString()
+            binding.btnLearnDesk.visibility = View.VISIBLE
+            binding.btnLearnDesk.setOnClickListener {
+                newIntentLearning()
+            }
+
+        } else {
+            binding.btnLearnDesk.visibility = View.GONE
+        }
+
+        binding.editTextSearch.afterTextChanged {
+
+            val listFilter = listCards.filter { card ->
+                val text1 = card.cardData?.get(0)?.text ?: ""
+                val text2 = card.cardData?.get(1)?.text ?: ""
+                text1.contains(it, true) || text2.contains(it, true)
+            }
+            adapterCards?.setChangeCards(listFilter)
+
+        }
+    }
+
     private fun newIntentAddCard() {
         idDesk?.let {
-            Router.launchAddCardActivity(this, it, title_top_bar.text.toString())
+            Router.launchAddCardActivity(this, it, binding.layoutTopbar.titleTopBar.text.toString())
         }
     }
 
     private fun newIntentLearning() {
         idDesk?.let {
-            Router.launchLearningActivity(this, it, title_top_bar.text.toString())
+            Router.launchLearningActivity(this, it, binding.layoutTopbar.titleTopBar.text.toString())
         }
     }
-
-    override fun onRestart() {
-        super.onRestart()
-        idDesk?.let {
-            desksDetailViewModel.getDesk(idDesk = it)
-            desksDetailViewModel.getCards(idDesk = it)
-        }
-    }
-
 
 }

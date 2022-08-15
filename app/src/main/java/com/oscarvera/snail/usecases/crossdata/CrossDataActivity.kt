@@ -1,9 +1,7 @@
 package com.oscarvera.snail.usecases.crossdata
 
-import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -14,28 +12,29 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.oscarvera.snail.R
+import com.oscarvera.snail.databinding.ActivityCrossDataBinding
 import com.oscarvera.snail.model.session.SessionManager
 import com.oscarvera.snail.util.*
-import kotlinx.android.synthetic.main.activity_cross_data.*
-import kotlinx.android.synthetic.main.layout_top_bar.*
-import kotlinx.android.synthetic.main.layout_top_bar.btn_back
+import com.oscarvera.snail.util.customs.LoadingDialog
 
 class CrossDataActivity : AppCompatActivity() {
 
     lateinit var crossDataViewModel: CrossDataViewModel
 
-    lateinit var loadingDialog: LoadingDialog
+    private lateinit var binding: ActivityCrossDataBinding
+
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cross_data)
 
-        crossDataViewModel = ViewModelProvider(this).get(CrossDataViewModel::class.java)
+        binding = ActivityCrossDataBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        crossDataViewModel = ViewModelProvider(this)[CrossDataViewModel::class.java]
 
         sendEvent(EventType.MIGRATESCREEN, null)
-
-        loadingDialog = LoadingDialog(this)
-
 
         val resultSignInGoogle = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -94,11 +93,11 @@ class CrossDataActivity : AppCompatActivity() {
         })
 
 
-        btn_back.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             finish()
         }
 
-        btn_migrate_data.setOnClickListener {
+        binding.btnMigrateData.setOnClickListener {
             loadingDialog.setCallback(object : LoadingDialog.LoadingDialogCallback {
                 override fun onFinish(dialog: Dialog) {
                     dialog.dismiss()

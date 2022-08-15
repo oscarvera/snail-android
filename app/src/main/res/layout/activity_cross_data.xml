@@ -54,12 +54,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/image_cross"
-                app:cardBackgroundColor="@color/background2"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
                 android:orientation="vertical"
                 app:contentPadding="20dp"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="30dp"
+                style="@style/cardviewDesk">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,11 +73,8 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/newyork_medium_medium"
-                        android:textColor="@color/textblack"
-                        android:textSize="22sp"
                         android:text="@string/data_cross_item_1_title"
-                        android:maxLines="2"/>
+                        style="@style/titleInfo"/>
 
                     <FrameLayout
                         android:layout_width="30dp"
@@ -104,7 +99,7 @@
                             android:src="@drawable/ic_online"
                             android:layout_gravity="center"
                             android:padding="6dp"
-                            app:tint="@color/secondary" />
+                            app:tint="@color/colorIconPrimary" />
                     </FrameLayout>
 
                 </LinearLayout>
@@ -112,11 +107,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_light"
                     android:text="@string/data_cross_item_1_subtitle"
-                    android:textColor="@color/textgrey"
-                    android:textSize="16sp"
-                    android:layout_marginTop="15dp"/>
+                    android:layout_marginTop="15dp"
+                    style="@style/textInfo"/>
 
                 </LinearLayout>
 
@@ -128,12 +121,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/card_share"
-                app:cardBackgroundColor="@color/background2"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
                 android:orientation="vertical"
                 app:contentPadding="20dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                style="@style/cardviewDesk">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -149,11 +140,8 @@
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/newyork_medium_medium"
-                            android:textColor="@color/textblack"
-                            android:textSize="22sp"
                             android:text="@string/data_cross_item_2_title"
-                            android:maxLines="2"/>
+                            style="@style/titleInfo"/>
 
                         <FrameLayout
                             android:layout_width="30dp"
@@ -178,7 +166,7 @@
                                 android:src="@drawable/ic_security"
                                 android:layout_gravity="center"
                                 android:padding="6dp"
-                                app:tint="@color/secondary" />
+                                app:tint="@color/colorIconPrimary" />
                         </FrameLayout>
 
                     </LinearLayout>
@@ -186,11 +174,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/data_cross_item_2_subtitle"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="15dp"
+                        style="@style/textInfo"/>
 
                 </LinearLayout>
 
@@ -202,12 +188,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/card_safe"
-                app:cardBackgroundColor="@color/background2"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
                 android:orientation="vertical"
                 app:contentPadding="20dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                style="@style/cardviewDesk">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -223,11 +207,8 @@
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/newyork_medium_medium"
-                            android:textColor="@color/textblack"
-                            android:textSize="22sp"
                             android:text="@string/data_cross_item_3_title"
-                            android:maxLines="2"/>
+                            style="@style/titleInfo"/>
 
                         <FrameLayout
                             android:layout_width="30dp"
@@ -252,7 +233,7 @@
                                 android:src="@drawable/ic_user"
                                 android:layout_gravity="center"
                                 android:padding="6dp"
-                                app:tint="@color/secondary" />
+                                app:tint="@color/colorIconPrimary" />
                         </FrameLayout>
 
                     </LinearLayout>
@@ -260,11 +241,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/data_cross_item_3_subtitle"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="15dp"
+                        style="@style/textInfo"/>
 
                 </LinearLayout>
 
@@ -305,7 +284,7 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_google_black"
-                app:tint="@color/white"/>
+                app:tint="@color/background"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -314,7 +293,7 @@
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/roboto_black"
                 android:text="@string/data_cross_btn_migrate"
-                android:textColor="@color/white"
+                android:textColor="@color/background"
                 android:textSize="16sp" />
 
 

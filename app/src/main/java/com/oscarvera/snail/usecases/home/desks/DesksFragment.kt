@@ -10,14 +10,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.oscarvera.snail.R
+import com.oscarvera.snail.databinding.FragmentHomeBinding
 import com.oscarvera.snail.model.domain.DeskWithCards
 import com.oscarvera.snail.util.Dialogs
 import com.oscarvera.snail.util.EventType
 import com.oscarvera.snail.util.Router
 import com.oscarvera.snail.util.sendEvent
 import com.oscarvera.snail.util.extensions.getProperId
-import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
 class DesksFragment : Fragment() {
@@ -29,10 +28,13 @@ class DesksFragment : Fragment() {
 
     lateinit var desksViewModel: DesksViewModel
 
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sendEvent(EventType.SHOWDESKSVIEW, null)
-        desksViewModel = ViewModelProvider(this).get(DesksViewModel::class.java)
+        desksViewModel = ViewModelProvider(this)[DesksViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -40,13 +42,15 @@ class DesksFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        //val view = inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         layoutManager2 = LinearLayoutManager(activity)
-        view.listDesksToLearn.layoutManager = layoutManager2
+        binding.listDesksToLearn.layoutManager = layoutManager2
 
         layoutManager = LinearLayoutManager(activity)
-        view.listDesksAll.layoutManager = layoutManager
+        binding.listDesksAll.layoutManager = layoutManager
 
         desksViewModel.desksChecked.observe(viewLifecycleOwner, Observer {
             adapterAll =
@@ -58,7 +62,7 @@ class DesksFragment : Fragment() {
                     }
 
                 })
-            view.listDesksAll.adapter = adapterAll
+            binding.listDesksAll.adapter = adapterAll
         })
 
         desksViewModel.desksToCheck.observe(viewLifecycleOwner, Observer {
@@ -75,18 +79,18 @@ class DesksFragment : Fragment() {
                     }
 
                 })
-            view.listDesksToLearn.adapter = adapterToLearn
+            binding.listDesksToLearn.adapter = adapterToLearn
         })
 
         desksViewModel.noDesks.observe(viewLifecycleOwner, Observer {
             if (it) {
-                showNoDesksScreen(view)
+                showNoDesksScreen(binding)
             } else {
-                showDesksScreen(view)
+                showDesksScreen(binding)
             }
         })
 
-        view.btn_add_desk.setOnClickListener {
+        binding.btnAddDesk.setOnClickListener {
 
             showAddDeskDialog()
 
@@ -112,30 +116,30 @@ class DesksFragment : Fragment() {
 
     }
 
-    private fun showNoDesksScreen(view: View) {
+    private fun showNoDesksScreen(view: FragmentHomeBinding) {
 
-        view.title_separator_1.visibility = View.GONE
+        view.titleSeparator1.visibility = View.GONE
         view.listDesksToLearn.visibility = View.GONE
-        view.title_separator_2.visibility = View.GONE
+        view.titleSeparator2.visibility = View.GONE
         view.listDesksAll.visibility = View.GONE
 
-        view.animation_noDesk.visibility = View.VISIBLE
+        view.animationNoDesk.visibility = View.VISIBLE
 
-        view.animation_noDesk.playAnimation()
+        view.animationNoDesk.playAnimation()
 
-        view.animation_noDesk.setOnClickListener {
+        view.animationNoDesk.setOnClickListener {
             showAddDeskDialog()
         }
 
     }
 
-    private fun showDesksScreen(view: View) {
-        if (view.title_separator_1.visibility == View.GONE) {
-            view.title_separator_1.visibility = View.VISIBLE
+    private fun showDesksScreen(view: FragmentHomeBinding) {
+        if (view.titleSeparator1.visibility == View.GONE) {
+            view.titleSeparator1.visibility = View.VISIBLE
             view.listDesksToLearn.visibility = View.VISIBLE
-            view.title_separator_2.visibility = View.VISIBLE
+            view.titleSeparator2.visibility = View.VISIBLE
             view.listDesksAll.visibility = View.VISIBLE
-            view.animation_noDesk.visibility = View.GONE
+            view.animationNoDesk.visibility = View.GONE
         }
     }
 

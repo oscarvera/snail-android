@@ -10,60 +10,54 @@ import com.oscarvera.snail.model.domain.Desk
 import com.oscarvera.snail.provider.CardDataSource
 import com.oscarvera.snail.provider.DeskDataSource
 import com.oscarvera.snail.provider.SwichDataSource
-import com.oscarvera.snail.usecases.crossdata.CrossDataActivity
-import com.oscarvera.snail.util.Dialogs
+import com.oscarvera.snail.util.customs.Result
 import com.oscarvera.snail.util.sendErrorEvent
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class DeskDetailViewModel : ViewModel() {
 
-    private val _cards: MutableLiveData<List<CardWithData>> by lazy {
-        MutableLiveData<List<CardWithData>>()
+    private val _cards: MutableLiveData<Result<List<CardWithData>>> by lazy {
+        MutableLiveData<Result<List<CardWithData>>>()
     }
 
-    private val _desk: MutableLiveData<Desk> by lazy {
-        MutableLiveData<Desk>()
+    private val _desk: MutableLiveData<Result<Desk>> by lazy {
+        MutableLiveData<Result<Desk>>()
     }
 
-    val cards: LiveData<List<CardWithData>> get() = _cards
+    val cards: LiveData<Result<List<CardWithData>>> get() = _cards
 
-    val desk: LiveData<Desk> get() = _desk
+    val desk: LiveData<Result<Desk>> get() = _desk
 
-    fun getDesk(idDesk : String) {
+    fun getDesk(idDesk: String) {
 
         viewModelScope.launch(Dispatchers.IO) {
-            SwichDataSource.deskData.getDesk(idDesk, object : DeskDataSource.LoadDeskCallBack {
-                override fun onDeskLoaded(desk: Desk) {
-                    _desk.postValue(desk)
+            SwichDataSource.deskData.getDesk(idDesk)
+                .catch {
+                    emit(Result.error(it.message ?: "", null))
+                    sendErrorEvent(DeskDetailViewModel::class.java.name, it.message)
                 }
-
-                override fun onError(t: Throwable) {
-                    sendErrorEvent(DeskDetailViewModel::class.java.name,t.message)
+                .collect {
+                    _desk.postValue(it)
                 }
-
-            })
         }
     }
 
-    fun getCards(idDesk : String) {
-
+    fun getCards(idDesk: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            SwichDataSource.cardData.getCardsAndData(idDesk, object : CardDataSource.LoadCardsAndDataCallBack {
-
-                override fun onCardsLoaded(cards: List<CardWithData>) {
-                    _cards.postValue(cards)
+            SwichDataSource.cardData.getCardsAndData(idDesk)
+                .catch {
+                    emit(Result.error(it.message ?: "", null))
+                    sendErrorEvent(DeskDetailViewModel::class.java.name, it.message)
                 }
-
-                override fun onError(t: Throwable) {
-                    sendErrorEvent(DeskDetailViewModel::class.java.name,t.message)
+                .collect {
+                    _cards.postValue(it)
                 }
-
-            })
         }
     }
 
-    fun addCard(idDesk : String, card: Card, onSuccess: () -> Unit){
+    fun addCard(idDesk: String, card: Card, onSuccess: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             SwichDataSource.cardData.addCard(idDesk, card = card, object : CardDataSource.SaveTaskCallback {
                 override fun onSaveSuccess() {
@@ -71,7 +65,7 @@ class DeskDetailViewModel : ViewModel() {
                 }
 
                 override fun onError(t: Throwable) {
-                    sendErrorEvent(DeskDetailViewModel::class.java.name,t.message)
+                    sendErrorEvent(DeskDetailViewModel::class.java.name, t.message)
                 }
 
 
@@ -79,9 +73,9 @@ class DeskDetailViewModel : ViewModel() {
         }
     }
 
-    fun deleteDesk(idDesk: String,onSuccess: () -> Unit){
+    fun deleteDesk(onSuccess: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            desk.value?.let {
+            desk.value?.data?.let {
                 SwichDataSource.deskData.deleteDesk(it, object : DeskDataSource.DeleteTaskCallback {
 
                     override fun onDeleteSuccess() {
@@ -89,7 +83,7 @@ class DeskDetailViewModel : ViewModel() {
                     }
 
                     override fun onError(t: Throwable) {
-                        sendErrorEvent(DeskDetailViewModel::class.java.name,t.message)
+                        sendErrorEvent(DeskDetailViewModel::class.java.name, t.message)
                     }
 
 

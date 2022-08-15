@@ -7,29 +7,31 @@ import com.oscarvera.snail.model.domain.Desk
 import com.oscarvera.snail.model.domain.DeskShared
 import com.oscarvera.snail.provider.CardDataSource
 import com.oscarvera.snail.provider.DeskDataSource
+import com.oscarvera.snail.util.customs.Result
+import com.oscarvera.snail.util.extensions.setResultEnclosed
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 class LocalRepository : DeskDataSource, CardDataSource {
 
-    override fun getDesk(id: String, callBack: DeskDataSource.LoadDeskCallBack) {
-        val desk = MyApplication.localDatabase.deskDao().getDesk(id.toInt())
-        callBack.onDeskLoaded(desk)
-    }
+    override fun getDesk(id: String): Flow<Result<Desk>> = MyApplication.localDatabase.deskDao()
+        .getDesk(id.toInt()).setResultEnclosed()
 
-    override fun getRemoteDesk(idRemote: String, callBack: DeskDataSource.LoadSharedDeskCallBack) {
+    override fun getRemoteDesk(idRemote: String): Flow<Result<DeskShared>> {
         //Not in local mode
+        return flow {}
     }
 
-    override fun getDesks(callBack: DeskDataSource.LoadDesksCallBack) {
-        val desks = MyApplication.localDatabase.deskDao().getDesks()
-        callBack.onDesksLoaded(desks = desks)
-    }
+    override fun getDesks(): Flow<Result<List<Desk>>> = MyApplication.localDatabase.deskDao().getDesks().setResultEnclosed()
 
-    override fun addDesk(desk: Desk, callback: DeskDataSource.SaveTaskCallback) {
+
+    override suspend fun addDesk(desk: Desk, callback: DeskDataSource.SaveTaskCallback) {
         val newId = MyApplication.localDatabase.deskDao().addDesk(desk = desk)
         callback.onSaveSuccess(newId.toString())
     }
 
-    override fun deleteDesk(desk: Desk, callback: DeskDataSource.DeleteTaskCallback) {
+    override suspend fun deleteDesk(desk: Desk, callback: DeskDataSource.DeleteTaskCallback) {
         MyApplication.localDatabase.deskDao().delete(desk = desk)
         callback.onDeleteSuccess()
     }
@@ -38,13 +40,14 @@ class LocalRepository : DeskDataSource, CardDataSource {
         //Not in local mode
     }
 
-    override fun getAllDesksWithCards(callback: DeskDataSource.LoadDesksWithCardsCallBack) {
+    override suspend fun getAllDesksWithCards(callback: DeskDataSource.LoadDesksWithCardsCallBack) {
         val desks = MyApplication.localDatabase.deskDao().getAllDeskswithCards()
         callback.onDesksLoaded(desks = desks)
     }
 
-    override fun getAllDesksSharedWithCards(callback: DeskDataSource.LoadDesksSharedWithCardsCallBack) {
+    override fun getAllDesksSharedWithCards(): Flow<Result<List<DeskShared>>> {
         //Not in local mode
+        return flow {  }
     }
 
     override fun uploadNumDownloadShareDesk(desk: DeskShared) {
@@ -55,30 +58,29 @@ class LocalRepository : DeskDataSource, CardDataSource {
         MyApplication.localDatabase.clearAllTables()
     }
 
-    override fun getDeskandCards(idDesk: String, callBack: CardDataSource.LoadCardsCallBack) {
+    override suspend fun getDeskandCards(idDesk: String, callBack: CardDataSource.LoadCardsCallBack) {
         val deskcards = MyApplication.localDatabase.cardDao().getCards(idDesk.toInt())
         callBack.onCardsLoaded(deskcards)
     }
 
-    override fun getCardsAndData(
-        idDesk: String,
-        callback: CardDataSource.LoadCardsAndDataCallBack
-    ) {
-        val deskcards = MyApplication.localDatabase.cardDao().getCardsAndData(idDesk.toInt())
-        callback.onCardsLoaded(deskcards)
+    override suspend fun getCardsAndData(
+        idDesk: String
+    ): Flow<Result<List<CardWithData>>> = MyApplication.localDatabase.cardDao().getCardsAndData(idDesk.toInt()).map {
+        Result(Result.Status.SUCCESS, it, null, null)
     }
 
-    override fun addCard(idDesk: String, card: Card, callback: CardDataSource.SaveTaskCallback) {
+
+    override suspend fun addCard(idDesk: String, card: Card, callback: CardDataSource.SaveTaskCallback) {
         card.deskId = idDesk.toInt()
         var idCard = MyApplication.localDatabase.cardDao().addCard(card)
-        for (carddata in card.cardswithdata) {
-            carddata.cardId = idCard.toInt()
-            MyApplication.localDatabase.cardDao().addCardData(carddata)
+        card.cardswithdata.forEach {
+            it.cardId = idCard.toInt()
+            MyApplication.localDatabase.cardDao().addCardData(it)
         }
         callback.onSaveSuccess()
     }
 
-    override fun updateCard(
+    override suspend fun updateCard(
         idDesk: String,
         listCards: List<CardWithData>,
         indexToUpload: Int,

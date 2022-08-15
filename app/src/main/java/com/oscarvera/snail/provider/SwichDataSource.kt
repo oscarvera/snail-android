@@ -7,7 +7,6 @@ import com.oscarvera.snail.provider.services.firebase.FirebaseRepository
 class SwichDataSource {
 
     companion object{
-
         val deskData: DeskDataSource
             get() {
                 return if (SessionManager.isLogged()) {
@@ -25,12 +24,6 @@ class SwichDataSource {
                     LocalRepository()
                 }
             }
-
-
-
     }
-
-
-
 
 }

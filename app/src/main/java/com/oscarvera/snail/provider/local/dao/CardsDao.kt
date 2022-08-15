@@ -2,26 +2,27 @@ package com.oscarvera.snail.provider.local.dao
 
 import androidx.room.*
 import com.oscarvera.snail.model.domain.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CardsDao {
 
     @Transaction
     @Query("SELECT * FROM desk WHERE id is :idDesk")
-    fun getCards(idDesk: Int): DeskWithCards
+    suspend fun getCards(idDesk: Int): DeskWithCards
 
     @Transaction
     @Query("SELECT * FROM card where deskId is :idDesk")
-    fun getCardsAndData(idDesk: Int): List<CardWithData>
+    fun getCardsAndData(idDesk: Int): Flow<List<CardWithData>>
 
     @Insert
-    fun addCard( card: Card) : Long
+    suspend fun addCard( card: Card) : Long
 
     @Insert
-    fun addCardData( card: CardData)
+    suspend fun addCardData( card: CardData)
 
     @Update
-    fun updateCard(card : Card)
+    suspend fun updateCard(card : Card)
 
 
 

@@ -38,25 +38,21 @@
                     android:id="@+id/title_shared_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/newyork_medium_bold"
                     android:text="@string/fragment_shared_title"
-                    android:textColor="@color/textblack"
-                    android:textSize="45sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/titleFragment"/>
 
                 <TextView
                     android:id="@+id/btn_share_desk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_black"
                     android:src="@drawable/ic_add"
                     android:text="@string/fragment_shared_btn_share"
-                    android:textColor="@color/secondary"
-                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/title_shared_fragment"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/title_shared_fragment" />
+                    app:layout_constraintTop_toTopOf="@id/title_shared_fragment"
+                    style="@style/buttonText"/>
 
                 <EditText
                     android:id="@+id/edit_text_search_shared"
@@ -64,16 +60,16 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
                     android:autofillHints=""
-                    android:background="@drawable/custom_input"
                     android:drawableStart="@drawable/ic_search"
                     android:drawablePadding="15dp"
                     android:hint="@string/detail_search_cards"
                     android:inputType="text"
-                    android:lines="1"
                     android:padding="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title_shared_fragment" />
+                    app:layout_constraintTop_toBottomOf="@id/title_shared_fragment"
+                    style="@style/editTextSearch"
+                    android:background="@drawable/custom_input"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/listDesksShared"

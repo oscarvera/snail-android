@@ -10,13 +10,12 @@
         android:id="@+id/title_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/newyork_medium_black"
+        android:layout_marginTop="16dp"
         android:text="@string/dialog_settings_desk_title"
-        android:textColor="@color/secondary"
-        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/titleDialog"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,17 +40,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_delete"
-                app:tint="@color/textblack"
+                app:tint="@color/iconSettings"
                 android:layout_margin="20sp"/>
 
             <TextView
                 android:text="@string/dialog_settings_desk_option_delete"
                 android:layout_width="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:textColor="@color/textblack"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                style="@style/nameSetting"/>
 
 
         </LinearLayout>

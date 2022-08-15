@@ -18,10 +18,8 @@
             android:id="@+id/title_desks_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/newyork_medium_bold"
             android:text="@string/fragment_desks_title"
-            android:textColor="@color/textblack"
-            android:textSize="45sp"
+            style="@style/titleFragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_add"
+            app:tint="@color/oppositeBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/title_desks_fragment"
             app:layout_constraintBottom_toBottomOf="@id/title_desks_fragment"/>
@@ -38,11 +37,9 @@
             android:id="@+id/title_separator_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
+            style="@style/titleList"
             android:paddingTop="15dp"
             android:text="@string/fragment_desks_separator_1"
-            android:textColor="@color/textgrey"
-            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/title_desks_fragment"
             tools:layout_editor_absoluteX="30dp" />
 
@@ -56,11 +53,9 @@
             android:id="@+id/title_separator_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
             android:paddingTop="15dp"
             android:text="@string/fragment_desks_separator_2"
-            android:textColor="@color/textgrey"
-            android:textSize="16sp"
+            style="@style/titleList"
             app:layout_constraintTop_toBottomOf="@id/listDesksToLearn"
             tools:layout_editor_absoluteX="30dp" />
 

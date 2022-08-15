@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/background2"
-    app:cardCornerRadius="15dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    app:cardElevation="0dp"
-    android:id="@+id/card_item">
+    android:id="@+id/card_item"
+    style="@style/cardviewDesk">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/section_title"
@@ -35,10 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:maxLines="3"
-                android:fontFamily="@font/newyork_medium_medium"
-                android:textColor="@color/textblack"
-                android:textSize="24sp"
+                style="@style/titleCard"
                 tools:text="Desk name" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -68,10 +63,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/item_desk_shared_title_cardsNumber"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp" />
+                        style="@style/textLevel2"/>
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="2dp"/>
@@ -81,9 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
+                        style="@style/textLevel1"
                         tools:text="12 flascards" />
 
                 </LinearLayout>
@@ -102,10 +93,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/item_desk_shared_title_date"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp" />
+                        style="@style/textLevel2"/>
 
                     <Space
                         android:layout_width="match_parent"
@@ -116,9 +105,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
+                        style="@style/textLevel1"
                         tools:text="3 flascards" />
 
                 </LinearLayout>
@@ -142,9 +129,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp"
+                        style="@style/textLevel2"
                         android:text="@string/item_desk_shared_title_userOwner" />
 
                     <Space
@@ -156,9 +141,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
+                        style="@style/textLevel1"
                         tools:text="12 flascards" />
 
                 </LinearLayout>
@@ -177,10 +160,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
                         android:text="@string/item_desk_shared_title_downloaded"
-                        android:textColor="@color/textgrey"
-                        android:textSize="16sp" />
+                        style="@style/textLevel2"/>
 
                     <Space
                         android:layout_width="match_parent"
@@ -191,9 +172,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/textblack"
-                        android:textSize="16sp"
+                        style="@style/textLevel1"
                         tools:text="3 flascards" />
 
                 </LinearLayout>
@@ -216,29 +195,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/background2"
-                android:fontFamily="@font/roboto_black"
                 android:text="@string/item_desk_shared_btn_show"
-                android:textAllCaps="false"
-                android:textColor="@color/secondary"
-                app:cornerRadius="15dp"
-                app:strokeColor="@color/secondary"
-                app:strokeWidth="2dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="0dp"
-                style="?android:attr/buttonBarButtonStyle" />
+                style="@style/buttonSecondary" />
 
             <Button
                 android:id="@+id/btn_download"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/gradient_button_primary"
-                android:fontFamily="@font/roboto_black"
                 android:text="@string/item_desk_shared_btn_download"
-                app:cornerRadius="15dp"/>
+                style="@style/buttonPrimary"
+                />
 
         </LinearLayout>
 

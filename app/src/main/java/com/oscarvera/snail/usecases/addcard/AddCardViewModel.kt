@@ -27,7 +27,7 @@ class AddCardViewModel : ViewModel() {
     val isCardAddedSuccessfully: LiveData<Boolean> get() = _isCardAddedSuccessfully
     val isCardAddedError: LiveData<Throwable> get() = _isCardAddedError
 
-    //Not Use
+    //Not Used
     fun addCard(idDesk : String, card : Card) {
         viewModelScope.launch(Dispatchers.IO) {
             SwichDataSource.cardData.addCard(idDesk, card ,object : CardDataSource.SaveTaskCallback {

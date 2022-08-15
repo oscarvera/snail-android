@@ -28,7 +28,7 @@ class SessionManager {
             PrefManager.userIdFirebase = id
         }
 
-        fun getIdFirebase(): String? = PrefManager.userIdFirebase
+        fun getIdFirebase(): String = PrefManager.userIdFirebase ?: ""
 
     }
 

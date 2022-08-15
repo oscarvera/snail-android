@@ -8,8 +8,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.oscarvera.snail.R
-import kotlinx.android.synthetic.main.activity_learning.*
-import kotlinx.android.synthetic.main.layout_top_bar.*
+import com.oscarvera.snail.databinding.ActivityLearningBinding
 
 class LearningActivity : AppCompatActivity() {
 
@@ -20,22 +19,26 @@ class LearningActivity : AppCompatActivity() {
 
     lateinit var learningVM: LearningViewModel
 
+    private lateinit var binding: ActivityLearningBinding
+
     private var idDesk: String? = null
     private var nameDesk: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_learning)
+        binding = ActivityLearningBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        learningVM = ViewModelProvider(this).get(LearningViewModel::class.java)
+        learningVM = ViewModelProvider(this)[LearningViewModel::class.java]
 
         idDesk = intent.getStringExtra(EXTRA_ID_DESK)
         nameDesk = intent.getStringExtra(EXTRA_NAME_DESK)
-        title_top_bar.text = nameDesk
+        binding.layoutTopbar.titleTopBar.text = nameDesk
 
-        card_text1.movementMethod = ScrollingMovementMethod()
-        card_text2.movementMethod = ScrollingMovementMethod()
+        binding.cardText1.movementMethod = ScrollingMovementMethod()
+        binding.cardText2.movementMethod = ScrollingMovementMethod()
 
         learningVM.card.observe(this, Observer {
 
@@ -45,8 +48,8 @@ class LearningActivity : AppCompatActivity() {
             val data = card_data!!.first().text
             val data2 = card_data[1].text
 
-            card_text1.text = data
-            card_text2.text = data2
+            binding.cardText1.text = data
+            binding.cardText2.text = data2
 
         })
 
@@ -61,12 +64,12 @@ class LearningActivity : AppCompatActivity() {
             learningVM.getCards(idDesk)
         }
 
-        btn_show.setOnClickListener {
+        binding.btnShow.setOnClickListener {
             showAnswerView()
         }
 
-        btn_learned.setOnClickListener {
-            if (btn_not_learned.visibility == View.VISIBLE) {
+        binding.btnLearned.setOnClickListener {
+            if (binding.btnNotLearned.visibility == View.VISIBLE) {
                 //Card learned
                 learningVM.setResultCard(true)
             } else {
@@ -76,11 +79,11 @@ class LearningActivity : AppCompatActivity() {
 
         }
 
-        btn_not_learned.setOnClickListener {
+        binding.btnNotLearned.setOnClickListener {
             learningVM.setResultCard(false)
         }
 
-        btn_back.setOnClickListener {
+        binding.layoutTopbar.btnBack.setOnClickListener {
             finish()
         }
 
@@ -88,21 +91,21 @@ class LearningActivity : AppCompatActivity() {
     }
 
     private fun resetAnswerView() {
-        btn_not_learned.visibility = View.INVISIBLE
-        im_check.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_arrow_bottom))
-        card_text2.visibility = View.GONE
-        btn_show.visibility = View.VISIBLE
+        binding.btnNotLearned.visibility = View.INVISIBLE
+        binding.imCheck.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_arrow_bottom))
+        binding.cardText2.visibility = View.GONE
+        binding.btnShow.visibility = View.VISIBLE
     }
 
     private fun showAnswerView() {
-        btn_not_learned.visibility = View.VISIBLE
-        im_check.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_check))
-        card_text2.visibility = View.VISIBLE
-        btn_show.visibility = View.GONE
+        binding.btnNotLearned.visibility = View.VISIBLE
+        binding.imCheck.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_check))
+        binding.cardText2.visibility = View.VISIBLE
+        binding.btnShow.visibility = View.GONE
     }
 
     private fun noMoreCards() {
-        btn_not_learned.visibility = View.INVISIBLE
-        btn_learned.visibility = View.INVISIBLE
+        binding.btnNotLearned.visibility = View.INVISIBLE
+        binding.btnLearned.visibility = View.INVISIBLE
     }
 }
