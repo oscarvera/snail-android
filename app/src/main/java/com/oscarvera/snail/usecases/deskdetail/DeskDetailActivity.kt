@@ -32,7 +32,7 @@ class DeskDetailActivity : AppCompatActivity() {
     }
 
     private var idDesk: String? = null
-    lateinit var loadingDialog: LoadingDialog
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +42,6 @@ class DeskDetailActivity : AppCompatActivity() {
         setContentView(view)
 
         desksDetailViewModel = ViewModelProvider(this)[DeskDetailViewModel::class.java]
-
-        loadingDialog = LoadingDialog(this)
 
         idDesk = intent.getStringExtra(EXTRA_ID_DESK)
         sendEventWithDeskId(EventType.SHOWDESKVIEW, idDesk)

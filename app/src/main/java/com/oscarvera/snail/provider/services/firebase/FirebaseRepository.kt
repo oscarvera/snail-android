@@ -45,6 +45,7 @@ class FirebaseRepository : DeskDataSource, CardDataSource {
             val subscription = document.addSnapshotListener { snapshot, _ ->
                 if (snapshot!!.exists()) {
                     val deskShared = snapshot.toObject(DeskShared::class.java)
+                    deskShared?.idRemote = idRemote
                     trySend(Result.success(deskShared))
                 }
             }

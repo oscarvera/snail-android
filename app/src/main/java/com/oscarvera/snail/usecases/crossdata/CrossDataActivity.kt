@@ -23,7 +23,7 @@ class CrossDataActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCrossDataBinding
 
-    lateinit var loadingDialog: LoadingDialog
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +35,6 @@ class CrossDataActivity : AppCompatActivity() {
         crossDataViewModel = ViewModelProvider(this)[CrossDataViewModel::class.java]
 
         sendEvent(EventType.MIGRATESCREEN, null)
-
-        loadingDialog = LoadingDialog(this)
-
 
         val resultSignInGoogle = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)

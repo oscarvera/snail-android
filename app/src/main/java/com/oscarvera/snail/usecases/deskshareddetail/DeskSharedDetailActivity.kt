@@ -32,7 +32,7 @@ class DeskSharedDetailActivity : AppCompatActivity() {
 
     private var idRemoteDesk: String? = null
 
-    lateinit var loadingDialog: LoadingDialog
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +43,6 @@ class DeskSharedDetailActivity : AppCompatActivity() {
         desksSharedDetailViewModel =
             ViewModelProvider(this)[DeskSharedDetailViewModel::class.java]
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
-
-        loadingDialog = LoadingDialog(this)
 
         idRemoteDesk = intent.getStringExtra(EXTRA_ID_DESK)
 

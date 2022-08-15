@@ -12,7 +12,7 @@ object Utils {
     fun dateIsAfter(date: String?): Boolean {
         return if (!date.isNullOrEmpty()) {
             val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-            val strDate: Date = formatter.parse(date)
+            val strDate: Date = formatter.parse(date) as Date
             Date().after(strDate)
         } else {
             true //If it's empty It's consider not started, therefore to start now
@@ -24,7 +24,7 @@ object Utils {
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
         cards.forEach {
             if (it.date_checked.isNotEmpty()) {
-                dates.add(formatter.parse(it.date_checked))
+                formatter.parse(it.date_checked)?.let { it1 -> dates.add(it1) }
             }
         }
         dates.sortByDescending { it }

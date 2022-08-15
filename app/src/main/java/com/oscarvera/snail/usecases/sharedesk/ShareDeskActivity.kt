@@ -25,7 +25,7 @@ class ShareDeskActivity : AppCompatActivity() {
     private var adapterShare: DesksShareAdapter? = null
     private var listDesks: List<DeskWithCards>? = null
 
-    lateinit var loadingDialog : LoadingDialog
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +35,6 @@ class ShareDeskActivity : AppCompatActivity() {
         setContentView(view)
 
         shareViewModel = ViewModelProvider(this)[DeskShareViewModel::class.java]
-
-        loadingDialog = LoadingDialog(this)
 
         binding.layoutTopbar.titleTopBar.text = getString(R.string.share_desk_title)
         layoutManager = LinearLayoutManager(this)
